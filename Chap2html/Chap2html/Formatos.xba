@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Formatos" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
+Option Explicit
+
+ Rem ############
+Rem Convierte Listas numeradas en etiquetas
+Function F_Listas
+   Call L10n.Trad
+   If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Function 
+   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
+     MsgBox (Txt(9) ,0+48+0, Extension)
+     Exit Function
+    End If
+ Dim oSection As Object, oCursor as Object, label, s As String
+   oSection = ThisComponent.TextSections.getByName(&quot;SEC_DISPLAYAREA&quot;)
+   oCursor = ThisComponent.Text.createTextCursorByRange(oSection.Anchor.Start)
+   Do While oCursor.gotoNextParagraph(False)
+     If oCursor.NumberingIsNumber Then
+       If ( (oCursor.NumberingStyleName = &quot;Numbering 1&quot;) _
+         OR  (oCursor.NumberingStyleName = &quot;Numbering 2&quot;) _
+         OR  (oCursor.NumberingStyleName = &quot;Numbering 3&quot;) _
+         OR  (oCursor.NumberingStyleName = &quot;Legend Numbered&quot;) ) Then
+         label = oCursor.ListLabelString &amp; &quot; &quot; &apos;(Inserta HARD_SPACE (-no es necesario modificar el estilo)
+         oCursor.gotoStartOfParagraph(False)
+         oCursor.CharStyleName = &quot;Strong Emphasis&quot;
+         oCursor.getText().insertString(oCursor, label , False)
+       Elseif OCursor.ParaStyleName = &quot;List 2&quot; Then
+         oCursor.gotoStartOfParagraph(False)
+         oCursor.CharStyleName = &quot;Strong Emphasis&quot;
+         oCursor.getText().insertString(oCursor, &quot;– &quot; , False)
+       End If
+     End If
+   Loop
+   s =  Txt(10)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 1&quot;, &quot;HNumbering 1&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 2&quot;, &quot;HNumbering 2&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 3&quot;, &quot;HNumbering 3&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Legend Numbered&quot;, &quot;HLegend Numbered&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;List 2&quot;, &quot;HList 2&quot;)
+   F_Listas = s
+   MsgBox (s,0+64+0,Txt(11) &amp; Extension) 
+End Function
+
+
+ Rem ############ 
+Sub Colores
+   Call L10n.Trad
+   If  ThisComponent.HasLocation = False Then
+     MsgBox (Txt(0), 0+48+0, Extension)
+     Exit Sub
+   End If
+ Dim Guia As String, Color As Variant&apos;Obtener las dos iniciales de la guía
+   Guia = FileNameoutofPath(ThisComponent.getURL)
+   Guia = Left(Guia,2)
+ &apos;  Guia = &quot;DG&quot;
+   Select case Guia&apos;1454680
+     Case &quot;BG&quot;: Color = RGB(83,2,96)
+     Case &quot;CG&quot;: Color = RGB(0,124,60)
+     Case &quot;DG&quot;: Color = RGB(135,105,0)
+     Case &quot;GS&quot;: Color = RGB(61,56,70)
+     Case &quot;IG&quot;: Color = RGB(98,37,2)
+     Case &quot;MG&quot;: Color = RGB(37,94,98)
+     Case &quot;WG&quot;: Color = RGB(22,50,88)
+     Case Else : Msgbox (Txt(12), 0+64+0, Extension): Exit Sub 
+   End select
+  
+ Dim oEstilos As Variant, HEstilos as Variant, oEstilo as Variant, i as Integer
+   oEstilos = ThisComponent.StyleFamilies.ParagraphStyles
+   HEstilos = Array(&quot;Title&quot;,&quot;Guide Name&quot;,&quot;Heading&quot;)&apos;,&quot;Contents 1&quot;,&quot;Contents 2&quot;,&quot;Contents 3&quot;) 
+   For i = 0 to uBound(HEstilos)   
+     oEstilo = oEstilos.getByName(HEstilos(i))
+     oEstilo.SetPropertyValue(&quot;CharColor&quot;,Color)
+   Next
+   HEstilos = Array(&quot;Heading 1&quot;,&quot;Contents Heading&quot;)&apos;,&quot;Body Text, Note&quot;)
+ Dim props(): props = Array(Color,0,35,0,0,35)
+   For i = 0 to uBound (HEstilos)
+    oEstilo = oEstilos.getByName(HEstilos(i))
+    oEstilo.SetPropertyValue(&quot;BottomBorder&quot;,props())
+   Next
+   oEstilo = oEstilos.getByName(&quot;Heading Caution&quot;)
+   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(163,63,3))
+   oEstilo.TopBorderDistance = 259
+   oEstilo.BottomBorderDistance = 0   
+   oEstilo = oEstilos.getByName(&quot;Heading Note&quot;)
+   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(16,104,3))
+   oEstilo.TopBorderDistance = 259
+   oEstilo.BottomBorderDistance = 0
+   oEstilo = oEstilos.getByName(&quot;Heading Tip&quot;)
+   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(2,63,98))
+   oEstilo.TopBorderDistance = 259
+   oEstilo.BottomBorderDistance = 0
+ Dim oDoc : oDoc = ThisComponent
+   If (oDoc.isModified) Then
+     If (oDoc.hasLocation AND (Not oDoc.isReadOnly)) Then oDoc.store()
+   End If  
+   Msgbox (Txt(13) ,0+64+0, Extension) 
+ Dim DocSettings
+   DocSettings = ThisComponent.createInstance( &quot;com.sun.star.document.Settings&quot; )
+   DocSettings.UpdateFromTemplate = FALSE
+end sub
+
+ Rem ############
+Sub Convierte
+   Call L10n.Trad
+   If _Aux.F_W2LTX = 0 then 
+     MsgBox (Txt(14), 0+64+0, Extension)
+   exit sub
+   End If
+   If ThisComponent.IsModified then
+     If Msgbox (Txt(0), 4+32+0, Extension) = 6 Then
+       ThisComponent.store()
+     else
+       Exit sub 
+     end If
+   End If
+
+   _Aux.CopiaIni
+ Dim sUrlOut As String
+   sUrlOut  = GetFileNameWithoutExtension(ThisComponent.url) &amp; &quot;.html&quot; 
+   If fileexists(sUrlOut) then 
+     If Msgbox (Txt(15) &amp; ConvertFromURL(sUrlOut) &amp; Chr(13) &amp; Txt(16), 4+32+0, Extension) &lt;&gt; 6 then
+       Exit sub
+     End If
+   End if 
+ Dim oContext, oPathsettings as Variant, sConfigUrl As String
+   oContext = getProcessServiceManager().DefaultContext
+   oPathSettings = oContext.getValueByName(&quot;/singletons/com.sun.star.util.thePathSettings&quot;)
+
+   sConfigUrl = oPathSettings.UserConfig_Writable &amp; &quot;/LO_writer2xhtml.xml&quot;
+   
+ Dim oFilterData(1) As New com.sun.star.beans.PropertyValue
+   oFilterData(0).Name  = &quot;ConfigURL&quot;
+   oFilterData(0).Value = sConfigUrl
+   oFilterData(1).Name  = &quot;use_mathjax&quot;
+   oFilterData(1).Value = &quot;true&quot;
+
+ Dim oProps(2) As New com.sun.star.beans.PropertyValue
+   oProps(0).Name  = &quot;FilterName&quot;
+   oProps(0).Value = &quot;org.openoffice.da.writer2xhtml5&quot;
+   oProps(1).Name  = &quot;Overwrite&quot;
+   oProps(1).Value = true
+   oProps(2).Name  = &quot;FilterData&quot;
+   oProps(2).Value = oFilterData
+
+   ThisComponent.StoreToURL(sUrlOut, oProps())
+   If Msgbox(Txt(17),4+32+0,Extension) = 6 then
+      _Aux.AbreArchivo(sUrlOut) 
+   End If
+End Sub
+
+ Rem ############
+Function F_AlternarLeyenda()
+
+   Call L10n.Trad
+&apos;&apos;&apos;&apos;&apos;&apos;   If ThisComponent.HasLocation = False Then : MsgBox (Txt(0), 0+48+0, Extension): Exit Function : End If
+   If ThisComponent.TextFrames.Count = 0 Then : MsgBox (Txt(18), 0+64+0, Extension): Exit Function: End If
+   If _Aux.F_Prueba_Sel = False then Exit Function
+   
+ Dim Document As Object, dispatcher As Object, vCursor as Object
+    Document  = ThisComponent.CurrentController.Frame
+    dispatcher = CreateUNOService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+    vcursor =  ThisComponent.CurrentController.getViewCursor
+ Dim oImages, oImg as Object : oImages = ThisComponent.GraphicObjects()
+ Dim oFCursor As Object, oFrame As Variant, i As Integer
+
+ For i = 0 To oImages.count - 1
+  oImg = oImages.getbyIndex(i)
+  oFrame = oImg.Anchor.TextFrame()
+ If Not isEmpty(oImg.Anchor.TextFrame()) Then
+    oFCursor = oFrame.Text.createTextCursor&apos; Entro en el marco
+    oFCursor.gotoStart(False)
+    vcursor.gotoRange(oFCursor,False)
+    dispatcher.executeDispatch(Document, &quot;.uno:MoveDown&quot;, &quot;&quot;, 0, Array())&apos;    End If
+  End If
+ Next
+&apos; Vuelvo al inicio
+ Dim marco1 : marco1 = ThisComponent.getTextFrames.getByIndex(0).Anchor
+   vcursor.gotoRange(marco1,False) &apos;vuelvo al inicio
+   MsgBox (Txt(19), 0+64+0, Extension)
+   F_AlternarLeyenda = Chr(13) &amp; Txt(19)
+End Function
+&apos;==================== FIN Formatos
+
+
+
+</script:module>

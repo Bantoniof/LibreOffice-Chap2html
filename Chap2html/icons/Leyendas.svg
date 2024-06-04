@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   version="1.1"
+   id="svg1"
+   width="32"
+   height="32"
+   viewBox="0 0 32 32"
+   sodipodi:docname="Leyendas.svg"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="7.8942308"
+     inkscape:cx="-13.237515"
+     inkscape:cy="9.3105968"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1" />
+  <g
+     inkscape:groupmode="layer"
+     inkscape:label="Image"
+     id="g1">
+    <text
+       xml:space="preserve"
+       style="font-size:8px;fill:#0000ff;fill-opacity:1"
+       x="0.69671112"
+       y="5.7271619"
+       id="text1"><tspan
+         sodipodi:role="line"
+         id="tspan1"
+         x="0.69671112"
+         y="5.7271619"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#0000ff;fill-opacity:1">Figura:</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:8px;fill:#d29600;fill-opacity:1"
+       x="8.1892691"
+       y="30.246933"
+       id="text1-8"><tspan
+         sodipodi:role="line"
+         id="tspan1-4"
+         x="8.1892691"
+         y="30.246933"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8px;font-family:Calibri;-inkscape-font-specification:Calibri;fill:#d29600;fill-opacity:1">Figura:</tspan></text>
+    <path
+       id="path1"
+       style="fill:#0000ff;stroke-width:1.06789;fill-opacity:1"
+       d="m 17.032885,13.7 c 0,0 -0.610534,0.130601 2.629573,0 C 19.293025,8.9624986 17.744066,8.8853911 13.9,8.9305685 10.573695,8.9696609 3.9853943,14.202962 3.9853943,14.202962 c 0,0 4.1730317,-8.1731456 10.0729487,-8.1858866 2.949959,-0.00637 9.664502,-0.1339657 9.452349,7.6829246 2.719703,-0.02051 2.389385,0 2.389385,0 l -4.196059,7.074667 z"
+       sodipodi:nodetypes="ccscscccc" />
+    <path
+       id="path2"
+       style="fill:#d29600;stroke-width:1.06789;fill-opacity:1"
+       d="m 16.516847,18.06286 c 0,0 0.610534,-0.130601 -2.629573,0 0.369433,4.737501 1.918392,4.814609 5.762458,4.769431 3.326305,-0.03909 9.914605,-5.272393 9.914605,-5.272393 0,0 -4.173031,8.173145 -10.072948,8.185886 -2.949959,0.0064 -9.664502,0.133966 -9.452349,-7.682924 -2.719703,0.02051 -2.389385,0 -2.389385,0 l 4.196059,-7.074667 z"
+       sodipodi:nodetypes="ccscscccc" />
+  </g>
+</svg>

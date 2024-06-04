@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Secciones" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
+&apos;Option Explicit
+
+Sub Pruebas
+ &apos;Msgbox (F_MoverSeccion(&quot;SEC_COPYRIGHT&quot;,&quot;SEC_DISPLAYAREA&quot;),0+64+0,Extension)
+ &apos;F_MoverSeccion(&quot;SEC_COPYRIGHT&quot;,&quot;SEC_DISPLAYAREA&quot;)
+&apos;Call Leyendas.F_AlternarLeyenda
+&apos;Call Formatos.F_Listas
+&apos;Call F_AjusteSecciones
+Dim s
+   s = F_DelTOCs
+   s = s &amp; Chr(13) &amp; F_MoverSeccion(&quot;SEC_COPYRIGHT&quot;,&quot;SEC_DISPLAYAREA&quot;)
+ MsgBox s,0+64+0,&quot;Secciones&quot;  
+End Sub
+
+
+ Rem ############
+ Rem Prepara las secciones para el formato HTML
+ Rem ============================================
+Function F_AjusteSecciones
+   Call L10n.Trad
+   If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Function 
+
+ Dim s As String
+&apos;   s = s &amp; F_DelTOC
+   If thisComponent.TextSections.HasbyName(&quot;SEC_COPYRIGHT&quot;) then 
+     s = s &amp; Chr(13) &amp; F_MoverSeccion(&quot;SEC_COPYRIGHT&quot;,&quot;SEC_DISPLAYAREA&quot;)
+   End If
+   s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_TOC&quot;)  
+   s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_BOOK_TOC&quot;)
+   s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_IMPRINT&quot;)
+   s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_SEARCH&quot;)
+   s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_NAV&quot;)
+   s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_DONATION&quot;)
+   s = s &amp; F_DelTOC
+   If ThisComponent.TextSections.count &gt; 5 then &apos;error al eliminar secciones manualmente
+   s = s &amp; Chr(13) &amp; F_InsertTOC  
+   else
+   _Aux.GuardaRecarga
+   s = txt(20)
+   End If
+   F_AjusteSecciones = s
+   MsgBox (s &amp; Chr(13) ,0+64+0, Extension)
+End Function
+
+ Rem ############
+Function F_MoverSeccion(N_Sec As String, N_SecDestino As String)
+ Rem Copia el texto de la sección &quot;NSec&quot; si está aislada
+ Rem lo pega al inicio de la &quot;N_SecDestino&quot;
+ Rem y borra el texto y la sección &quot;N_Sec&quot;
+ Rem ============================================
+
+ Dim oCursor As Object, oSec1 As Object, oSec2 As Object, oSel As Object, s As String
+ Dim VCursor
+
+   If Not ThisComponent.TextSections.HasByName(N_Sec) Then
+     F_MoverSeccion = Txt(22) &amp; N_Sec &amp; Txt(21)
+     Exit Function
+   ElseIf Not ThisComponent.TextSections.HasByName(N_SecDestino) Then
+     F_MoverSeccion = Txt(22) &amp; N_SecDestino  &amp; Txt(21)
+     Exit Function
+   End If
+     oSec1 = ThisComponent.TextSections.getByName(N_Sec)
+     oSec2 = ThisComponent.textSections.getByName(N_SecDestino)
+     If Not IsNull(oSec1.ParentSection) Then &apos; Seccion en su sitio ?
+      &apos;F_MoverSeccion = s &amp; Chr(13) &amp; &quot;- La sección &quot; &amp; N_Sec &amp; &quot; es una Subsección de &quot; &amp;_
+        &apos; Chr(13) &amp; oSec1.ParentSection.LinkDisplayName
+       If Msgbox  (Txt(22) &amp; N_Sec &amp; Txt(23) &amp;_
+          oSec1.ParentSection.LinkDisplayName &amp; Txt(24), 4+32+0, Extension) = 6 Then
+          ThisComponent.TextSections.getByName(N_Sec).Dispose
+          s = Txt(25) &amp; N_Sec &amp; Txt(26)
+       Else
+         s = Txt(22) &amp; N_Sec &amp; Txt(27)
+       End If    
+          
+     Else &apos;Sección aislada
+       VCursor = ThisComponent.CurrentController.GetViewCursor
+       VCursor.gotoRange(oSec1.Anchor.Start, False)&apos; Selecciono la sección 
+       vcursor.gotoRange(oSec1.Anchor.End, True)
+       oSel =  ThisComponent.CurrentController.getTransferable() &apos;Copio al Portapapeles
+       vcursor.gotoRange(oSec2.Anchor.Start,False)
+       ThisComponent.Text.InsertControlCharacter( vcursor,0, False )
+       vCursor.goUp(1,false)
+       vCursor.ParastyleName = &quot;Standard&quot;
+       ThisComponent.CurrentController.insertTransferable(oSel) &apos;Pego
+       oCursor = ThisComponent.getText().createTextCursorByRange(oSec1.Anchor.End,False)
+       oCursor.gotoRange(oSec1.Anchor.Start,True)&apos;seccion original
+       oCursor.String = &quot;&quot; Rem elimino texto
+       ThisComponent.TextSections.getByName(N_Sec).Dispose
+       s = s &amp; Chr(13) &amp; Txt(25) &amp; N_Sec &amp; Txt(26) &amp; Chr(13)
+       oCursor.gotoPreviousParagraph(True)
+       If Asc(oCursor.String) = 13 Then Rem Párrafo vacío
+         oCursor.String = &quot;&quot; Rem Elimino párrafo vacío
+       End If
+&apos;       F_MoverSeccion = s &amp; Chr(13) &amp; &quot;- Texto de la Sección &quot; &amp; N_Sec &amp; Chr(13) &amp;_
+&apos;         &quot; Copiado al inicio de &quot; &amp;  N_SecDestino &amp; Chr(13) &amp; Chr(13) &amp; &quot;Comprueba Párrafos Vacíos&quot; &amp; Chr(13)
+         s = s &amp; Txt(28) &amp; N_Sec &amp;Txt(29) &amp;  N_SecDestino &amp; Txt(30)
+   End If
+   F_MoverSeccion = s
+End Function
+
+ Rem ############
+Function F_InsertaSeccion(NombreSec As String) As String
+
+ Dim oCursor As Object, oSec As Object
+   If Not ThisComponent.TextSections.HasByName(NombreSec) Then
+     oCursor = ThisComponent.Text.CreateTextCursor
+     oCursor.gotoEnd(False)
+     oSec = ThisComponent.createInstance(&quot;com.sun.star.text.TextSection&quot;)
+     oSec.Name = NombreSec
+     ThisComponent.Text.insertTextContent(oCursor, oSec, True)
+     F_InsertaSeccion = Txt(31) &amp; NombreSec
+   Else
+     F_InsertaSeccion = Txt(22) &amp; NombreSec &amp; Txt(32)
+   End If
+End Function
+
+ Rem ############
+Function F_DelTOC() As String
+
+ Dim oIndexes As Object, oIndex As Object, i As Integer, s As String
+ Dim oSections As Object, SectionIn as Variant, NombreSec As String
+   oIndexes = ThisComponent.getDocumentIndexes()
+   oSections = ThisComponent.TextSections
+   bIndexFound = False
+
+   For i = 0 To oIndexes.getCount() - 1
+     oIndex = oIndexes.getByIndex(i)
+     If oIndex.supportsService(&quot;com.sun.star.text.ContentIndex&quot;) Then
+       bIndexFound = True
+       Exit For
+     End If 
+   Next
+   If Not bIndexFound Then
+   Msgbox (Txt(33) &amp; Txt(34),0+64+0, Extension)
+   Exit Function &apos; Tableof contents Sumario (pt)
+   Else
+   SectionIn = oIndex.Anchor.TextSection.ParentSection.ParentSection   
+ &apos;Sumario aislado
+     If isnull(SectionIn) Then
+       oIndex.dispose()
+       s= Txt(34) &amp; Txt(35)
+       F_DelTOC= s
+       msgbox (s ,0+64+0,)
+       Exit Function
+ &apos;Sumario en sección
+     Else
+       NombreSec = SectionIn.LinkDisplayName
+     End If 
+     oIndex.dispose()
+     s = Txt(34) &amp; Txt(36) &amp; NombreSec &amp; Txt(35)
+     If Msgbox (s &amp; Txt(37) &amp; NombreSec &amp; Txt(38), 4+32+0, Extension) = 6 Then
+       If oSections.HasByName(NombreSec) Then
+         oSections.getByName(NombreSec).Dispose
+         s= s &amp; Chr(13) &amp; NombreSec &amp; Txt(26)
+       End If
+     End If
+   End If
+   F_DelTOCs = s 
+   msgbox s
+End Function
+
+ Rem ############
+Function F_InsertTOC() As String
+ Rem  modified from original by Andrew Pitonyak
+ Dim oIndexes As Object, oIndex As Object
+ Dim  i As Integer, bIndexFound As Boolean
+ Dim oCursor As Object, oSecToc As Object, sTitle As String
+   If Not ThisComponent.TextSections.HasByName(&quot;SEC_TOC&quot;) Then
+     MsgBox (Txt(39), 0+64+0, Extension)
+     Exit Function
+   Else 
+     oSecToc = ThisComponent.getTextSections().getByName(&quot;SEC_TOC&quot;)
+   End If
+   oIndexes = ThisComponent.getDocumentIndexes()
+   bIndexFound = False
+ &apos;  If oIndexes.Count &lt;&gt; 0 Then
+   For i = 0 To oIndexes.getCount() - 1
+     oIndex = oIndexes.getByIndex(i)
+     If oIndex.supportsService(&quot;com.sun.star.text.ContentIndex&quot;) Then
+       bIndexFound = True
+       Exit For
+     End If
+   Next
+   If Not bIndexFound Then
+     sTitle = Txt(40)&apos;&quot;Contents&quot;&apos;&quot;Contenido&quot; &apos; Sumário &apos; Contents
+     oIndex = ThisComponent.createInstance(&quot;com.sun.star.text.ContentIndex&quot;)
+     oIndex.CreateFromOutline = True
+     oIndex.Title = sTitle
+     oCursor = ThisComponent.Text().createTextCursorByRange(oSecToc.Anchor.Start,False)&apos; Añaso start
+     ThisComponent.getText.insertTextContent(oCursor, oIndex, False)
+     s = Txt(41)
+   Else
+     s = Txt(42)
+   End If
+   oIndex.update()
+   F_InsertTOC = s
+End Function
+
+</script:module>

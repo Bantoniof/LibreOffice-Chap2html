@@ -1,0 +1,6 @@
+Chap2html.oxt
+Copyright (c) 2024 B. Antonio Fernández
+
+Macros to modify the format of the chapters and export to HTML
+(You need SanityCheck and Writer2xhtml extensions)
+

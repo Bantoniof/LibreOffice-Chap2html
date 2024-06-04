@@ -1,0 +1,421 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<oor:component-data 
+ xmlns:oor="http://openoffice.org/2001/registry"
+ xmlns:xs="http://www.w3.org/2001/XMLSchema"
+ oor:name="Addons"
+ oor:package="org.openoffice.Office">
+	<node oor:name="AddonUI">
+
+		<node oor:name="OfficeToolBar">
+			<node oor:name="Chap2html.OfficeToolBar" oor:op="replace">
+
+				<node oor:name="m001" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_AlternarLeyenda?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Move captions</value>
+						<value xml:lang="pt-BR">mover as lendas</value>
+						<value xml:lang="es-ES">Mover las leyendas</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m002" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Change lists</value>
+						<value xml:lang="pt-BR">Alterar listas</value>
+						<value xml:lang="es-ES">Cambiar las listas</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m003" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Heading Colors</value>
+						<value xml:lang="pt-BR">Cors dos titulos</value>
+						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m004" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Add sections</value>
+						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
+						<value xml:lang="es-ES">Agregar secciones</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m005" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>private:separator</value>
+					</prop>
+				</node>
+
+				<node oor:name="m006" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Html Export</value>
+						<value xml:lang="pt-BR">Exporta&#231;&#227;o HTML</value>
+						<value xml:lang="es-ES">Exportaci&#243;n HTML</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+			</node>
+		</node>
+
+		<node oor:name="OfficeMenuBar">
+			<node oor:name="Chap2html.OfficeMenuBar" oor:op="replace">
+				<prop oor:name="Context" oor:type="xs:string">
+					<value>com.sun.star.text.TextDocument</value>
+				</prop>
+				<prop oor:name="Title" oor:type="xs:string">
+					<value>LO_Chap2html</value>
+					<value xml:lang="pt-PT">LO_Chap2xHTML</value>
+					<value xml:lang="es-ES">LO_Chap2xHTML</value>
+				</prop>
+
+				<node oor:name="Submenu"> <!-- 3 -->
+
+				<node oor:name="m001" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_AlternarLeyenda?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Move captions</value>
+						<value xml:lang="pt-BR">mover as lendas</value>
+						<value xml:lang="es-ES">Mover las leyendas</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m002" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Lists format</value>
+						<value xml:lang="pt-BR">Formato de listas</value>
+						<value xml:lang="es-ES">Formato de listas</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m003" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Heading Colors</value>
+						<value xml:lang="pt-BR">Cors dos titulos</value>
+						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m004" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Add sections</value>
+						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
+						<value xml:lang="es-ES">Agregar secciones</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m005" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>private:separator</value>
+					</prop>
+				</node>
+
+				<node oor:name="m006" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Html Export</value>
+						<value xml:lang="pt-BR">Exporta&#231;&#227;o HTML</value>
+						<value xml:lang="es-ES">Exportaci&#243;n HTML</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				</node>
+			</node>
+		</node>
+
+
+<!--  Inicio Omnibarra -->
+		<node oor:name="OfficeNotebookBar">
+			<node oor:name="Chap2html.OfficeOmniBar" oor:op="replace">
+
+				<node oor:name="omb01" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value> 
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+					<value>private:separator</value> 
+					</prop>
+				</node>
+
+
+				<node oor:name="omb02" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_AlternarLeyenda?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Move captions</value>
+						<value xml:lang="pt-BR">mover as lendas</value>
+						<value xml:lang="es-ES">Mover las leyendas</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="omb03" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Lists format</value>
+						<value xml:lang="pt-BR">Formato de listas</value>
+						<value xml:lang="es-ES">Formato de listas</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="omb04" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Heading Colors</value>
+						<value xml:lang="pt-BR">Cors dos titulos</value>
+						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="omb05" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Add sections</value>
+						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
+						<value xml:lang="es-ES">Agregar secciones</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="omb06" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>private:separator</value>
+					</prop>
+				</node>
+
+				<node oor:name="omb07" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Html Export</value>
+						<value xml:lang="pt-BR">Exporta&#231;&#227;o HTML</value>
+						<value xml:lang="es-ES">Exportaci&#243;n HTML</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+  
+- 
+				<node oor:name="omb08" oor:op="replace">
+				<prop oor:name="Context" oor:type="xs:string">
+					<value>com.sun.star.text.TextDocument</value> 
+				</prop>
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>private:separator</value> 
+				</prop>
+				</node>
+
+			</node>
+		</node>
+- <!--  Fin Omnibarra 
+  --> 
+		<node oor:name="Images"><!-- Imágenes --> 
+
+
+			<node oor:name="vnd.bantoniof.Chap2html.Formatos.F_AlternarLeyenda" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Formatos.F_AlternarLeyenda?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Leyendas.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Leyendas.svg</value>
+					</prop>
+				</node>
+			</node>
+
+
+			<node oor:name="vnd.bantoniof.Chap2html.Formatos.F_Listas" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Listas.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Listas.svg</value>
+					</prop>
+				</node>
+			</node>
+
+
+			<node oor:name="vnd.bantoniof.Chap2html.Formatos.Colores" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Colores.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Colores.svg</value>
+					</prop>
+				</node>
+			</node>
+
+			<node oor:name="vnd.bantoniof.Chap2html.Secciones.F_AjusteSecciones" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Secciones.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Secciones.svg</value>
+					</prop>
+				</node>
+			</node>
+
+			<node oor:name="vnd.bantoniof.Chap2html.Formatos.Convierte" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Html5.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Html5.svg</value>
+					</prop>
+				</node>
+			</node> -->
+  
+
+		</node>
+	</node>
+</oor:component-data>

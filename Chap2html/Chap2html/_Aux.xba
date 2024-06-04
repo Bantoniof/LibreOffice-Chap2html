@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="_Aux" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****  Modulo Aux *****
+Option Explicit
+
+ Rem ############ 
+Function F_Extension&apos;(identificateur As String) As String
+ dim sv As Object, e as variant, x as variant
+   sv = GetDefaultContext().getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
+   e = sv.getExtensionList()
+   for each x in e
+     if  x(0) = &quot;vnd.bantoniof.Chap2html&quot;  then
+       F_Extension = &quot; Chap2html &quot; &amp; x(1) &apos;no necesita trad
+       Exit Function
+     end if
+   next
+   F_Extension = &quot; - Chap2html (Pruebas, no instalada)&quot; &apos;extension pas trouvée
+End Function
+
+ Rem ############ 
+Function F_Prueba_Est() As Integer
+ Rem Comprueba que este guardado
+ Rem y los estilos necesarios están en el documento
+ Rem (Al documento se ha aplicado la plantilla html)
+ Rem Devuelve 0 o nº elementos Matriz
+ Rem =================================================
+ Dim HtmlEstilos() As Variant, i As Integer, Contador As Integer
+   Contador = 0
+   HtmlEstilos = Array (&quot;HList 2&quot;,&quot;HNumbering 1&quot;,&quot;HNumbering 2&quot;,&quot;HNumbering 3&quot;,&quot;HLegend Numbered&quot;)
+   For i = LBound(HtmlEstilos) To UBound(HtmlEstilos)
+     If ThisComponent.StyleFamilies.ParagraphStyles.HasByName(HtmlEstilos(i)) Then
+       Contador = Contador + 1       
+     End If
+   Next
+   F_Prueba_Est = Contador
+End Function
+
+ Rem ############ 
+Function F_Prueba_Secs() as Integer
+ Dim Secs, i as Integer, Cont as Integer
+    Secs = ThisComponent.TextSections
+    Cont = 0
+ Dim nSec()
+   nSec = Array(&quot;SEC_LOGO&quot;,&quot;SEC_GUIDE&quot;,&quot;SEC_TITLE&quot;,&quot;SEC_DISPLAYAREA&quot;)
+   For i= 0 to Ubound(nSec)
+     If Secs.hasByName(nSec(i)) Then Cont = Cont +1 
+   Next
+   If cont &lt;&gt; 4 Then 
+    Msgbox (Txt(1) &amp; Join(nsec,Chr(13)) &amp; Chr(13) &amp; Chr(9) &amp; Txt(2),0+32+0, Extension)
+   End If
+   F_Prueba_Secs = Cont
+End Function
+
+ Rem ############ 
+Function F_Prueba_Sel()As Boolean &apos;pasar prueba selección
+ Rem Devuelve 1 si estamos en texto y podemos continuar (correcto)
+ Rem Devuelve 0 si estamos en un objeto o sucede otro error (mal)
+&apos; Call L10n.Trad_Aux
+ Dim oSel : oSel= ThisComponent.getCurrentSelection
+   On Error GoTo ERRORES
+   If Not oSel.supportsService(&quot;com.sun.star.text.TextRanges&quot;) Then 
+     MsgBox (Txt(3) &amp; Chr(13) &amp; Chr(13) &amp; Txt(5), 0+0+64, Extension)&apos;Cursor en un objeto
+     F_Prueba_Sel = 0
+     Exit Function
+   End If
+ERRORES:
+   If Err = 0 Then : F_Prueba_Sel = 1 : Exit Function
+   ElseIf Err = 91 Then : MsgBox  (Txt(4) &amp; Txt(5), 0+64+0, Extension)&apos; Cursor en comentario
+   ElseIf Err &lt;&gt; 0 Then : MsgBox (&quot;Error n.&quot; &amp; Err  &amp; &quot;  Linea n. &quot; &amp; Erl &amp; Chr(13) &amp; Error, 0+48+0, &quot;Error&quot; &amp; Extension)
+   End If
+   F_Prueba_Sel = 0
+End Function
+
+ Rem ############
+Sub Actualizar
+ Rem necesario después de cambiar nombre a sección 
+ Dim document As Object, dispatcher As Object
+   document   = ThisComponent.CurrentController.Frame
+   dispatcher = CreateUNOService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+   dispatcher.executeDispatch(document, &quot;.uno:UpdateAll&quot;, &quot;&quot;, 0, Array())
+End Sub
+
+ Rem ############
+Sub GuardaRecarga
+   If (ThisComponent.isModified()) Then
+     If (ThisComponent.hasLocation() AND (Not ThisComponent.isReadOnly())) Then
+       ThisComponent.store()
+     Else
+       setModified(False)
+     End If
+   End If
+ Dim document   as object
+ Dim dispatcher as object
+   document   = ThisComponent.CurrentController.Frame
+   dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
+   dispatcher.executeDispatch(document, &quot;.uno:Reload&quot;, &quot;&quot;, 0, Array())
+End Sub
+
+ Rem ############
+Function F_W2LTX as boolean&apos;(identificateur As String) As String
+ dim sv As Object, ext as variant, lista as variant
+   sv = GetDefaultContext().getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
+   lista = sv.getExtensionList() &apos;lista de extensiones en array, 0=nombre ext 1=versión
+   for each ext in lista  &apos;  Print Join(ext, &quot;; &quot;)  
+     if  ext(0) = &quot;org.openoffice.da.writer2xhtml.oxt&quot;  then 
+      F_W2LTX = 1
+       Exit Function
+     end if
+   next &apos;ext
+   F_W2LTX = 0 &apos;extension pas trouvée
+End Function
+
+ Rem ############ 
+Sub Carga_Tools
+
+   If GlobalScope.BasicLibraries.hasByName(&quot;Tools&quot;) Then
+     If Not GlobalScope.BasicLibraries.isLibraryLoaded(&quot;Tools&quot;) Then
+       GlobalScope.BasicLibraries.LoadLibrary(&quot;Tools&quot;)
+     End If
+   Else
+     MsgBox (&quot;La biblioteca Tools no existe , la macro dará errores&quot;, 0+48+0, Extension)&apos; muy poco probable no traduzco
+   End If
+End Sub
+
+ Rem ############
+Sub AbreArchivo (Archivo as String)
+ Dim sv As Object, op As Long&apos;, archivo as String
+   On Error GoTo ERRORES
+   If GetGUIType = 1 Then
+     archivo =  ConvertFromURL(Archivo)
+   End If 
+   op = com.sun.star.system.SystemShellExecuteFlags.NO_SYSTEM_ERROR_MESSAGE
+   sv = CreateUNOService(&quot;com.sun.star.system.SystemShellExecute&quot;)
+   sv.execute(Archivo,&quot;1&quot;,op)
+ERRORES:
+   Select Case Err
+     Case 0 : Exit Sub
+     Case 1 : MsgBox (Txt(6), 0+16+0, &quot;Shell&quot;)
+     Case Else :  MsgBox (Txt(7) &amp; Error, 0+16+0, &quot;Shell&quot;)
+   End Select
+End Sub
+
+ Rem ############
+Function F_RemplazaEstilo(E_Buscado As Variant, E_Remplazo As Variant) As String
+ Rem Remplaza las apariciones de E_Buscado por E_Remplazo
+ Rem ¡Solo válido para estilos de Párrafo!
+ Rem ¡Versiones localizadas: usar .DisplayName en nombre estilo
+ Rem (si se usa .Name) L.O. REVIENTA!
+ Rem ============================================
+
+ Dim Parrafos As Object, s As String
+   Parrafos = ThisComponent.StyleFamilies.ParagraphStyles
+   If Parrafos.hasbyName(E_Buscado) AND Parrafos.hasbyName(E_Remplazo) then
+   E_Buscado = Parrafos.getbyName(E_Buscado).DisplayName
+   E_Remplazo = Parrafos.getbyName(E_Remplazo).DisplayName
+     Dim Busqueda As Object
+     Busqueda = ThisComponent.CreateReplaceDescriptor
+       If Parrafos.getbyname(E_Buscado).isInuse then
+         With Busqueda
+           .SearchString = E_Buscado
+           .ReplaceString = E_Remplazo
+           .SearchStyles = True    
+         End with
+         ThisComponent.ReplaceAll(Busqueda)
+         s =  &quot;- &quot;&quot;&quot; &amp; E_Buscado &amp; Txt(8) &amp; E_Remplazo &amp; &quot;&quot;&quot; &quot;
+       End If
+   End If 
+   F_RemplazaEstilo = s
+End Function
+
+ Rem ############
+Sub CopiaIni
+
+ Dim sOrigen as String, sDestino as String
+ Dim oContext, oPathsettings as Variant, sConfigUrl As String
+ Dim pathExt As String, sv as Object
+
+   sv = GetDefaultContext.getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
+   pathExt = sv.getPackageLocation(&quot;vnd.bantoniof.Chap2html&quot;)
+   sOrigen = PathExt &amp; &quot;/Chap2html/LO_writer2xhtml.xml&quot;
+
+   oContext = getProcessServiceManager().DefaultContext
+   oPathSettings = oContext.getValueByName(&quot;/singletons/com.sun.star.util.thePathSettings&quot;)
+   sDestino = oPathSettings.UserConfig_Writable &amp; &quot;/LO_writer2xhtml.xml&quot;
+
+   If Not FileExists(sDestino) And FileExists(sOrigen) then
+      FileCopy(sOrigen,sDestino)
+   End If
+End sub
+
+Rem  ================ Fin Aux ==================
+</script:module>
