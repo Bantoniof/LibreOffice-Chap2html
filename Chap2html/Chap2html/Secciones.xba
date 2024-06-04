@@ -28,13 +28,13 @@ Function F_AjusteSecciones
    If thisComponent.TextSections.HasbyName(&quot;SEC_COPYRIGHT&quot;) then 
      s = s &amp; Chr(13) &amp; F_MoverSeccion(&quot;SEC_COPYRIGHT&quot;,&quot;SEC_DISPLAYAREA&quot;)
    End If
+   s = s &amp; F_DelTOC
    s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_TOC&quot;)  
    s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_BOOK_TOC&quot;)
    s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_IMPRINT&quot;)
    s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_SEARCH&quot;)
    s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_NAV&quot;)
    s = s &amp; Chr(13) &amp; F_InsertaSeccion (&quot;SEC_DONATION&quot;)
-   s = s &amp; F_DelTOC
    If ThisComponent.TextSections.count &gt; 5 then &apos;error al eliminar secciones manualmente
    s = s &amp; Chr(13) &amp; F_InsertTOC  
    else

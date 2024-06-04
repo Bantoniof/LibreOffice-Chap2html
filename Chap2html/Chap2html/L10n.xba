@@ -146,7 +146,7 @@ case else
  Txt(18) = &quot;There are no frames in the document.&quot;
  Txt(19) = &quot;Captions situation changed.&quot;
  Rem Secciones
- Txt(20) = &quot;Sections appear to have been deleted manually.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Rerun the macro again.&quot; 
+ Txt(20) = &quot;Sections appear to have been deleted manually.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Run the macro again.&quot; 
  Txt(21) = &quot; does not exist.&quot;  
  Txt(22) = &quot;- The section &quot;
  Txt(23) = &quot; is a Subsection of &quot; &amp; Chr(13)
@@ -170,8 +170,7 @@ case else
  Txt(41) = &quot;- TOC inserted in the &quot;&quot;SEC_TOC&quot;&quot; section.&quot;
  Txt(42) = &quot;- TOC Updated.&quot;
 
-
-end select
+End Select
 
 End sub
 

@@ -50,6 +50,11 @@ Sub Colores
      MsgBox (Txt(0), 0+48+0, Extension)
      Exit Sub
    End If
+   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
+     MsgBox (Txt(9) ,0+48+0, Extension)
+     Exit Sub
+   End If
+     
  Dim Guia As String, Color As Variant&apos;Obtener las dos iniciales de la guía
    Guia = FileNameoutofPath(ThisComponent.getURL)
    Guia = Left(Guia,2)
@@ -105,7 +110,11 @@ Sub Convierte
    Call L10n.Trad
    If _Aux.F_W2LTX = 0 then 
      MsgBox (Txt(14), 0+64+0, Extension)
-   exit sub
+     Exit sub
+   End If
+   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
+     MsgBox (Txt(9) ,0+48+0, Extension)
+     Exit Sub
    End If
    If ThisComponent.IsModified then
      If Msgbox (Txt(0), 4+32+0, Extension) = 6 Then
