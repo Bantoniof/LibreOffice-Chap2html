@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="_Aux" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****  Modulo Aux *****
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="_Aux" script:language="StarBasic" script:moduleType="normal"> Rem  *****  BASIC  Módulo _Aux *****
+ Rem Este módulo forma parte de la extensión Chap2html
+ Rem Autor: bantoniof@libreoffice.org
+ Rem Licencia GNU v3 o posterior
+ 
 Option Explicit
 
  Rem ############ 
@@ -55,7 +59,7 @@ End Function
 Function F_Prueba_Sel()As Boolean &apos;pasar prueba selección
  Rem Devuelve 1 si estamos en texto y podemos continuar (correcto)
  Rem Devuelve 0 si estamos en un objeto o sucede otro error (mal)
-&apos; Call L10n.Trad_Aux
+   Call L10n.Trad
  Dim oSel : oSel= ThisComponent.getCurrentSelection
    On Error GoTo ERRORES
    If Not oSel.supportsService(&quot;com.sun.star.text.TextRanges&quot;) Then 

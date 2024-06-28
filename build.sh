@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd SanityCheck
-zip -r SanityCheck.oxt .
+cd Chap2html
+zip -r Chap2html.oxt .
 cd ..
-mv SanityCheck/SanityCheck.oxt ./
+mv Chap2html/Chap2html.oxt ./

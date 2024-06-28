@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Formatos" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Formatos" script:language="StarBasic" script:moduleType="normal"> Rem  *****  BASIC  Módulo Formatos *****
+ Rem Este módulo forma parte de la extensión Chap2html
+ Rem Autor: bantoniof@libreoffice.org
+ Rem Licencia GNU v3 o posterior
+ 
 Option Explicit
 
  Rem ############
@@ -58,8 +62,7 @@ Sub Colores
  Dim Guia As String, Color As Variant&apos;Obtener las dos iniciales de la guía
    Guia = FileNameoutofPath(ThisComponent.getURL)
    Guia = Left(Guia,2)
- &apos;  Guia = &quot;DG&quot;
-   Select case Guia&apos;1454680
+   Select case Guia
      Case &quot;BG&quot;: Color = RGB(83,2,96)
      Case &quot;CG&quot;: Color = RGB(0,124,60)
      Case &quot;DG&quot;: Color = RGB(135,105,0)
@@ -103,7 +106,41 @@ Sub Colores
  Dim DocSettings
    DocSettings = ThisComponent.createInstance( &quot;com.sun.star.document.Settings&quot; )
    DocSettings.UpdateFromTemplate = FALSE
+   Call Notas
 end sub
+
+ Rem ############
+Sub Notas
+ Rem cambia salto de párrafo por salto de línea en el texto de las notas
+ Rem para evitar líneas al final de cada párrafo
+ 
+ Dim oEstilos As Object: oEstilos = ThisComponent.StyleFamilies.getByName(&quot;ParagraphStyles&quot;)
+ Dim oParEnum As Object, oPar As Object
+ Dim bFound As Boolean, P_Nota As String ,P_Anterior As String
+ Dim cursor_Nota As Object, cursor_Ant As Object
+   oParEnum = ThisComponent.Text.createEnumeration()
+   Do While oParEnum.hasMoreElements()
+     oPar = oParEnum.nextElement()
+     If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then
+       P_Nota = oPar.ParaStyleName
+       bFound = False&apos; Reset variable
+       If P_Nota = &quot;Body Text, Note&quot; Then
+         bFound = True
+       End If
+       
+       If (bFound) = True Then
+         cursor_Nota = opar.getText.createTextCursorByRange(opar)
+         cursor_Ant = opar.getText.createTextCursorByRange(opar)
+         cursor_Ant.gotoPreviousParagraph(false)
+         If cursor_Ant.ParaStyleName = &quot;Body Text, Note&quot; then
+           cursor_Ant.gotoEndOfParagraph(false)
+           cursor_Ant.gotoNextParagraph(true)
+           ThisComponent.Text.InsertControlCharacter(cursor_ant,1,true)
+         End If
+       End If
+     End If
+   loop
+End Sub
 
  Rem ############
 Sub Convierte
@@ -162,7 +199,6 @@ End Sub
 Function F_AlternarLeyenda()
 
    Call L10n.Trad
-&apos;&apos;&apos;&apos;&apos;&apos;   If ThisComponent.HasLocation = False Then : MsgBox (Txt(0), 0+48+0, Extension): Exit Function : End If
    If ThisComponent.TextFrames.Count = 0 Then : MsgBox (Txt(18), 0+64+0, Extension): Exit Function: End If
    If _Aux.F_Prueba_Sel = False then Exit Function
    

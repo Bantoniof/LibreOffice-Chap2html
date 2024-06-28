@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="L10n" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="L10n" script:language="StarBasic" script:moduleType="normal"> Rem  *****  BASIC  Módulo L10n *****
+ Rem Este módulo forma parte de la extensión Chap2html
+ Rem Autor: bantoniof@libreoffice.org
+ Rem Licencia GNU v3 o posterior
+
 Option Explicit
 
 Global Extension
-Global Txt(42)
+Global Txt(43)
 
 Function F_getLang As String
    Call _Aux.Carga_Tools
@@ -40,7 +44,7 @@ case &quot;es&quot;
  Txt(14) = &quot;No se ha encontrado la extensión Writer2xhtml, no se puede exportar con sus filtros.&quot;
  Txt(15) = &quot; El archivo &quot; &amp; Chr(13)
  Txt(16) = &quot; ya existe, ¿quieres sobreescribirlo? &quot;
- Txt(17) = &quot;Html Creado&quot; &amp; Chr(13) &amp; &quot;¿Quieres abrirlo?&quot;
+ Txt(17) = &quot;Archivo Html Creado&quot; &amp; Chr(13) &amp; &quot;¿Quieres abrirlo?&quot;
  Txt(18) = &quot;No hay marcos en el documento.&quot;
  Txt(19) = &quot;Situación de Leyendas cambiada.&quot;
  Rem Secciones
@@ -61,12 +65,13 @@ case &quot;es&quot;
  Txt(34) = &quot;Sumario.&quot; &apos; Table of Contents, Sumário (índice de contenido?)
  Txt(35) = &quot; eliminado.&quot;
  Txt(36) = &quot; en la sección. &quot;
- Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot; ¿Eliminar sección &quot;
- Txt(38) = &quot;?&quot;
+ Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot; ¿Eliminar sección &quot; &apos; no necesario
+ Txt(38) = &quot;?&quot; &apos;no necesario
  Txt(39) = &quot;La sección &quot;&quot;SEC_TOC&quot;&quot;  no existe.&quot;
- Txt(40) = &quot;Contenido&quot; &apos;Nombre del índice)
+ Txt(40) = &quot;Contenido&quot; &apos;Sumário, TOC (Nombre del índice)
  Txt(41) = &quot;- Sumario insertado en la sección &quot;&quot;SEC_TOC&quot;&quot;.&quot;
  Txt(42) = &quot;- Sumario actualizado.&quot;
+ Txt(43) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; movida al inicio de &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
 
 case &quot;pt&quot;
  Rem Aux
@@ -91,7 +96,7 @@ case &quot;pt&quot;
  Txt(14) = &quot;Extensão Writer2xhtml não encontrada, não é possível exportar com seus filtros.&quot;
  Txt(15) = &quot;O arquivo &quot; &amp; Chr(13)
  Txt(16) = &quot; já existe, deseja sobrescrevê-lo?&quot;
- Txt(17) = &quot;Html criado&quot; &amp; Chr(13) &amp; &quot;Deseja abri-lo?&quot;
+ Txt(17) = &quot;Arquivo Html criado&quot; &amp; Chr(13) &amp; &quot;Deseja abri-lo?&quot;
  Txt(18) = &quot;Não há cuadros no documento.&quot;
  Txt(19) = &quot;Situação das lendas alterada.&quot;
  Rem Secciones
@@ -115,9 +120,10 @@ case &quot;pt&quot;
  Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot; Excluir seção&quot;
  Txt(38) = &quot;?&quot;
  Txt(39) = &quot;- A seção &quot;&quot;SEC_TOC&quot;&quot; não existe.&quot;
- Txt(40) = &quot;Sumário&quot; &apos;(Nome do índice)
+ Txt(40) = &quot;Sumário&quot; &apos;Contenido, Sumário, TOC (Nome do índice)
  Txt(41) = &quot;- Sumário inserido na seção &quot;&quot;SEC_TOC&quot;&quot;.&quot;
  Txt(42) = &quot;- Sumário atualizado.&quot;
+ Txt(43) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; movida para o início de &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
 
 case else
   Rem Aux
@@ -166,12 +172,13 @@ case else
  Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot;You want to Delete the section &quot;
  Txt(38) = &quot;?&quot;
  Txt(39) = &quot;The section &quot;&quot;SEC_TOC&quot;&quot; does not exist.&quot;
- Txt(40) = &quot;Contents&quot; &apos;Index name)
+ Txt(40) = &quot;Contents&quot; &apos; Contenido, Sumario, TOC(Index name)
  Txt(41) = &quot;- TOC inserted in the &quot;&quot;SEC_TOC&quot;&quot; section.&quot;
  Txt(42) = &quot;- TOC Updated.&quot;
+ Txt(43) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; moved to the beginning of  &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
 
 End Select
 
 End sub
-
+&apos;==================== FIN L10n
 </script:module>
