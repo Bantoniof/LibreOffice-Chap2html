@@ -4,19 +4,16 @@
  xmlns:dep="http://openoffice.org/extensions/description/2006"
  xmlns:xlink="http://www.w3.org/1999/xlink">
 	<identifier value="vnd.bantoniof.Chap2html"/>
-	<version value="1.0.1"/>
-
+	<version value="1.0.1"/> <!-- Es posible que no funcione ? se obtiene de https://githubraw.com/-->
+	<update-information>
+		<src xlink:href="https://githubraw.com/Bantoniof/LibreOffice-Chap2html/master/Chap2html.update.xml"/> 
+	</update-information>
 	<dependencies>
 	<l:LibreOffice-minimal-version xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:l="http://libreoffice.org/extensions/description/2011" value="7.5" d:name="LibreOffice 7.5" /> 
 	</dependencies>
-
-<!--  <1:LibreOffice-minimal-version value="7.5" d:name="LibreOffice.org 7.5 or higher" /> --> 
-
-
 	<publisher>
 		<name lang="en" xlink:href="http://">B. Antonio Fernández</name> 
 	</publisher>
-
 	<registration>
 		<simple-license  accept-by="admin" default-license-id="ID0" suppress-on-update="true" >
 			<license-text xlink:href="registration/Licencia_en.txt" lang="en" license-id="ID0" />
@@ -27,5 +24,4 @@
 	<icon>
 		<default xlink:href="icons/Chap2html.svg" /> 
 	</icon>
-
 </description>
