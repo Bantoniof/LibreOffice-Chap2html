@@ -76,6 +76,22 @@ ERRORES:
 End Function
 
  Rem ############
+Sub InsertAnnotation(oParSection As Object, oCursor As Object, stexto As String, Optional Autor)
+ Dim Fecha As New com.sun.star.util.DateTime
+   If IsMissing(Autor) Then : Autor = F_Extension : End If
+   With Fecha
+     .Day = Day(Now) : .Month = Month(Now): .Year = Year(Now)
+     .Hours = Hour(Now) : .Minutes = Minute(Now) : .Seconds = Second(Now)
+   End With
+ Dim oAnno As Object
+   oAnno = ThisComponent.createInstance(&quot;com.sun.star.text.TextField.Annotation&quot;)
+   oAnno.Content = stexto
+   oAnno.Author = Autor &apos;_Aux.F_NombreUsuario
+   oAnno.DateTimeValue = Fecha
+   oParSection.Text.insertTextContent(oCursor, oAnno, True)
+End Sub
+
+ Rem ############
 Sub Actualizar
  Rem necesario después de cambiar nombre a sección 
  Dim document As Object, dispatcher As Object
@@ -101,7 +117,7 @@ Sub GuardaRecarga
 End Sub
 
  Rem ############
-Function F_W2LTX as boolean&apos;(identificateur As String) As String
+Function F_W2LTX as boolean
  dim sv As Object, ext as variant, lista as variant
    sv = GetDefaultContext().getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
    lista = sv.getExtensionList() &apos;lista de extensiones en array, 0=nombre ext 1=versión
@@ -111,7 +127,7 @@ Function F_W2LTX as boolean&apos;(identificateur As String) As String
        Exit Function
      end if
    next &apos;ext
-   F_W2LTX = 0 &apos;extension pas trouvée
+   F_W2LTX = 0
 End Function
 
  Rem ############ 
