@@ -107,7 +107,7 @@ Sub Colores
    DocSettings = ThisComponent.createInstance( &quot;com.sun.star.document.Settings&quot; )
    DocSettings.UpdateFromTemplate = FALSE
    Call Notas
-   Call Above_Bellow
+   Call Above_Below
 end sub
 
  Rem ############
@@ -151,7 +151,10 @@ End Sub
  Dim vCursor As Object, numero as Variant
  Dim Texto As String, espacio as String , pagina As integer
    
- &apos;  If L10n.F_getLang &lt;&gt; &quot;en&quot; Then Exit Sub
+   If L10n.F_getLang &lt;&gt; &quot;en&quot; Then
+     Msgbox (&quot;Above y Below &quot; &amp; Chr(13) &amp; &quot;De momento solo disponible en inglés&quot; ,0+6+0, Extension) 
+     Exit Sub
+   End If
  
    If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Sub
    vCursor = ThisComponent.CurrentController.getViewCursor
