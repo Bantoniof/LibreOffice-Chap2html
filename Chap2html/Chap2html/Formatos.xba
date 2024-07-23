@@ -7,61 +7,20 @@
  
 Option Explicit
 
- Rem ############
-Rem Convierte Listas numeradas en etiquetas
-Function F_Listas
-   Call L10n.Trad
-   If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Function 
-   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
-     MsgBox (Txt(9) ,0+48+0, Extension)
-     Exit Function
-    End If
- Dim oSection As Object, oCursor as Object, label, s As String
-   oSection = ThisComponent.TextSections.getByName(&quot;SEC_DISPLAYAREA&quot;)
-   oCursor = ThisComponent.Text.createTextCursorByRange(oSection.Anchor.Start)
-   Do While oCursor.gotoNextParagraph(False)
-     If oCursor.NumberingIsNumber Then
-       If ( (oCursor.NumberingStyleName = &quot;Numbering 1&quot;) _
-         OR  (oCursor.NumberingStyleName = &quot;Numbering 2&quot;) _
-         OR  (oCursor.NumberingStyleName = &quot;Numbering 3&quot;) _
-         OR  (oCursor.NumberingStyleName = &quot;Legend Numbered&quot;) ) Then
-         label = oCursor.ListLabelString &amp; &quot; &quot; &apos;(Inserta HARD_SPACE (-no es necesario modificar el estilo)
-         oCursor.gotoStartOfParagraph(False)
-         oCursor.CharStyleName = &quot;Strong Emphasis&quot;
-         oCursor.getText().insertString(oCursor, label , False)
-       Elseif OCursor.ParaStyleName = &quot;List 2&quot; Then
-         oCursor.gotoStartOfParagraph(False)
-         oCursor.CharStyleName = &quot;Strong Emphasis&quot;
-         oCursor.getText().insertString(oCursor, &quot;– &quot; , False)
-       End If
-     End If
-   Loop
-   s =  Txt(10)
-   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 1&quot;, &quot;HNumbering 1&quot;)
-   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 2&quot;, &quot;HNumbering 2&quot;)
-   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 3&quot;, &quot;HNumbering 3&quot;)
-   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Legend Numbered&quot;, &quot;HLegend Numbered&quot;)
-   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;List 2&quot;, &quot;HList 2&quot;)
-   F_Listas = s
-   MsgBox (s,0+64+0,Txt(11) &amp; Extension) 
-End Function
-
-
  Rem ############ 
 Sub Colores
-   Call L10n.Trad
-   If  ThisComponent.HasLocation = False Then
+
+ Dim oDoc : oDoc = ThisComponent
+  Call L10n.Trad
+   If  oDoc.HasLocation = False Then
      MsgBox (Txt(0), 0+48+0, Extension)
      Exit Sub
    End If
-   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
-     MsgBox (Txt(9) ,0+48+0, Extension)
-     Exit Sub
-   End If
      
- Dim Guia As String, Color As Variant&apos;Obtener las dos iniciales de la guía
-   Guia = FileNameoutofPath(ThisComponent.getURL)
+ Dim Guia As String, Color As Variant
+   Guia = FileNameoutofPath(oDoc.getURL)
    Guia = Left(Guia,2)
+ &apos;  guia = &quot;CG&quot; 
    Select case Guia
      Case &quot;BG&quot;: Color = RGB(83,2,96)
      Case &quot;CG&quot;: Color = RGB(0,124,60)
@@ -70,44 +29,35 @@ Sub Colores
      Case &quot;IG&quot;: Color = RGB(98,37,2)
      Case &quot;MG&quot;: Color = RGB(37,94,98)
      Case &quot;WG&quot;: Color = RGB(22,50,88)
-     Case Else : Msgbox (Txt(12), 0+64+0, Extension): Exit Sub 
+     Case Else : Msgbox (Txt(20), 0+64+0, Extension): Exit Sub 
    End select
   
  Dim oEstilos As Variant, HEstilos as Variant, oEstilo as Variant, i as Integer
-   oEstilos = ThisComponent.StyleFamilies.ParagraphStyles
-   HEstilos = Array(&quot;Title&quot;,&quot;Guide Name&quot;,&quot;Heading&quot;)&apos;,&quot;Contents 1&quot;,&quot;Contents 2&quot;,&quot;Contents 3&quot;) 
+   oEstilos = oDoc.StyleFamilies.ParagraphStyles
+   HEstilos = Array(&quot;Title&quot;,&quot;Guide Name&quot;,&quot;Heading&quot;) &apos; Heading 1 Frist, Heading 1-10, -Contents 1-10 
    For i = 0 to uBound(HEstilos)   
      oEstilo = oEstilos.getByName(HEstilos(i))
      oEstilo.SetPropertyValue(&quot;CharColor&quot;,Color)
    Next
-   HEstilos = Array(&quot;Heading 1&quot;,&quot;Contents Heading&quot;)&apos;,&quot;Body Text, Note&quot;)
+   HEstilos = Array(&quot;Heading 1&quot;,&quot;Contents Heading&quot;) &apos;Heading 1 First ,&quot;Body Text, Note&quot;)
  Dim props(): props = Array(Color,0,35,0,0,35)
    For i = 0 to uBound (HEstilos)
     oEstilo = oEstilos.getByName(HEstilos(i))
     oEstilo.SetPropertyValue(&quot;BottomBorder&quot;,props())
    Next
-   oEstilo = oEstilos.getByName(&quot;Heading Caution&quot;)
-   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(163,63,3))
-   oEstilo.TopBorderDistance = 259
-   oEstilo.BottomBorderDistance = 0   
-   oEstilo = oEstilos.getByName(&quot;Heading Note&quot;)
-   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(16,104,3))
-   oEstilo.TopBorderDistance = 259
-   oEstilo.BottomBorderDistance = 0
-   oEstilo = oEstilos.getByName(&quot;Heading Tip&quot;)
-   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(2,63,98))
-   oEstilo.TopBorderDistance = 259
-   oEstilo.BottomBorderDistance = 0
- Dim oDoc : oDoc = ThisComponent
+   Rem se consigue con archivo CSS
+&apos;   oEstilo = oEstilos.getByName(&quot;Heading Caution&quot;)
+&apos;   oEstilo.SetPropertyValue(&quot;CharColor&quot;,RGB(163,63,3))
+&apos;   oEstilo.TopBorderDistance = 259
+
    If (oDoc.isModified) Then
      If (oDoc.hasLocation AND (Not oDoc.isReadOnly)) Then oDoc.store()
    End If  
    Msgbox (Txt(13) ,0+64+0, Extension) 
  Dim DocSettings
-   DocSettings = ThisComponent.createInstance( &quot;com.sun.star.document.Settings&quot; )
+   DocSettings = oDoc.createInstance( &quot;com.sun.star.document.Settings&quot; )
    DocSettings.UpdateFromTemplate = FALSE
    Call Notas
-   Call Above_Below
 end sub
 
  Rem ############
@@ -116,9 +66,9 @@ Sub Notas
  Rem para evitar líneas al final de cada párrafo
  
  Dim oEstilos As Object: oEstilos = ThisComponent.StyleFamilies.getByName(&quot;ParagraphStyles&quot;)
- Dim oParEnum As Object, oPar As Object
+ Dim oParEnum As Object, oPar As Object, oCursor As Object
  Dim bFound As Boolean, P_Nota As String ,P_Anterior As String
- Dim cursor_Nota As Object, cursor_Ant As Object
+
    oParEnum = ThisComponent.Text.createEnumeration()
    Do While oParEnum.hasMoreElements()
      oPar = oParEnum.nextElement()
@@ -130,110 +80,152 @@ Sub Notas
        End If
        
        If (bFound) = True Then
-         cursor_Nota = opar.getText.createTextCursorByRange(opar)
-         cursor_Ant = opar.getText.createTextCursorByRange(opar)
-         cursor_Ant.gotoPreviousParagraph(false)
-         If cursor_Ant.ParaStyleName = &quot;Body Text, Note&quot; then
-           cursor_Ant.gotoEndOfParagraph(false)
-           cursor_Ant.gotoNextParagraph(true)
-           ThisComponent.Text.InsertControlCharacter(cursor_ant,1,true)
+         oCursor = opar.getText.createTextCursorByRange(opar)
+         oCursor.gotoPreviousParagraph(false)
+         If oCursor.ParaStyleName = &quot;Body Text, Note&quot; then
+           oCursor.gotoEndOfParagraph(false)
+           oCursor.gotoNextParagraph(true)
+           ThisComponent.Text.InsertControlCharacter(oCursor,1,true)
          End If
        End If
      End If
    loop
 End Sub
 
- Rem ############
- Sub Above_Below
-
- Dim oSecciones As Object, oSeccion As Object 
+ Rem ##########
+Function OnpageX
+ REM Otra forma sería buscar campos, que en su Repres. tuvieran el texto
+ REM &quot;REF&quot;, cambiar el ReferenceFieldPart,  Ir al ancla y borrar &quot;on page&quot;
+ REM pero se pierde el comentario en otros textos &quot; on page&quot; sin campo
+ Rem -No lo he probado, ¿Afecta a las Entradas del Índice?  ¿pies de página?  
+ Dim palabras As Integer,  Busqueda As String
  Dim oSearch  As Variant, oFound As Variant
- Dim vCursor As Object, numero as Variant
- Dim Texto As String, espacio as String , pagina As integer
-   
-   If L10n.F_getLang &lt;&gt; &quot;en&quot; Then
-     Msgbox (&quot;Above y Below &quot; &amp; Chr(13) &amp; &quot;De momento solo disponible en inglés&quot; ,0+6+0, Extension) 
-     Exit Sub
-   End If
- 
-   If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Sub
-   vCursor = ThisComponent.CurrentController.getViewCursor
-   oSeccion = ThisComponent.TextSections.getbyName(&quot;SEC_DISPLAYAREA&quot;)
-   vCursor.gotoRange(oSeccion.Anchor,false)
-   vCursor.goRight(1,False)
+ Dim vCursor As Object, Texto1 As String 
+ Dim contador1 as Integer, contador2 as Integer
+
+   Call L10n.Trad
+   _Aux.EliminaComentarios(Txt(34))
+   If _Aux.F_getlang = &quot;es&quot; Then palabras = 3
+   Busqueda = Txt(9) &amp; &quot; &quot; &apos;Espacio normal
+
+&apos;   If IsMissing(palabras) then palabras = 2 
    oSearch = ThisComponent.createSearchDescriptor()
-   oSearch.SearchString = &quot; on page &quot;
+   oSearch.SearchString = Busqueda
    oFound = ThisComponent.findFirst(oSearch)
-   
-&apos; Rem ESPACIOS NORMALES
+  On local error goto Errores     
+   vCursor = ThisComponent.CurrentController.getViewCursor
+  If not isNull(oFound) then : vCursor.gotorange(oFound.Start,false) : End If
    Do While Not IsNull(oFound)
-     oFound.gotoNextWord(True) &apos;devuelve palabra y el espacio siguiente
-     Texto =  oFound.string
-     If Right(oFound.String,1) = &quot; &quot; Then
-       espacio = &quot; &quot;
-     Else
-       espacio = &quot;&quot;
-     End If      
-     numero = split(oFound.getString,&quot; &quot;)
-     vCursor.gotoRange(ofound,false)
-     pagina =  vCursor.getpage()
-     If cInt(numero(3)) &lt;  pagina then &apos;3
-       ThisComponent.Text.InsertString(oFound,&quot; above&quot; &amp; espacio,True)
-       InsertAnnotation(ThisComponent,vCursor, Texto &amp; &quot; replaced by  &quot;&quot;above&quot;&quot; &quot;,&quot;Above / Below&quot;)
-     ElseIf cInt(numero(3)) &gt;  pagina then
-       ThisComponent.Text.InsertString(oFound,&quot; below&quot; &amp; espacio,True)
-        InsertAnnotation(ThisComponent,vCursor, Texto &amp; &quot; replaced by  &quot;&quot;below&quot;&quot; &quot;,&quot;Above / Below&quot;)
-     end If
+     oFound.gotoNextWord(False)  &apos;voy sl inicio de siguiente palabra)
+     oFound.goLeft(1,True) &apos; cojo campo, espacio o signo puntuación REM sigue punto o salto párrafo  
+     If Not IsEmpty(oFound.TextField) then &apos; Cambio Campo
+       Texto1 =Txt(9) &amp; &quot;-&quot; &amp; oFound.String 
+       oFound.TextField.ReferenceFieldPart = 3 &apos;error 423
+       oFound.TextField.update
+&apos;***** Borro y commento  ****
+       oFound.goLeft(1,false) &apos;posición antes del espacio y campo 
+       oFound.gotoPreviousWord(true)    &apos;page
+       oFound.gotoPreviousWord(true)    &apos;on 
+       If palabras = 3 Then : oFound.gotoPreviousWord(True) : End If &apos;español
+       oFound.goLeft(1,true)
+       ThisComponent.text.InsertString(oFound,&quot;&quot;,True)&apos; limpio
+       InsertAnnotation(ThisComponent,oFound,  Txt(33) &amp; Texto1 &amp; Txt(8) &amp; Txt(12), Txt(35))
+       contador1 = contador1 +1
+SIGUIENTE: 
+     Else  REM &apos;Sigue un espacio vacío o signo puntuación
+       oFound.goLeft(1,False)
+       oFound.goRight(1,True)&apos; Es el campo
+       If Not IsEmpty(oFound.TextField) then
+         Texto1 = Txt(9) &amp; &quot;-&quot; &amp; oFound.String     
+         oFound.TextField.ReferenceFieldPart = 3
+         oFound.TextField.update
+         oFound.goLeft(1,false) 
+         oFound.gotoPreviousWord(true)
+         oFound.gotoPreviousWord(True)
+         If palabras = 3 Then : oFound.gotoPreviousWord(True) : End If &apos;español
+         ThisComponent.text.InsertString(oFound,&quot;&quot;,True)&apos;limpio
+         InsertAnnotation(ThisComponent,oFound,  Txt(33) &amp; Texto1 &amp; Txt(8) &amp; Txt(12), Txt(35))
+         contador1 = contador1 +1
+       Else
+         InsertAnnotation(ThisComponent, oFound, Txt(33) &amp; Txt(9) &amp; Chr(13) &amp; Txt(34), Txt(34))
+         contador2 = contador2 +1
+       End If
+     End If
    oFound = ThisComponent.findNext(oFound.End, oSearch)
    Loop
 
-&apos; Rem ESPACIOS INDIVISIBLES
-&apos;  oSearch.SearchString = &quot; on page &quot; El espacio final es indivisible 
-   oSearch.SearchString = &quot; on page&quot;&amp; CHR(160)&apos; Espacio indivisible 
+   Busqueda = Txt(9) &amp; Chr(160)&apos; Espacio indivisible
+   oSearch.SearchString = Busqueda
    oFound = ThisComponent.findFirst(oSearch)
    Do While Not IsNull(oFound)
-     oFound.gotoNextWord(True)
-     Texto =  oFound.string
-     if Right(oFound.String,1) = &quot; &quot; Then
-       espacio = &quot; &quot;
-     Else
-       espacio = &quot;&quot;
-     End If      
- &apos;    numero = split(oFound.getString, &quot; &quot;)&apos;El espacio es indivisible 
-     numero = split(oFound.getString, CHR(160))&apos;Espacio indivisible 
-     vCursor.gotoRange(ofound,false)
-     pagina =  vCursor.getpage()
-      If cInt(numero(1)) &lt;  pagina then &apos;3
-       ThisComponent.Text.InsertString(oFound,&quot; above&quot; &amp; espacio,True)
-       InsertAnnotation(ThisComponent,vCursor, Texto &amp; &quot; replaced by  &quot;&quot;above&quot;&quot; &quot;,&quot;Above / Below&quot;)
-     elseIf cInt(numero(1)) &gt;  pagina then
-       ThisComponent.Text.InsertString(oFound,&quot; below&quot; &amp; espacio,True)
-       InsertAnnotation(ThisComponent,vCursor, Texto &amp; &quot; replaced by  &quot;&quot;below&quot;&quot; &quot;,&quot;Above / Below&quot;)
-     end If
+     oFound.gotoNextWord(False)  &apos;voy sl inicio de siguiente palabra)
+     oFound.goLeft(1,True) &apos; cojo campo, espacio o signo puntuación REM sigue punto o salto párrafo  
+     If Not IsEmpty(oFound.TextField) then &apos; Cambio Campo
+       Texto1 = Txt(9) &amp; &quot;-&quot; &amp; oFound.String 
+       oFound.TextField.ReferenceFieldPart = 3 &apos;error 423
+       oFound.TextField.update
+&apos;***** Borro y commento  ****
+       oFound.goLeft(1,false) &apos;posición antes del espacio y campo 
+       oFound.gotoPreviousWord(true)    &apos;page
+       oFound.gotoPreviousWord(true)    &apos;on 
+       If palabras = 3 Then : oFound.gotoPreviousWord(True) : End If &apos;español
+       oFound.goLeft(1,true)
+       ThisComponent.text.InsertString(oFound,&quot;&quot;,True)
+       InsertAnnotation(ThisComponent,oFound,  Txt(33) &amp; Texto1 &amp; Txt(8) &amp; Txt(12), Txt(35))
+       contador1 = contador1 +1
+     Else  REM &apos;Sigue un espacio vacío o signo puntuación
+       oFound.goLeft(1,False)
+       oFound.goRight(1,True)&apos; Es el campo
+       If Not IsEmpty(oFound.TextField) then
+         Texto1 = Txt(9) &amp; &quot;-&quot; &amp; oFound.String     
+         oFound.TextField.ReferenceFieldPart = 3
+         oFound.TextField.update
+&apos;***** Borro y commento  ****
+         oFound.goLeft(1,false) 
+         oFound.gotoPreviousWord(true)
+         oFound.gotoPreviousWord(True)
+         If palabras = 3 Then : oFound.gotoPreviousWord(True) : End If &apos;español
+         ThisComponent.text.InsertString(oFound,&quot;&quot;,True)
+         InsertAnnotation(ThisComponent,oFound,  Txt(33) &amp; Texto1 &amp; Txt(8) &amp; Txt(12), Txt(35))
+         contador1 = contador1 +1
+       Else
+         InsertAnnotation(ThisComponent, oFound, Txt(33) &amp; Txt(9) &amp; Chr(13) &amp; Txt(34), Txt(34))
+         contador2 = contador2 +1
+       End If
+   End If
    oFound = ThisComponent.findNext(oFound.End, oSearch)
    Loop
-End sub
+   If contador1 +  contador2 &lt;&gt; 0 Then
+     Msgbox ( Txt(37),0+64+0,Extension)
+   Else
+     Msgbox ( Txt(36) ,0+64+0,Extension)
+   End If  
+   Exit Function
+
+ERRORES:
+   If Err = 423 then
+     Msgbox &quot;Vuelve a ejecutar la macro&quot;
+     Exit Function
+   ElseIf Err = 0 then
+     Print &quot;vamos a siguiente&quot;
+   Goto SIGUIENTE
+   Else
+     Msgbox &quot;Error Nº &quot;&amp; Err &amp; Chr(13) &amp; &quot;En Línea: &quot; &amp; Erl &amp; Chr(13) &amp; Error
+     Exit Function
+   End If       
+End Function
  
  Rem ############
 Sub Convierte
    Call L10n.Trad
-   If _Aux.F_W2LTX = 0 then 
+   If _Aux.F_W2XHTML = 0 then 
      MsgBox (Txt(14), 0+64+0, Extension)
      Exit sub
    End If
-   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
-     MsgBox (Txt(9) ,0+48+0, Extension)
-     Exit Sub
-   End If
-   If ThisComponent.IsModified then
-     If Msgbox (Txt(0), 4+32+0, Extension) = 6 Then
-       ThisComponent.store()
-     else
-       Exit sub 
-     end If
-   End If
+   Call _Aux.Actualizar
+   ThisComponent.store()
+   Call _Aux.CopiaIni
 
-   _Aux.CopiaIni
  Dim sUrlOut As String
    sUrlOut  = GetFileNameWithoutExtension(ThisComponent.url) &amp; &quot;.html&quot; 
    If fileexists(sUrlOut) then 
@@ -297,6 +289,93 @@ Function F_AlternarLeyenda()
    MsgBox (Txt(19), 0+64+0, Extension)
    F_AlternarLeyenda = Chr(13) &amp; Txt(19)
 End Function
+
+&apos;==================== DESCARTADOs =============
+
+Function F_Prueba_Est() As Integer
+ Rem Comprueba que este guardado
+ Rem y los estilos necesarios están en el documento
+ Rem (Al documento se ha aplicado la plantilla html)
+ Rem Devuelve 0 o nº elementos Matriz
+ Rem =================================================
+ Dim HtmlEstilos() As Variant, i As Integer, Contador As Integer
+   Contador = 0
+   HtmlEstilos = Array (&quot;HList 2&quot;,&quot;HNumbering 1&quot;,&quot;HNumbering 2&quot;,&quot;HNumbering 3&quot;,&quot;HLegend Numbered&quot;)
+   For i = LBound(HtmlEstilos) To UBound(HtmlEstilos)
+     If ThisComponent.StyleFamilies.ParagraphStyles.HasByName(HtmlEstilos(i)) Then
+       Contador = Contador + 1       
+     End If
+   Next
+   F_Prueba_Est = Contador
+End Function
+
+ Rem ############
+Rem Convierte Listas numeradas en etiquetas&apos; 
+REM descartado por la versión final de Writer2xhtml 
+Function F_Listas
+   Call L10n.Trad
+   If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Function 
+   If _Aux.F_Prueba_Est &lt;&gt; 5 Then
+     MsgBox (&quot;El documento No tiene estilos necesarios&quot; ,0+48+0, Extension)
+     Exit Function
+    End If
+ Dim oSection As Object, oCursor as Object, label, s As String
+   oSection = ThisComponent.TextSections.getByName(&quot;SEC_DISPLAYAREA&quot;)
+   oCursor = ThisComponent.Text.createTextCursorByRange(oSection.Anchor.Start)
+   Do While oCursor.gotoNextParagraph(False)
+     If oCursor.NumberingIsNumber Then
+       If ( (oCursor.NumberingStyleName = &quot;Numbering 1&quot;) _
+         OR  (oCursor.NumberingStyleName = &quot;Numbering 2&quot;) _
+         OR  (oCursor.NumberingStyleName = &quot;Numbering 3&quot;) _
+         OR  (oCursor.NumberingStyleName = &quot;Legend Numbered&quot;) ) Then
+         label = oCursor.ListLabelString &amp; &quot; &quot; &apos;(Inserta HARD_SPACE (-no es necesario modificar el estilo)
+         oCursor.gotoStartOfParagraph(False)
+         oCursor.CharStyleName = &quot;Strong Emphasis&quot;
+         oCursor.getText().insertString(oCursor, label , False)
+       Elseif OCursor.ParaStyleName = &quot;List 2&quot; Then
+         oCursor.gotoStartOfParagraph(False)
+         oCursor.CharStyleName = &quot;Strong Emphasis&quot;
+         oCursor.getText().insertString(oCursor, &quot;– &quot; , False)
+       End If
+     End If
+   Loop
+   s =  &quot;Txt(xx)&quot;&apos;- Nuevo formato aplicado a listas numeradas.&quot;
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 1&quot;, &quot;HNumbering 1&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 2&quot;, &quot;HNumbering 2&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Numbering 3&quot;, &quot;HNumbering 3&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;Legend Numbered&quot;, &quot;HLegend Numbered&quot;)
+   s = s &amp; Chr(13) &amp; _Aux.F_RemplazaEstilo (&quot;List 2&quot;, &quot;HList 2&quot;)
+   F_Listas = s
+   MsgBox (s,0+64+0,&quot;Txt(xx)&quot; &amp; Extension)&apos; &quot;Cambio de estilos.&quot;
+End Function
+
+Function F_RemplazaEstilo(E_Buscado As Variant, E_Remplazo As Variant) As String
+ Rem Remplaza las apariciones de E_Buscado por E_Remplazo
+ Rem ¡Solo válido para estilos de Párrafo!
+ Rem ¡Versiones localizadas: usar .DisplayName en nombre estilo
+ Rem (si se usa .Name) L.O. REVIENTA!
+ Rem ============================================
+
+ Dim Parrafos As Object, s As String
+   Parrafos = ThisComponent.StyleFamilies.ParagraphStyles
+   If Parrafos.hasbyName(E_Buscado) AND Parrafos.hasbyName(E_Remplazo) then
+   E_Buscado = Parrafos.getbyName(E_Buscado).DisplayName
+   E_Remplazo = Parrafos.getbyName(E_Remplazo).DisplayName
+     Dim Busqueda As Object
+     Busqueda = ThisComponent.CreateReplaceDescriptor
+       If Parrafos.getbyname(E_Buscado).isInuse then
+         With Busqueda
+           .SearchString = E_Buscado
+           .ReplaceString = E_Remplazo
+           .SearchStyles = True    
+         End with
+         ThisComponent.ReplaceAll(Busqueda)
+         s =  &quot;- &quot;&quot;&quot; &amp; E_Buscado &amp; Txt(8) &amp; E_Remplazo &amp; &quot;&quot;&quot; &quot;
+       End If
+   End If 
+   F_RemplazaEstilo = s
+End Function
+
 &apos;==================== FIN Formatos
 
 

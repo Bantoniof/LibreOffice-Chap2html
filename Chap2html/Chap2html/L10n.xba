@@ -8,7 +8,7 @@
 Option Explicit
 
 Global Extension
-Global Txt(43)
+Global Txt(37)
 
 Function F_getLang As String
    Call _Aux.Carga_Tools
@@ -18,13 +18,12 @@ Function F_getLang As String
 End Function
 
 Sub Trad
-
 Select case F_getLang
 
 case &quot;es&quot;
- Rem Aux
- Txt(0) = &quot;Primero tienes que guardar el documento.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;¿Guardar ahora?&quot;
- Txt(1) = &quot;El archivo no tiene las secciones necesarias: &quot; &amp; Chr(13) &amp; Chr(13) 
+ Rem _Aux
+ Txt(0) = &quot;Primero tienes que guardar el documento.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;¿Guardar ahora?&quot;&apos;Anulado
+ Txt(1) = &quot;El documento no tiene las secciones necesarias: &quot; &amp; Chr(13) &amp; Chr(13) 
  Txt(2) = &quot;Comprueba situación y nombres de secciones.&quot;
  Txt(3) = &quot;Es posible que esté seleccionado un objeto: imagen, marco, etc.&quot; &amp; Chr(13) &amp; _
     &quot; Coloca el cursor en un fragmento de texto y prueba de nuevo.&quot;
@@ -33,12 +32,12 @@ case &quot;es&quot;
  Txt(5) =  &quot;Para evitar este mensaje coloca siempre el cursor en un fragmento de texto&quot;
  Txt(6) = &quot; No se puede mostrar (Archivo o ruta no válida).&quot;
  Txt(7) = &quot;Error Imprevisto.&quot; &amp; chr(13)
- Txt(8) = &quot;  Cambiado por  &quot;
+ Txt(8) = &quot;  cambiado por  &quot;
  Rem Formatos
- Txt(9) = &quot;El no tiene los estilos necesarios,&quot; &amp; Chr(13) &amp; &quot;¿Está aplicada la plantilla correcta?&quot;
- Txt(10) = &quot;- Nuevo formato aplicado a listas numeradas.&quot;
- Txt(11) = &quot;Cambio de estilos&quot;
- Txt(12) = &quot;Este archivo no parece un documento de las guías.&quot; 
+ Txt(9) =  &quot; en la página&quot; &apos; Loc- Respetar espacio inicial, se usa en buscar
+ Txt(10) = &quot; arriba&quot; &apos; Loc -Respetar espacio inicial, se usa en remplazar
+ Txt(11) = &quot; abajo&quot; &apos; Loc-Respetar espacio Inicial, se usa en remplazar
+ Txt(12) = &quot;Arriba / Abajo&quot;
  Txt(13) = &quot;Se ha cambiado el color de los títulos&quot; &amp; Chr(13) &amp;_
     &quot;Como medida de seguridad se desactiva la actualización de estilos a partir de la plantilla.&quot;
  Txt(14) = &quot;No se ha encontrado la extensión Writer2xhtml, no se puede exportar con sus filtros.&quot;
@@ -47,36 +46,31 @@ case &quot;es&quot;
  Txt(17) = &quot;Archivo Html Creado&quot; &amp; Chr(13) &amp; &quot;¿Quieres abrirlo?&quot;
  Txt(18) = &quot;No hay marcos en el documento.&quot;
  Txt(19) = &quot;Situación de Leyendas cambiada.&quot;
+ Txt(20) = &quot;Este archivo no parece un documento de las guías.&quot;
  Rem Secciones
- Txt(20) = &quot;Parece que se han borrado secciones manualmente.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Vuelve a ejecutar la macro&quot; 
- Txt(21) = &quot; no existe.&quot;  
- Txt(22) = &quot;- La sección &quot;
- Txt(23) = &quot; es una Subsección de &quot; &amp; Chr(13)
- Txt(24) = Chr(13) &amp; Chr(9) &amp; &quot;¿Eliminar sección?&quot;
- Txt(25) = &quot;- Sección &quot;
- Txt(26) = &quot; eliminada.&quot;
- Txt(27) = &quot; no se ha eliminado.&quot;
- Txt(28) = &quot; - Texto de la Sección &quot; 
- Txt(29) = Chr(13) &amp; &quot; Copiado al inicio de &quot;
- Txt(30) = Chr(13) &amp; Chr(9) &amp; &quot;Comprueba Párrafos Vacíos.&quot; &amp; Chr(13)
- Txt(31) = &quot;- Sección añadida: &quot;
- Txt(32) = &quot; ya existe.&quot; 
- Txt(33) = &quot;No se ha encontrado ningún &quot;
- Txt(34) = &quot;Sumario.&quot; &apos; Table of Contents, Sumário (índice de contenido?)
- Txt(35) = &quot; eliminado.&quot;
- Txt(36) = &quot; en la sección. &quot;
- Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot; ¿Eliminar sección &quot; &apos; no necesario
- Txt(38) = &quot;?&quot; &apos;no necesario
- Txt(39) = &quot;La sección &quot;&quot;SEC_TOC&quot;&quot;  no existe.&quot;
- Txt(40) = &quot;Contenido&quot; &apos;Sumário, TOC (Nombre del índice)
- Txt(41) = &quot;- Sumario insertado en la sección &quot;&quot;SEC_TOC&quot;&quot;.&quot;
- Txt(42) = &quot;- Sumario actualizado.&quot;
- Txt(43) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; movida al inicio de &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
+ Txt(21) = &quot;- La sección &quot; 
+ Txt(22) = &quot; no existe.&quot;
+ Txt(23) = &quot; ya existe.&quot;
+ Txt(24) = &quot;Parece que se han borrado secciones manualmente.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Vuelve a ejecutar la macro&quot;
+ Txt(25) = &quot;- Sección añadida: &quot;
+ Txt(26) = &quot;- Sumario &quot; &apos; Loc- Objeto índice 
+ Txt(27) = &quot; eliminado. &quot;  &apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;&apos;MOVER
+ Txt(28) = &quot;La sección &quot;&quot;SEC_TOC&quot;&quot;  no existe.&quot;
+ Txt(29) = &quot;Contenido&quot; &apos; Loc- Título del índice
+ Txt(30) = &quot;- Sumario insertado en la sección &quot;&quot;SEC_TOC&quot;&quot;.&quot;
+ Txt(31) = &quot;- Sumario actualizado.&quot;
+ Txt(32) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; movida al inicio de &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
+ Rem msg arriba/abajo
+ Txt(33) = &quot;Texto encontrado: &quot;
+ Txt(34) = &quot;Revisa esta línea.&quot;
+ Txt(35) = &quot;Referencias&quot;
+ Txt(36) = &quot;No se han encontrado referencias a páginas  con el texto:&quot; &amp; Chr(13) &amp; Chr(9) &amp; Txt(9) 
+ Txt(37) = &quot;Se han encontrado referencias a páginas.&quot; &amp; Chr(13) &amp; &quot;Revisa los comentarios&quot;
 
 case &quot;pt&quot;
  Rem Aux
- Txt(0) = &quot;Primeiro de tudo você deve salvar o documento.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Salvar agora?&quot;
- Txt(1) = &quot;O arquivo não possui as seções necessárias: &quot; &amp; Chr(13) &amp; Chr(13) 
+ Txt(0) = &quot;Primeiro de tudo você deve salvar o documento.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Salvar agora?&quot;&apos;Anulado
+ Txt(1) = &quot;O documento não possui as seções necessárias: &quot; &amp; Chr(13) &amp; Chr(13) 
  Txt(2) = &quot;Verifique o local e os nomes das seções.&quot;
  Txt(3) = &quot;Um objeto pode ser selecionado: imagem, quadro, etc.&quot; &amp; Chr(13) &amp; _
      &quot;Coloque o cursor em um trecho de texto e tente novamente.&quot;
@@ -85,12 +79,12 @@ case &quot;pt&quot;
  Txt(5) = &quot;Para evitar esta mensagem sempre coloque o cursor em um trecho de texto.&quot;
  Txt(6) = &quot;Não é possível exibir (arquivo ou caminho inválido).&quot;
  Txt(7) = &quot;Erro imprevisto.&quot; &amp; chr(13)
- Txt(8) = &quot;  Mudado por  &quot;
+ Txt(8) = &quot;  mudado por  &quot;
  Rem Formatos
- Txt(9) = &quot;O documento não tem estilos necessarios,&quot; &amp; Chr(13) &amp; &quot; O modelo correto foi aplicado?&quot;
- Txt(10) = &quot;- Novo formato aplicado a listas numeradas.&quot;
- Txt(11) = &quot;Mudança de estilos&quot;
- Txt(12) = &quot;Este arquivo não parece um documento do guia.&quot;
+ Txt(9) = &quot; na página&quot; &apos;Respetar espacio inicial, se usa en buscar 
+ Txt(10) = &quot; acima&quot;&apos;Respetar espacio inicial, se usa en remplazar
+ Txt(11) = &quot; abaixo&quot;&apos;Respetar espacio inicial, se usa en remplazar
+ Txt(12) = &quot;Acima / Abaixo&quot;
  Txt(13) = &quot;A cor dos títulos foi alterada.&quot; &amp; Chr(13) &amp;_
     &quot;Como medida de segurança, a atualização de estilos do modelo está desativada.&quot;
  Txt(14) = &quot;Extensão Writer2xhtml não encontrada, não é possível exportar com seus filtros.&quot;
@@ -99,36 +93,31 @@ case &quot;pt&quot;
  Txt(17) = &quot;Arquivo Html criado&quot; &amp; Chr(13) &amp; &quot;Deseja abri-lo?&quot;
  Txt(18) = &quot;Não há cuadros no documento.&quot;
  Txt(19) = &quot;Situação das lendas alterada.&quot;
+ Txt(20) = &quot;Este arquivo não parece um documento do guia.&quot;
  Rem Secciones
- Txt(20) = &quot;As seções parecem ter sido excluídas manualmente.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Execute novamente a macro.&quot; 
- Txt(21) = &quot; não existe.&quot;  
- Txt(22) = &quot;- A seção &quot;
- Txt(23) = &quot; é uma subseção de &quot; &amp; Chr(13)
- Txt(24) = Chr(13) &amp; Chr(9) &amp; &quot;Excluir seção?&quot;
- Txt(25) = &quot;- Seção &quot;
- Txt(26) = &quot; excluída.&quot;
- Txt(27) = &quot; não foi excluída.&quot; 
- Txt(28) = &quot; - Texto da Seção &quot; 
- Txt(29) = Chr(13) &amp; &quot; Copiado para o início de &quot;
- Txt(30) = Chr(13) &amp; Chr(9) &amp; &quot;Verifique parágrafos vazios.&quot; &amp; Chr(13)
- Txt(31) = &quot;- Seção adicionada: &quot;
- Txt(32) = &quot; já existe.&quot; 
- Txt(33) = &quot; Não encontrado.&quot;
- Txt(34) = &quot;Sumário &quot;
- Txt(35) = &quot; excluído.&quot;
- Txt(36) = &quot; na seção &quot;
- Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot; Excluir seção&quot;
- Txt(38) = &quot;?&quot;
- Txt(39) = &quot;- A seção &quot;&quot;SEC_TOC&quot;&quot; não existe.&quot;
- Txt(40) = &quot;Sumário&quot; &apos;Contenido, Sumário, TOC (Nome do índice)
- Txt(41) = &quot;- Sumário inserido na seção &quot;&quot;SEC_TOC&quot;&quot;.&quot;
- Txt(42) = &quot;- Sumário atualizado.&quot;
- Txt(43) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; movida para o início de &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
+ Txt(21) = &quot;- A seção &quot; 
+ Txt(22) = &quot; não existe.&quot;
+ Txt(23) = &quot; já existe.&quot;
+ Txt(24) = &quot;As seções parecem ter sido excluídas manualmente.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Execute novamente a macro.&quot;
+ Txt(25) = &quot;- Seção adicionada: &quot;
+ Txt(26) = &quot;Sumário &quot;&apos;Objeto índice 
+ Txt(27) = &quot; excluído.&quot;
+ Txt(28) = &quot;- A seção &quot;&quot;SEC_TOC&quot;&quot; não existe.&quot; 
+ Txt(29) = &quot;Sumário&quot; &apos; Loc -Título del índice
+ Txt(30) = &quot;Sumário inserido na seção &quot;&quot;SEC_TOC&quot;&quot;.&quot;
+ Txt(31) = &quot;- Sumário atualizado.&quot;
+ Txt(32) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; movida para o início de &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
+ Rem msg arriba/abajo
+ Txt(33) = &quot;Texto encontrado: &quot;
+ Txt(34) = &quot;Verifique esta linha. &quot;
+ Txt(35) = &quot;Referências&quot;
+ Txt(36) = &quot;Nenhuma referência de página encontrada com o texto:&quot; &amp; Chr(13) &amp; Chr(9) &amp; Txt(9)
+ Txt(37) = &quot;Referências de páginas encontradas.&quot; &amp; Chr(13) &amp; &quot;Verifique os comentários&quot;
 
 case else
   Rem Aux
- Txt(0) = &quot;You must to save the document first.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Save now?&quot;
- Txt(1) = &quot;The file does not have the necessary sections: &quot; &amp; Chr(13) &amp; Chr(13) 
+ Txt(0) = &quot;You must to save the document first.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Save now?&quot;&apos;Anulado
+ Txt(1) = &quot;The document does not have the necessary sections: &quot; &amp; Chr(13) &amp; Chr(13) 
  Txt(2) = &quot;Check location and section names.&quot;
  Txt(3) = &quot;An object may be selected: image, frame, etc.&quot; &amp; Chr(13) &amp; Chr(13) &amp; _
      &quot;Place the cursor on a piece of text and try again.&quot;
@@ -137,12 +126,12 @@ case else
  Txt(5) = &quot; - To avoid this message always place the cursor on a text fragment.&quot;
  Txt(6) = &quot;Cannot display (Invalid file or path).&quot;
  Txt(7) = &quot;Unexpected Error.&quot; &amp; chr(13)
- Txt(8) = &quot; Changed by &quot;
+ Txt(8) = &quot; replaced by &quot;
  Rem Formatos
- Txt(9) = &quot;The document does not have the necessary styles,&quot; &amp; Chr(13) &amp; &quot;Is the correct template applied?&quot;
- Txt(10) = &quot;- New format applied to numbered lists.&quot;
- Txt(11) = &quot;Style change&quot;
- Txt(12) = &quot;This file does not look like a guide document.&quot;
+ Txt(9) = &quot; on page&quot; &apos;Respetar espacio inicial, se usa en buscar
+ Txt(10) = &quot; above&quot;&apos;Respetar espacio inicial, se usa en remplazar
+ Txt(11) = &quot; below&quot;&apos;Respetar espacio inicial, se usa en remplazar
+ Txt(12) = &quot;Above / Below&quot;
  Txt(13) = &quot;The color of the titles has been changed.&quot; &amp; Chr(13) &amp;_
     &quot;As a security measure, updating styles from the template is disabled.&quot;
  Txt(14) = &quot;Writer2xhtml extension not found, cannot export with its filters.&quot;
@@ -151,32 +140,26 @@ case else
  Txt(17) = &quot;Html Created&quot; &amp; Chr(13) &amp; &quot;Do you want to open it?&quot;
  Txt(18) = &quot;There are no frames in the document.&quot;
  Txt(19) = &quot;Captions situation changed.&quot;
- Rem Secciones
- Txt(20) = &quot;Sections appear to have been deleted manually.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Run the macro again.&quot; 
- Txt(21) = &quot; does not exist.&quot;  
- Txt(22) = &quot;- The section &quot;
- Txt(23) = &quot; is a Subsection of &quot; &amp; Chr(13)
- Txt(24) = Chr(13) &amp; Chr(9) &amp; &quot;Delete section?&quot;
- Txt(25) = &quot;- Section &quot;
- Txt(26) = &quot; deleted.&quot;
- Txt(27) = &quot; not deleted.&quot;
- Txt(28) = &quot; - Section Text of &quot; 
- Txt(29) = Chr(13) &amp; &quot; Copied to the beginning of &quot;
- Txt(30) = Chr(13) &amp; Chr(9) &amp; &quot;Check Empty Paragraphs.&quot; &amp; Chr(13)
- Txt(31) = &quot;- Added section: &quot;
- Txt(32) = &quot; already exists.&quot; 
- Txt(33) = &quot; Not found.&quot;
- Txt(34) = &quot;Table of contents&quot;
- Txt(35) = &quot; deleted.&quot;
- Txt(36) = &quot; in section &quot;
- Txt(37) = Chr(13) &amp; Chr(9) &amp; &quot;You want to Delete the section &quot;
- Txt(38) = &quot;?&quot;
- Txt(39) = &quot;The section &quot;&quot;SEC_TOC&quot;&quot; does not exist.&quot;
- Txt(40) = &quot;Contents&quot; &apos; Contenido, Sumario, TOC(Index name)
- Txt(41) = &quot;- TOC inserted in the &quot;&quot;SEC_TOC&quot;&quot; section.&quot;
- Txt(42) = &quot;- TOC Updated.&quot;
- Txt(43) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; moved to the beginning of  &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
-
+ Txt(20) = &quot;This file does not look like a guide document.&quot;
+ Rem Secciones 
+ Txt(21) = &quot;- The section &quot;  
+ Txt(22) = &quot; does not exist.&quot;
+ Txt(23) = &quot; already exists.&quot;
+ Txt(24) = &quot;Sections appear to have been deleted manually.&quot; &amp; Chr(13) &amp; Chr(13) &amp; &quot;Run the macro again.&quot;
+ Txt(25) = &quot;- Added section: &quot;
+ Txt(26) = &quot;Table of contents&quot;&apos;Objeto índice 
+ Txt(27) = &quot; deleted. &quot;
+ Txt(28) = &quot;The section &quot;&quot;SEC_TOC&quot;&quot; does not exist.&quot; 
+ Txt(29) = &quot;Contents&quot; &apos; Loc - Título del índice
+ Txt(30) = &quot;- TOC inserted in the &quot;&quot;SEC_TOC&quot;&quot; section.&quot;
+ Txt(31) = &quot;- TOC Updated.&quot;
+ Txt(32) = &quot; &quot;&quot;SEC_COPYRIGHT&quot;&quot; moved to the beginning of  &quot;&quot;SEC_DISPLAYAREA&quot;&quot; &quot;
+ Rem msg arriba/abajo
+ Txt(33) = &quot;Text found: &quot;
+ Txt(34) = &quot;Check this line.&quot;
+ Txt(35) = &quot; References&quot;
+ Txt(36)  = &quot;No page references found with the text:&quot; &amp; Chr(13) &amp; Chr(9) &amp; Txt(9)
+ Txt(37) = &quot;Page references found.&quot; &amp; Chr(13) &amp; &quot;Check the comments&quot;
 End Select
 
 End sub

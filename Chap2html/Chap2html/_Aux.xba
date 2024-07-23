@@ -9,34 +9,51 @@ Option Explicit
 
  Rem ############ 
 Function F_Extension&apos;(identificateur As String) As String
- dim sv As Object, e as variant, x as variant
+ dim sv As Object, ext as variant, lista as variant
    sv = GetDefaultContext().getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
-   e = sv.getExtensionList()
-   for each x in e
-     if  x(0) = &quot;vnd.bantoniof.Chap2html&quot;  then
-       F_Extension = &quot; Chap2html &quot; &amp; x(1) &apos;no necesita trad
+   lista = sv.getExtensionList()
+   for each ext in lista
+     if  ext(0) = &quot;vnd.bantoniof.Chap2html&quot;  then
+       F_Extension = &quot; Chap2html &quot; &amp; ext(1) &apos;no necesita trad
        Exit Function
      end if
    next
    F_Extension = &quot; - Chap2html (Pruebas, no instalada)&quot; &apos;extension pas trouvée
 End Function
 
- Rem ############ 
-Function F_Prueba_Est() As Integer
- Rem Comprueba que este guardado
- Rem y los estilos necesarios están en el documento
- Rem (Al documento se ha aplicado la plantilla html)
- Rem Devuelve 0 o nº elementos Matriz
- Rem =================================================
- Dim HtmlEstilos() As Variant, i As Integer, Contador As Integer
-   Contador = 0
-   HtmlEstilos = Array (&quot;HList 2&quot;,&quot;HNumbering 1&quot;,&quot;HNumbering 2&quot;,&quot;HNumbering 3&quot;,&quot;HLegend Numbered&quot;)
-   For i = LBound(HtmlEstilos) To UBound(HtmlEstilos)
-     If ThisComponent.StyleFamilies.ParagraphStyles.HasByName(HtmlEstilos(i)) Then
-       Contador = Contador + 1       
-     End If
-   Next
-   F_Prueba_Est = Contador
+ Rem ############
+Function F_W2XHTML as boolean
+ dim sv As Object, ext as variant, lista as variant
+   sv = GetDefaultContext().getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
+   lista = sv.getExtensionList() &apos;lista de extensiones en array, 0=nombre ext 1=versión
+   for each ext in lista  &apos;  Print Join(ext, &quot;; &quot;)  
+     if  ext(0) = &quot;org.openoffice.da.writer2xhtml.oxt&quot;  then 
+ &apos;     print ext(0)
+      
+      F_W2XHTML = 1
+       Exit Function
+     end if
+   next &apos;ext
+   F_W2XHTML = 0
+End Function
+
+ Rem ############
+Function F_LOVersion() As Double
+ Rem Devuelve la versión de LibreOffice instalada
+ Rem ==================================
+ Dim oSet, oCfgProvider
+ Dim aAux(0) As New com.sun.star.beans.PropertyValue
+   oCfgProvider = CreateUNOService(&quot;com.sun.star.configuration.ConfigurationProvider&quot;)
+   aAux(0).Name = &quot;nodepath&quot;
+   aAux(0).Value = &quot;/org.openoffice.Setup/Product&quot;
+   oSet = oCfgProvider.createInstanceWithArguments(&quot;com.sun.star.configuration.ConfigurationAccess&quot;, aAux())
+
+ Rem Corrige problema separador decimal (config. Regional)
+ Rem Basic opera con . pero las conversiones las hace con coma en Español o punto en inglés
+ Rem En español CDbl(&quot;7.5&quot;) = 75 / CDbl(&quot;7,5&quot;)= 7,5
+ Dim s : s = split(oSet.getByName(&quot;ooSetupVersion&quot;),&quot;.&quot;) 
+ Dim C : C = CDbl(s(0)) + CDbl(s(1))/10 
+   F_LOVersion = C
 End Function
 
  Rem ############ 
@@ -116,20 +133,6 @@ Sub GuardaRecarga
    dispatcher.executeDispatch(document, &quot;.uno:Reload&quot;, &quot;&quot;, 0, Array())
 End Sub
 
- Rem ############
-Function F_W2LTX as boolean
- dim sv As Object, ext as variant, lista as variant
-   sv = GetDefaultContext().getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
-   lista = sv.getExtensionList() &apos;lista de extensiones en array, 0=nombre ext 1=versión
-   for each ext in lista  &apos;  Print Join(ext, &quot;; &quot;)  
-     if  ext(0) = &quot;org.openoffice.da.writer2xhtml.oxt&quot;  then 
-      F_W2LTX = 1
-       Exit Function
-     end if
-   next &apos;ext
-   F_W2LTX = 0
-End Function
-
  Rem ############ 
 Sub Carga_Tools
 
@@ -161,44 +164,14 @@ ERRORES:
 End Sub
 
  Rem ############
-Function F_RemplazaEstilo(E_Buscado As Variant, E_Remplazo As Variant) As String
- Rem Remplaza las apariciones de E_Buscado por E_Remplazo
- Rem ¡Solo válido para estilos de Párrafo!
- Rem ¡Versiones localizadas: usar .DisplayName en nombre estilo
- Rem (si se usa .Name) L.O. REVIENTA!
- Rem ============================================
-
- Dim Parrafos As Object, s As String
-   Parrafos = ThisComponent.StyleFamilies.ParagraphStyles
-   If Parrafos.hasbyName(E_Buscado) AND Parrafos.hasbyName(E_Remplazo) then
-   E_Buscado = Parrafos.getbyName(E_Buscado).DisplayName
-   E_Remplazo = Parrafos.getbyName(E_Remplazo).DisplayName
-     Dim Busqueda As Object
-     Busqueda = ThisComponent.CreateReplaceDescriptor
-       If Parrafos.getbyname(E_Buscado).isInuse then
-         With Busqueda
-           .SearchString = E_Buscado
-           .ReplaceString = E_Remplazo
-           .SearchStyles = True    
-         End with
-         ThisComponent.ReplaceAll(Busqueda)
-         s =  &quot;- &quot;&quot;&quot; &amp; E_Buscado &amp; Txt(8) &amp; E_Remplazo &amp; &quot;&quot;&quot; &quot;
-       End If
-   End If 
-   F_RemplazaEstilo = s
-End Function
-
- Rem ############
 Sub CopiaIni
 
- Dim sOrigen as String, sDestino as String
- Dim oContext, oPathsettings as Variant, sConfigUrl As String
- Dim pathExt As String, sv as Object
+ Dim sOrigen as String, sDestino as String , sv as Object
+ Dim oContext As Object, oPathsettings as Variant, sConfigUrl As String
 
    sv = GetDefaultContext.getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
-   pathExt = sv.getPackageLocation(&quot;vnd.bantoniof.Chap2html&quot;)
-   sOrigen = PathExt &amp; &quot;/Chap2html/LO_writer2xhtml.xml&quot;
-
+   sOrigen = sv.getPackageLocation(&quot;vnd.bantoniof.Chap2html&quot;) &amp; &quot;/Chap2html/LO_writer2xhtml.xml&quot;
+ 
    oContext = getProcessServiceManager().DefaultContext
    oPathSettings = oContext.getValueByName(&quot;/singletons/com.sun.star.util.thePathSettings&quot;)
    sDestino = oPathSettings.UserConfig_Writable &amp; &quot;/LO_writer2xhtml.xml&quot;
@@ -207,6 +180,22 @@ Sub CopiaIni
       FileCopy(sOrigen,sDestino)
    End If
 End sub
+
+ Rem ############
+Sub EliminaComentarios(Autor)
+&apos;   If _Aux.F_Prueba_Sel = 0 Then : Exit Sub : End If
+ Dim oEnum As Object, oField As Object, s As String
+   oEnum = ThisComponent.getTextFields().createEnumeration()
+   Do While oEnum.hasMoreElements()
+     oField = oEnum.nextElement()
+     If oField.supportsService(&quot;com.sun.star.text.TextField.Annotation&quot;) Then
+       s = oField.Author
+       If s = Autor Then
+         oField.dispose()
+       End If
+     End If
+   Loop
+End Sub
 
 Rem  ================ Fin Aux ==================
 </script:module>

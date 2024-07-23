@@ -31,12 +31,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Change lists</value>
-						<value xml:lang="pt-BR">Alterar listas</value>
-						<value xml:lang="es-ES">Cambiar las listas</value>
+						<value>Heading Colors</value>
+						<value xml:lang="pt-BR">Cors dos titulos</value>
+						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -48,12 +48,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Heading Colors</value>
-						<value xml:lang="pt-BR">Cors dos titulos</value>
-						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
+						<value>Avobe/Below</value>
+						<value xml:lang="pt-BR">Acima/Abaixo</value>
+						<value xml:lang="es-ES">Arriba/Abajo</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -82,7 +82,15 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>private:separator</value>
+						<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Html Export</value>
+						<value xml:lang="pt-BR">Exporta&#231;&#227;o HTML</value>
+						<value xml:lang="es-ES">Exportaci&#243;n HTML</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
 					</prop>
 				</node>
 
@@ -91,12 +99,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Info.Dlg_Info?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Html Export</value>
-						<value xml:lang="pt-BR">Exporta&#231;&#227;o HTML</value>
-						<value xml:lang="es-ES">Exportaci&#243;n HTML</value>
+						<value>Info</value>
+						<value xml:lang="pt-BR">Info</value>
+						<value xml:lang="es-ES">Info</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -141,12 +149,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Lists format</value>
-						<value xml:lang="pt-BR">Formato de listas</value>
-						<value xml:lang="es-ES">Formato de listas</value>
+						<value>Heading Colors</value>
+						<value xml:lang="pt-BR">Cors dos titulos</value>
+						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -158,12 +166,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Heading Colors</value>
-						<value xml:lang="pt-BR">Cors dos titulos</value>
-						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
+						<value>Avobe/Below</value>
+						<value xml:lang="pt-BR">Acima/Abaixo</value>
+						<value xml:lang="es-ES">Arriba/Abajo</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -213,6 +221,24 @@
 					</prop>
 				</node>
 
+				<node oor:name="m007" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Info.Dlg_Info?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Info</value>
+						<value xml:lang="pt-BR">Info</value>
+						<value xml:lang="es-ES">Info</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+
 				</node>
 			</node>
 		</node>
@@ -230,7 +256,6 @@
 					<value>private:separator</value> 
 					</prop>
 				</node>
-
 
 				<node oor:name="omb02" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
@@ -254,12 +279,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Lists format</value>
-						<value xml:lang="pt-BR">Formato de listas</value>
-						<value xml:lang="es-ES">Formato de listas</value>
+						<value>Avobe/Below</value>
+						<value xml:lang="pt-BR">Acima/Abaixo</value>
+						<value xml:lang="es-ES">Arriba/Abajo</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -305,15 +330,6 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>private:separator</value>
-					</prop>
-				</node>
-
-				<node oor:name="omb07" oor:op="replace">
-					<prop oor:name="Context" oor:type="xs:string">
-						<value>com.sun.star.text.TextDocument</value>
-					</prop>
-					<prop oor:name="URL" oor:type="xs:string">
 						<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
@@ -325,8 +341,24 @@
 						<value>_self</value>
 					</prop>
 				</node>
-  
-- 
+
+				<node oor:name="omb07" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Info.Dlg_Info?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Info</value>
+						<value xml:lang="pt-BR">Info</value>
+						<value xml:lang="es-ES">Info</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
 				<node oor:name="omb08" oor:op="replace">
 				<prop oor:name="Context" oor:type="xs:string">
 					<value>com.sun.star.text.TextDocument</value> 
@@ -338,8 +370,9 @@
 
 			</node>
 		</node>
-- <!--  Fin Omnibarra 
-  --> 
+- <!--  Fin Omnibarra   -->
+
+
 		<node oor:name="Images"><!-- Imágenes --> 
 
 
@@ -357,22 +390,6 @@
 				</node>
 			</node>
 
-
-			<node oor:name="vnd.bantoniof.Chap2html.Formatos.F_Listas" oor:op="replace">
-				<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.F_Listas?language=Basic&amp;location=application</value>
-				</prop>
-				<node oor:name="UserDefinedImages">
-					<prop oor:name="ImageSmallURL">
-						<value>%origin%/icons/Listas.svg</value>
-					</prop>
-					<prop oor:name="ImageBigURL">
-						<value>%origin%/icons/Listas.svg</value>
-					</prop>
-				</node>
-			</node>
-
-
 			<node oor:name="vnd.bantoniof.Chap2html.Formatos.Colores" oor:op="replace">
 				<prop oor:name="URL" oor:type="xs:string">
 					<value>vnd.sun.star.script:Chap2html.Formatos.Colores?language=Basic&amp;location=application</value>
@@ -383,6 +400,20 @@
 					</prop>
 					<prop oor:name="ImageBigURL">
 						<value>%origin%/icons/Colores.svg</value>
+					</prop>
+				</node>
+			</node>
+
+			<node oor:name="vnd.bantoniof.Chap2html.Formatos.OnpageX" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Above.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Above.svg</value>
 					</prop>
 				</node>
 			</node>
@@ -415,7 +446,19 @@
 				</node>
 			</node> -->
   
-
+			<node oor:name="vnd.bantoniof.Chap2html.Info.Dlg_Info" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Info.Dlg_Info?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Info.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Info.svg</value>
+					</prop>
+				</node>
+			</node> -->
 		</node>
 	</node>
 </oor:component-data>
