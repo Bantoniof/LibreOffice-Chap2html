@@ -48,12 +48,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Referencias.Dlg_Refs?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Avobe/Below</value>
-						<value xml:lang="pt-BR">Acima/Abaixo</value>
-						<value xml:lang="es-ES">Arriba/Abajo</value>
+						<value>Cross-references</value>
+						<value xml:lang="pt-BR">Referências</value>
+						<value xml:lang="es-ES">Referencias</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -166,12 +166,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Referencias.Dlg_Refs?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Avobe/Below</value>
-						<value xml:lang="pt-BR">Acima/Abaixo</value>
-						<value xml:lang="es-ES">Arriba/Abajo</value>
+						<value>Cross-references</value>
+						<value xml:lang="pt-BR">Referências</value>
+						<value xml:lang="es-ES">Referencias</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -279,12 +279,12 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
+						<value>vnd.sun.star.script:Chap2html.Referencias.Dlg_Refs?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
-						<value>Avobe/Below</value>
-						<value xml:lang="pt-BR">Acima/Abaixo</value>
-						<value xml:lang="es-ES">Arriba/Abajo</value>
+						<value>Cross-references</value>
+						<value xml:lang="pt-BR">Referências</value>
+						<value xml:lang="es-ES">Referencias</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -404,16 +404,16 @@
 				</node>
 			</node>
 
-			<node oor:name="vnd.bantoniof.Chap2html.Formatos.OnpageX" oor:op="replace">
+			<node oor:name="vnd.bantoniof.Chap2html.Referencias.Dlg_Refs" oor:op="replace">
 				<prop oor:name="URL" oor:type="xs:string">
-					<value>vnd.sun.star.script:Chap2html.Formatos.OnpageX?language=Basic&amp;location=application</value>
+					<value>vnd.sun.star.script:Chap2html.Referencias.Dlg_Refs?language=Basic&amp;location=application</value>
 				</prop>
 				<node oor:name="UserDefinedImages">
 					<prop oor:name="ImageSmallURL">
-						<value>%origin%/icons/Above.svg</value>
+						<value>%origin%/icons/Refs.svg</value>
 					</prop>
 					<prop oor:name="ImageBigURL">
-						<value>%origin%/icons/Above.svg</value>
+						<value>%origin%/icons/Refs.svg</value>
 					</prop>
 				</node>
 			</node>

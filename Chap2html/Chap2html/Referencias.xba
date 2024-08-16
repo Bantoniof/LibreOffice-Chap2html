@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Referencias" script:language="StarBasic" script:moduleType="normal"> Rem  *****  BASIC  Módulo Referencias *****
+ Rem Este módulo forma parte de la extensión Chap2html
+ Rem Autor: bantoniof@libreoffice.org
+ Rem Licencia GNU v3 o posterior
+
+ Option Explicit
+ 
+ Dim oDlgRefs As Object, oDlgAbove As Object, CierraDlg As Boolean
+ Dim oEnum As Object, oField As Object
+ Dim vCursor As Object, oCursor As Object
+
+
+Sub Dlg_Refs
+
+Call L10n.Trad
+   DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
+   oDlgRefs = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgRefs&quot;))
+   With oDlgRefs.Model
+     .Title = &quot;Referencias&quot; &amp; Extension : .PositionX = 530: .PositionY = 60
+     .Title = Txt(28) &amp; Extension : .PositionX = 530: .PositionY = 60
+     .getByName(&quot;Opt_Pag&quot;).Label = Txt(29)
+     .getByName(&quot;Opt_Obj&quot;).Label = Txt(30)
+     .getByName(&quot;Opt_Err&quot;).Label = Txt(31)
+     .getByName(&quot;Btn_Ejec&quot;).Label = Txt(32) 
+     .getByName(&quot;Btn_Salir&quot;).Label = Txt(33)
+     .getByName(&quot;Lbl_Info&quot;).Label = Txt(34)
+     .getByName(&quot;Lbl_Info&quot;).VerticalAlign = 1
+   End With
+   oDlgRefs.execute()
+End Sub
+
+  Rem ############
+Sub OnBtn_Ejec(oEv)
+
+   oDlgRefs = oEv.Source.Context
+   With oDlgRefs.getmodel
+     If .getByName(&quot;Opt_Pag&quot;).state = 0 AND _ 
+       .getByName(&quot;Opt_Obj&quot;).state = 0 AND _
+       .getByName(&quot;Opt_Err&quot;).state = 0 then
+       Msgbox Txt(34) , 0+0+0, Txt(28) &amp; Extension
+     ElseIf .getByName(&quot;Opt_Pag&quot;).state = 1 then
+       Call Campo_Pag
+     ElseIf .getByName(&quot;Opt_Obj&quot;).state = 1 then
+       Call Campo_Obj
+     ElseIf .getByName(&quot;Opt_Err&quot;).state = 1 then
+       Call Campo_Error
+     End If
+     .getByName(&quot;Opt_Pag&quot;).state = 0
+     .getByName(&quot;Opt_Obj&quot;).state = 0
+     .getByName(&quot;Opt_Err&quot;).state = 0
+     .getByName(&quot;Lbl_Info&quot;).Label = Txt(34)
+   End WIth
+End Sub
+
+  Rem ############
+Sub OnOpts(oEv)
+   oDlgRefs = oEv.Source.Context
+   With oDlgRefs.getmodel
+     If .getByName(&quot;Opt_Pag&quot;).state = 1 then
+       .getByName(&quot;Lbl_Info&quot;).Label = Txt(35)
+     ElseIf .getByName(&quot;Opt_Obj&quot;).state = 1 then
+       .getByName(&quot;Lbl_Info&quot;).Label = Txt(36)
+     ElseIf .getByName(&quot;Opt_Err&quot;).state = 1 then
+       .getByName(&quot;Lbl_Info&quot;).Label = Txt(37)
+     End If
+   End WIth
+End Sub
+
+
+ Rem ############
+Sub Dlg_Above(oField)
+   DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
+   oDlgAbove = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgAbove&quot;))
+   With oDlgAbove.Model
+     .Title = Txt(28) &amp; Extension : .PositionX = 530: .PositionY = 60
+     .getByName(&quot;Lbl_Actual&quot;).Label = Txt(41)   
+     .getByName(&quot;Lbl_OnPage&quot;).Label = ocursor.string
+     .getByName(&quot;Lbl_Pres&quot;).Label= oFIeld.CurrentPresentation 
+     .getByName(&quot;Lbl_Sust&quot;).Label = Txt(42)   
+     .getByName(&quot;Lbl_Encima&quot;).Label = Txt(43)
+     .getByName(&quot;Lbl_Debajo&quot;).Label = Txt(44)
+     .getByName(&quot;Btn_Salir&quot;).Label  = Txt(33) 
+      .getByName(&quot;Btn_Omitir&quot;).Label  = Txt(45)
+      .getByName(&quot;Btn_Cambiar&quot;).Label  = Txt(46) 
+   End With
+   oDlgAbove.execute()
+End Sub
+
+ Rem ############
+Sub OnBtn_Cambiar
+   oField.ReferenceFieldPart = 3 
+   oField.update
+   ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+   oDlgAbove.EndExecute
+End Sub
+
+ Rem ############
+Sub OnBtn_Salir
+   CierraDlg = True
+   oDlgAbove.EndExecute
+End Sub
+
+  Rem ############
+ Sub Campo_Pag
+ Call L10n.Trad
+ Dim i As Integer, Texto as String
+ 
+   Texto = Txt(38)
+   
+   vCursor = ThisComponent.CurrentController.getViewCursor
+   oCursor= ThisComponent.Text.CreateTextCursor
+   oEnum = ThisComponent.getTextFields().createEnumeration()
+   Do While oEnum.hasMoreElements()
+   on local error goto ERRORES
+  oField = oEnum.nextElement()
+   If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
+     If InStr(ofield.SourceName, &quot;RefHeading&quot;) OR _
+         oField.SourceName = &quot;Figure&quot; OR  _
+         oField.SourceName = &quot;Table&quot; OR _
+         oField.SourceName = &quot;Formula&quot; Then 
+      If oField.ReferenceFieldPart = 0 OR _
+         oField.ReferenceFieldPart = 4 then
+         oCursor.GotoRange(oField.Anchor.Start,false) &apos;.START?Error en tablas y pie de pagina
+         For i= 0 to uBound(split(Texto,&quot; &quot;))
+           oCursor.gotoPreviousWord(True)
+         Next
+         If ocursor.string = Texto &amp; &quot; &quot; OR ocursor.string = Texto &amp; Chr(160) Then
+           vCursor.GotoRange(oCursor,false)                     
+           CierraDlg = False
+           Call Dlg_Above (oField)
+           If CierraDlg = True then exit Do
+         End If
+        End If   
+     End If
+   End If
+      
+   Loop
+   Msgbox (Txt(39),0+64+0,&quot;Extension&quot;)
+ 
+ERRORES:
+   If Err = 0 Then
+     Exit Sub 
+   ElseIf Err = 1 Then
+     vCursor.gotoRange(oField.Anchor.start,false)
+     vCursor.goRight(1,true)
+     If not isNull(oDlgAbove) Then oDlgAbove.EndExecute
+      Msgbox ( Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+64+0, &quot;Error n. 1&quot; &amp; Extension)
+      Exit Sub
+   Else
+     Msgbox (&quot;Error=  &quot;&amp; Err &amp; &quot;  Linea = &quot; &amp;  Erl &amp;  Chr(13) &amp; &quot;  Msg = &quot; &amp;  Error )
+   End If
+End Sub
+
+ Rem ############
+  sub Campo_Obj
+ 
+ Call L10n.Trad
+ Dim oEnum As Object, oField As Object, i As Integer
+ Dim vCursor As Object, oCursor As Object
+   vCursor = ThisComponent.CurrentController.getViewCursor
+   oCursor= ThisComponent.Text.CreateTextCursor
+   oEnum = ThisComponent.getTextFields().createEnumeration()
+   Do While oEnum.hasMoreElements()
+   oField = oEnum.nextElement() 
+   If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
+     If oField.SourceName = &quot;Figure&quot; OR  _
+         oField.SourceName = &quot;Table&quot; OR _
+         oField.SourceName = &quot;Text&quot; OR _
+         oField.SourceName = &quot;Formula&quot; Then
+         oCursor.GotoRange(oField.Anchor.start,false)
+         oCursor.gotoPreviousWord(True)       
+       If oField.ReferenceFieldPart = 7 Then
+         vCursor.GotoRange(oCursor,false)  
+         oField.ReferenceFieldPart = 5 
+         oField.update
+         ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+         i = i + 1
+       End If   
+     End If
+   End If
+   Loop
+   If i &lt;&gt; 0 Then
+     Msgbox  (i &amp; Txt(50) ,0+64+0, Txt(28) &amp; Extension)
+   Else  
+     Msgbox  (Txt(51) ,0+64+0, Txt(28) &amp; Extension)
+   End If
+ERRORES:
+   If Err = 0 Then
+     Exit Sub 
+   ElseIf Err = 1 Then 
+     Msgbox ( Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+64+0, &quot;Error n. 1&quot; &amp; Extension)
+     vCursor.gotoRange(oField.Anchor.start,false)
+     vCursor.goRight(1,true)
+     Exit sub
+   Else
+     Msgbox (&quot;Error =  &quot;&amp; Err &amp; &quot;  Linea = &quot; &amp;  Erl &amp;  &quot;  Msg = &quot; &amp;  Error )
+   End If
+ end sub
+
+ Rem ############
+Sub Campo_Error
+
+ Dim s As String, Loc as String, i as Integer 
+   VCursor = ThisComponent.CurrentController.getViewCursor
+   oEnum = ThisComponent.getTextFields().createEnumeration()
+   Do While oEnum.hasMoreElements()
+     oField = oEnum.nextElement() 
+     s = ofield.getPresentation(false)
+     If inStr(s,&quot;Erro&quot;) then
+       VCursor.gotoRange(oField.Anchor.Start,False)
+       VCursor.goRight(1, true)
+       i = i+1
+       Loc = VCursor.getPage &amp; &quot;,  &quot; &amp; Loc
+     End If
+   Loop
+   If i = 0 Then
+     Msgbox (Txt(47) &amp; Loc ,0+64+0, Txt(49) &amp; Extension)
+   else
+     Msgbox (Txt(48) &amp; Chr(13)  &amp; Chr(13) &amp; Chr(9) &amp; Loc ,0+64+0, Txt(49) &amp; Extension)
+     End If
+End Sub
+ Rem ===================== Fin Referencias ========
+
+Sub RestablecerCampoObj
+ Call L10n.Trad
+ Dim oEnum As Object, oField As Object, i As Integer
+ Dim vCursor As Object, oCursor As Object
+   vCursor = ThisComponent.CurrentController.getViewCursor
+   oCursor= ThisComponent.Text.CreateTextCursor
+   oEnum = ThisComponent.getTextFields().createEnumeration()
+   Do While oEnum.hasMoreElements()
+   oField = oEnum.nextElement() 
+   If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
+     If oField.SourceName = &quot;Figure&quot; Then &apos;OR  _
+         &apos;oField.SourceName = &quot;Table&quot; OR _
+         &apos;oField.SourceName = &quot;Text&quot; OR _
+         &apos;oField.SourceName = &quot;Formula&quot; Then
+         oCursor.GotoRange(oField.Anchor.start,false)
+&apos;         oCursor.gotoPreviousWord(True)       
+       If oField.ReferenceFieldPart = 5 Then
+         vCursor.GotoRange(oCursor,false)  
+         oField.ReferenceFieldPart = 7 
+         oField.update
+         ThisComponent.Text.InsertString(oCursor,&quot;figura&quot; &amp; Chr(160),true)
+         i = i + 1
+       End If   
+     End If
+   End If
+   Loop
+   If i &lt;&gt; 0 Then
+     Msgbox  (i &amp; Txt(50) ,0+64+0, Txt(28) &amp; Extension)
+   Else  
+     Msgbox  (Txt(51) ,0+64+0, Txt(28) &amp; Extension)
+   End If
+ERRORES:
+   If Err = 0 Then
+     Exit Sub 
+   ElseIf Err = 1 Then 
+     Msgbox ( Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+64+0, &quot;Error n. 1&quot; &amp; Extension)
+     vCursor.gotoRange(oField.Anchor.start,false)
+     vCursor.goRight(1,true)
+     Exit sub
+   Else
+     Msgbox (&quot;Error =  &quot;&amp; Err &amp; &quot;  Linea = &quot; &amp;  Erl &amp;  &quot;  Msg = &quot; &amp;  Error )
+   End If
+ end sub
+ 
+Rem ##########
+ &apos;Consultar Extension Referencias - (https://web.archive.org/web/20220331113902/http://www.calc-info.de/makros.htm)
+</script:module>

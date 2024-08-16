@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
-<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Info" script:language="StarBasic" script:moduleType="normal">REM  *****  BASIC  *****
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Info" script:language="StarBasic" script:moduleType="normal"> Rem  *****  BASIC  Módulo Info *****
+ Rem Este módulo forma parte de la extensión Chap2html
+ Rem Autor: bantoniof@libreoffice.org
+ Rem Licencia GNU v3 o posterior
 
  Option Explicit
  Dim oDlgInfo
@@ -53,7 +56,7 @@ End Sub
  Rem ############
 Sub OnBtn_Ayuda(oEv)
    oDlgInfo = oEv.Source.Context
-   AbreURL(&quot;https://bantoniof.github.io/LO-Chap2Html-Pages/docs/Chap2Html_&quot; &amp;_
+   AbreURL(&quot;https://bantoniof.github.io/LO-Chap2html-Pages/docs/Chap2html_&quot; &amp;_
    Ucase(_Aux.F_getLang) &amp; &quot;.html&quot;)
 End Sub
 

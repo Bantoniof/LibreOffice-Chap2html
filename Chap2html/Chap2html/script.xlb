@@ -6,4 +6,5 @@
  <library:element library:name="Formatos"/>
  <library:element library:name="L10n"/>
  <library:element library:name="Info"/>
+ <library:element library:name="Referencias"/>
 </library:library>

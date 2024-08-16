@@ -26,7 +26,7 @@
   <option name="frame_formatting" value="convert_all" />
   <option name="section_formatting" value="convert_all" />
   <option name="table_formatting" value="convert_all" />
-  <option name="table_size" value="auto" />
+  <option name="table_size" value="none" />
   <option name="list_formatting" value="convert_all" />
   <option name="use_default_font" value="false" />
   <option name="default_font_name" value="" />

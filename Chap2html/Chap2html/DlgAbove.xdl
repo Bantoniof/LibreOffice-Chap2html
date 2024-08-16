@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="DlgAbove" dlg:left="168" dlg:top="116" dlg:width="169" dlg:height="66" dlg:closeable="true" dlg:moveable="true">
+ <dlg:styles>
+  <dlg:style dlg:style-id="0" dlg:font-height="10"/>
+  <dlg:style dlg:style-id="1" dlg:background-color="0xb2b2b2" dlg:font-weight="150"/>
+  <dlg:style dlg:style-id="2" dlg:background-color="0xffffff"/>
+  <dlg:style dlg:style-id="3" dlg:background-color="0xb2b2b2"/>
+  <dlg:style dlg:style-id="4" dlg:font-weight="150"/>
+  <dlg:style dlg:style-id="5" dlg:font-height="11"/>
+ </dlg:styles>
+ <dlg:bulletinboard>
+  <dlg:button dlg:style-id="0" dlg:id="Btn_Salir" dlg:tab-index="1" dlg:left="135" dlg:top="3" dlg:width="31" dlg:height="13" dlg:value="Btn_Salir" dlg:valign="center">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:Chap2html.Referencias.OnBtn_Salir?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:text dlg:style-id="1" dlg:id="Lbl_Pres" dlg:tab-index="4" dlg:left="92" dlg:top="9" dlg:width="14" dlg:height="10" dlg:value="Lbl_Pres" dlg:align="center" dlg:valign="center"/>
+  <dlg:text dlg:style-id="2" dlg:id="Lbl_OnPage" dlg:tab-index="3" dlg:left="48" dlg:top="9" dlg:width="42" dlg:height="10" dlg:value="Lbl_OnPage" dlg:align="right" dlg:valign="center"/>
+  <dlg:button dlg:style-id="0" dlg:id="Btn_Cambiar" dlg:tab-index="0" dlg:left="90" dlg:top="46" dlg:width="40" dlg:height="13" dlg:value="Btn_Cambiar" dlg:valign="center">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:Chap2html.Referencias.OnBtn_Cambiar?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:button dlg:style-id="0" dlg:id="Btn_Omitir" dlg:tab-index="5" dlg:left="38" dlg:top="46" dlg:width="40" dlg:height="13" dlg:value="Btn_Omitir" dlg:valign="center" dlg:button-type="cancel">
+   <script:event script:event-name="on-performaction" script:macro-name="vnd.sun.star.script:Chap2html.Referencias.On_Btn_Omitir?language=Basic&amp;location=application" script:language="Script"/>
+  </dlg:button>
+  <dlg:text dlg:style-id="3" dlg:id="Lbl_Encima" dlg:tab-index="7" dlg:left="48" dlg:top="26" dlg:width="38" dlg:height="10" dlg:value="Lbl_Encima" dlg:align="center" dlg:valign="center"/>
+  <dlg:text dlg:style-id="4" dlg:id="Label1" dlg:tab-index="9" dlg:left="88" dlg:top="28" dlg:width="12" dlg:height="10" dlg:value="/" dlg:align="center" dlg:valign="center"/>
+  <dlg:text dlg:id="Lbl_Sust" dlg:tab-index="6" dlg:left="8" dlg:top="26" dlg:width="38" dlg:height="12" dlg:value="Lbl_Sust" dlg:valign="center"/>
+  <dlg:text dlg:style-id="3" dlg:id="Lbl_Debajo" dlg:tab-index="8" dlg:left="101" dlg:top="26" dlg:width="38" dlg:height="10" dlg:value="Lbl_Debajo" dlg:align="center" dlg:valign="center"/>
+  <dlg:text dlg:id="Lbl_Actual" dlg:tab-index="2" dlg:left="8" dlg:top="9" dlg:width="38" dlg:height="12" dlg:value="Lbl_Actual" dlg:valign="center"/>
+  <dlg:text dlg:style-id="5" dlg:id="Label2" dlg:tab-index="10" dlg:left="144" dlg:top="26" dlg:width="11" dlg:height="11" dlg:value="?" dlg:valign="center"/>
+ </dlg:bulletinboard>
+</dlg:window>
