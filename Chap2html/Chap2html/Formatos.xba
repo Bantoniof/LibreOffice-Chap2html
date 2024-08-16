@@ -130,7 +130,8 @@ Function F_LeyendasNum() As String
  Dim nRow As Variant, ncol As Variant, ocell As Object
  Dim oEnum As Object, opar As Object, label As String
  Dim vcursor As Object, oCursor As Object, j As Integer
- Dim oProgressbar As Object: oProgressbar = ThisComponent.CurrentController.getStatusIndicator()
+ Dim oProgressbar As Object, PbCounter as integer
+  oProgressbar = ThisComponent.CurrentController.getStatusIndicator()
    oProgressbar.start(Txt(53), ThisComponent.ParagraphCount ) &apos; x2 si se unen
    oProgressbar.setValue(1) : PBcounter = 0
 
@@ -153,7 +154,7 @@ Function F_LeyendasNum() As String
          Do While oEnum.hasMoreElements
            oPar = oEnum.nextElement()
            If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) And _
-              oPar.paraStyleName = &quot;Legend Numbered&quot; Then
+             oPar.paraStyleName = &quot;Legend Numbered&quot; Then
              oCursor = oPar.getText().createTextCursorByRange(oPar)   
              oCursor.gotoEndOfParagraph(false) &apos; -para el comentario
              oCursor.setAllPropertiesToDefault 
