@@ -8,7 +8,7 @@
 Option Explicit
 
 Global Extension
-Global Txt(52)
+Global Txt(53)
 
 Function F_getLang As String
    Call _Aux.Carga_Tools
@@ -87,6 +87,7 @@ Rem Formatos.Convierte
  Txt(50) = &quot;  campos cambiados&quot;
  Txt(51) = &quot; No se ha cambiado ningún campo&quot;
  Txt(52) = &quot;- Se ha actualizado la numeración en leyendas numeradas&quot;
+ Txt(53) = &quot;Procesando ...&quot;
  
 case &quot;pt&quot;
  Rem Aux
@@ -155,7 +156,7 @@ Txt(28) = &quot;Referências&quot;
  Txt(50) = &quot;  campos alterados&quot;
  Txt(51) = &quot; Nenhum campo foi alterado&quot;
  Txt(52) = &quot;- A numeração nas legendas numeradas foi atualizada&quot;
-
+ Txt(53) = &quot;Em processamento ...&quot;
 case else
   Rem Aux
  Txt(0) = &quot;You must to save the document first.&quot; &apos;&amp; Chr(13) &amp; Chr(13) &amp; &quot;Save now?&quot;
@@ -223,7 +224,7 @@ Txt(47) = &quot;There are no errors in references&quot; &amp; Chr(13)
  Txt(50) = &quot;  fields changed&quot;
  Txt(51) = &quot;No field has been changed&quot;
  Txt(52) = &quot;- Numbering in numbered legends has been updated&quot;
- 
+ Txt(53) = &quot;Working ...&quot;
 End Select
 
 

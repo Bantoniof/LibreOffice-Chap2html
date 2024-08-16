@@ -131,7 +131,7 @@ Function F_LeyendasNum() As String
  Dim oEnum As Object, opar As Object, label As String
  Dim vcursor As Object, oCursor As Object, j As Integer
  Dim oProgressbar As Object: oProgressbar = ThisComponent.CurrentController.getStatusIndicator()
-   oProgressbar.start( F_Txt(13), ThisComponent.ParagraphCount ) &apos; x2 si se unen
+   oProgressbar.start(Txt(53), ThisComponent.ParagraphCount ) &apos; x2 si se unen
    oProgressbar.setValue(1) : PBcounter = 0
 
 
