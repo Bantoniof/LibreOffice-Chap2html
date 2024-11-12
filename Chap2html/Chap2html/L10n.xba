@@ -10,13 +10,30 @@ Option Explicit
 Global Extension
 Global Txt(53)
 
+ Rem ############
 Function F_getLang As String
    Call _Aux.Carga_Tools
    Extension = _Aux.F_Extension
    F_getLang = GetStarOfficeLocale.language
-&apos;F_getLang = &quot;es&quot; &apos;Cambia el idioma para pruebas.
+&apos;F_getLang = &quot;apt&quot; &apos;Cambia el idioma para pruebas.
 End Function
 
+ Rem ############
+Sub IdiomaDoc
+ Rem Cambia el idioma global del documento
+ Dim pais as string, idioma as String
+ Dim Locales As New com.sun.star.lang.Locale
+   Select case F_getLang
+     Case &quot;es&quot; :  pais= &quot;es&quot; : idioma = &quot;es&quot;
+     Case &quot;pt&quot; : pais= &quot;br&quot; : idioma = &quot;pt&quot;
+     Case else : pais= &quot;us&quot; : idioma = &quot;en&quot;
+   End select
+   Locales.Language = idioma
+   Locales.Country = pais
+   ThisComponent.CharLocale = Locales
+end sub
+
+ Rem ############
 Sub Trad
 Select case F_getLang
 

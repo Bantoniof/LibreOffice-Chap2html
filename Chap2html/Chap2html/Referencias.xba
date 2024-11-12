@@ -119,6 +119,7 @@ End Sub
      If InStr(ofield.SourceName, &quot;RefHeading&quot;) OR _
          oField.SourceName = &quot;Figure&quot; OR  _
          oField.SourceName = &quot;Table&quot; OR _
+         oField.SourceName = &quot;Listing&quot; OR _
          oField.SourceName = &quot;Formula&quot; Then 
       If oField.ReferenceFieldPart = 0 OR _
          oField.ReferenceFieldPart = 4 then
@@ -168,7 +169,9 @@ End Sub
      If oField.SourceName = &quot;Figure&quot; OR  _
          oField.SourceName = &quot;Table&quot; OR _
          oField.SourceName = &quot;Text&quot; OR _
-         oField.SourceName = &quot;Formula&quot; Then
+         oField.SourceName = &quot;Formula&quot; OR _
+         oField.SourceName = &quot;Listing&quot; OR _
+         oField.SourceName = &quot;Listado&quot; Then      &apos;Listado = Español y posible Portugués    
          oCursor.GotoRange(oField.Anchor.start,false)
          oCursor.gotoPreviousWord(True)       
        If oField.ReferenceFieldPart = 7 Then
@@ -223,31 +226,31 @@ Sub Campo_Error
 End Sub
  Rem ===================== Fin Referencias ========
 
-Sub RestablecerCampoObj
+Sub RestablecerCampoObj &apos; En Castellano
  Call L10n.Trad
  Dim oEnum As Object, oField As Object, i As Integer
- Dim vCursor As Object, oCursor As Object
+ Dim vCursor As Object, oCursor As Object, sObjeto as String
    vCursor = ThisComponent.CurrentController.getViewCursor
    oCursor= ThisComponent.Text.CreateTextCursor
    oEnum = ThisComponent.getTextFields().createEnumeration()
    Do While oEnum.hasMoreElements()
-   oField = oEnum.nextElement() 
-   If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
-     If oField.SourceName = &quot;Figure&quot; Then &apos;OR  _
-         &apos;oField.SourceName = &quot;Table&quot; OR _
-         &apos;oField.SourceName = &quot;Text&quot; OR _
-         &apos;oField.SourceName = &quot;Formula&quot; Then
-         oCursor.GotoRange(oField.Anchor.start,false)
-&apos;         oCursor.gotoPreviousWord(True)       
+     oField = oEnum.nextElement() 
+     If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
+       If oField.SourceName = &quot;Figure&quot; Then sObjeto = &quot;figura&quot;  
+       If  oField.SourceName = &quot;Table&quot; Then sObjeto = &quot;tabla&quot;
+       If oField.SourceName = &quot;Text&quot; Then sObjeto = &quot;texto&quot;
+       If oField.SourceName = &quot;Formula&quot; Then sObjeto = &quot;formula&quot;
+       If oField.SourceName = &quot;Listado&quot; Then sObjeto = &quot;listado&quot;
+       If oField.SourceName = &quot;Listing&quot; Then sObjeto = &quot;Listing&quot;
+       oCursor.GotoRange(oField.Anchor.start,false)
        If oField.ReferenceFieldPart = 5 Then
          vCursor.GotoRange(oCursor,false)  
          oField.ReferenceFieldPart = 7 
          oField.update
-         ThisComponent.Text.InsertString(oCursor,&quot;figura&quot; &amp; Chr(160),true)
+         ThisComponent.Text.InsertString(oCursor,sObjeto &amp; Chr(160),true)
          i = i + 1
        End If   
      End If
-   End If
    Loop
    If i &lt;&gt; 0 Then
      Msgbox  (i &amp; Txt(50) ,0+64+0, Txt(28) &amp; Extension)

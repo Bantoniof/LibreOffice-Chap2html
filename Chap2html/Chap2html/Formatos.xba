@@ -226,6 +226,7 @@ Sub Convierte2(sUrlOut)
      MsgBox (Txt(14), 0+64+0, Extension)
      Exit sub
    End If
+   Call L10n.IdiomaDoc
    Call _Aux.Actualizar
      ThisComponent.store()
    Call _Aux.CopiaIni
@@ -255,6 +256,10 @@ Sub Convierte2(sUrlOut)
       _Aux.AbreArchivo(sUrlOut) 
    End If
 End Sub
-
 &apos;==================== FIN Formatos
+
+
+
+
+
 </script:module>
