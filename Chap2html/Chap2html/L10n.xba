@@ -107,8 +107,8 @@ Rem Formatos.Convierte
  Txt(47) = &quot;No hay errores en referencias&quot; &amp; Chr(13)
  Txt(48) =  &quot;Se encontraron errores en la(s) Paginas(s): &quot;
  Txt(49) = &quot; Errores en referencias&quot;
- Txt(50) = &quot;  campos cambiados&quot;
- Txt(51) = &quot; No se ha cambiado ningún campo&quot;
+ Txt(50) = &quot;  referencias cambiadas&quot;
+ Txt(51) = &quot; No se ha cambiado ninguna referencia&quot;
  Txt(52) = &quot;- Se ha actualizado la numeración en leyendas numeradas&quot;
  Txt(53) = &quot;Elimina el campo y texto &quot;&quot;en la página&quot;&quot;.&quot;
  Txt(54) = &quot;Cambia el campo por &quot;&quot;arriba/ abajo&quot;&quot; y Elimina el texto &quot;&quot;en la página&quot;&quot; &quot;
@@ -187,8 +187,8 @@ Txt(28) = &quot;Referências&quot;
  Txt(47) = &quot;Não há erros nas referências&quot; &amp; Chr(13)
  Txt(48) = &quot;Foram encontrados erros na(s) página(s):&quot;
  Txt(49) = &quot;Erros nas referências&quot;
- Txt(50) = &quot;  campos alterados&quot;
- Txt(51) = &quot; Nenhum campo foi alterado&quot;
+ Txt(50) = &quot;   referências alteradas&quot;
+ Txt(51) = &quot; Nenhuma referência foi alterada&quot;
  Txt(52) = &quot;- A numeração nas legendas numeradas foi atualizada&quot;
  Txt(53) = &quot;Exclude o campo e o texto &quot;&quot;na página&quot;&quot;.&quot;
  Txt(54) = &quot;Muda o campo para &quot;&quot;acima/baixo&quot;&quot; e exclude o texto &quot;&quot;na página&quot;&quot; &quot;
@@ -267,8 +267,8 @@ Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Te
  Txt(47) = &quot;There are no errors in references&quot; &amp; Chr(13)
  Txt(48) = &quot;Errors were found on the Page(s): &quot;
  Txt(49) = &quot;Errors in references&quot;
- Txt(50) = &quot;  fields changed&quot;
- Txt(51) = &quot;No field has been changed&quot;
+ Txt(50) = &quot;  cross-references changed&quot;
+ Txt(51) = &quot;No cross-references has been changed&quot;
  Txt(52) = &quot;- Numbering in numbered legends has been updated&quot;
  Txt(53) = &quot;Delete the field and text &quot;&quot;on page&quot;&quot;.&quot;
  Txt(54) = &quot;Change the field to &quot;&quot;above/below&quot;&quot; and Delete the text &quot;&quot;on page&quot;&quot; &quot;
@@ -276,7 +276,7 @@ Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Te
  Txt(56) = &quot;The document must have a section break at the end.&quot; &amp; Chr(13) &amp; _
        &quot;Press OK to continue or Cancel to insert the break&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
  Txt(57) = &quot;Language conflict.&quot; &amp; Chr(13)  &amp; Chr(13) &amp; &quot;The interface language is different from the document&quot; &amp; Chr(13) &amp; _
-       &quot;To process the cross-referemces it is necessary that the interface is in the same language as the document&quot;
+       &quot;To process the cross-references it is necessary that the interface is in the same language as the document&quot;
 End Select
 
 End sub
