@@ -12,7 +12,7 @@
 	<l:LibreOffice-minimal-version xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:l="http://libreoffice.org/extensions/description/2011" value="7.5" d:name="LibreOffice 7.5" /> 
 	</dependencies>
 	<publisher>
-		<name lang="en" xlink:href="http://">B. Antonio Fernández</name> 
+		<name lang="en" xlink:href="https://github.com/Bantoniof/LibreOffice-Chap2html">B. Antonio Fernández</name> 
 	</publisher>
 	<registration>
 		<simple-license  accept-by="admin" default-license-id="ID0" suppress-on-update="true" >
