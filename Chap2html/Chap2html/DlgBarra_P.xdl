@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="DlgBarra_P" dlg:tab-index="0" dlg:left="257" dlg:top="159" dlg:width="204" dlg:height="50" dlg:closeable="true" dlg:moveable="true">
+ <dlg:bulletinboard>
+  <dlg:progressmeter dlg:id="ProgressBar1" dlg:tab-index="0" dlg:left="16" dlg:top="18" dlg:width="168" dlg:height="10"/>
+  <dlg:titledbox dlg:id="Fr_Procesando" dlg:tab-index="1" dlg:left="10" dlg:top="8" dlg:width="182" dlg:height="31">
+   <dlg:title dlg:value="Fr_Procesando"/>
+  </dlg:titledbox>
+ </dlg:bulletinboard>
+</dlg:window>

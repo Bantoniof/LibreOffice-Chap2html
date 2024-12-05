@@ -82,12 +82,12 @@ Sub Colores
    If (oDoc.isModified) Then
      If (oDoc.hasLocation AND (Not oDoc.isReadOnly)) Then oDoc.store()
    End If  
-&apos;   Msgbox (Txt(11) ,0+64+0, Extension) 
+   Msgbox (Txt(11) ,0+64+0, Extension) 
  Dim DocSettings
    DocSettings = oDoc.createInstance( &quot;com.sun.star.document.Settings&quot; )
    DocSettings.UpdateFromTemplate = FALSE
 
-   Msgbox (Txt(11) &amp; Chr(13) &amp; F_Notas &amp; Chr(13) &amp; F_LeyendasNum ,0+64+0, Extension)
+&apos;   Msgbox (Txt(11) &amp; Chr(13) &amp; F_Notas &amp; Chr(13) &amp; F_LeyendasNum ,0+64+0, Extension)
 end sub
 
  Rem ############
@@ -105,13 +105,14 @@ Function F_Notas() As String
      If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then
        P_Nota = oPar.ParaStyleName
        bFound = False&apos; Reset variable
-       If P_Nota = &quot;Body Text, Note&quot; Then
+       If P_Nota = &quot;Body Text, Note&quot; Or P_Nota = &quot;Code&quot; Then
          bFound = True
        End If
        If (bFound) = True Then
          oCursor = opar.getText.createTextCursorByRange(opar)
          oCursor.gotoPreviousParagraph(false)
-         If oCursor.ParaStyleName = &quot;Body Text, Note&quot; then
+         If oCursor.ParaStyleName = &quot;Body Text, Note&quot; _
+         OR oCursor.ParaStyleName = &quot;Code&quot; then
            oCursor.gotoEndOfParagraph(false)
            oCursor.gotoNextParagraph(true)
            ThisComponent.Text.InsertControlCharacter(oCursor,1,true)
@@ -184,9 +185,17 @@ Sub Convierte()
    ElseIf  ThisComponent.isModified Then
      If Not ThisComponent.isReadOnly Then
        Call _Aux.Actualizar
-       ThisComponent.store()
+&apos;      Msgbox (Txt(11) &amp; Chr(13) &amp; F_Notas &amp; Chr(13) &amp; F_LeyendasNum ,0+64+0, Extension)
+&apos;      ThisComponent.store()
      End If
    End If 
+
+Dim Mensaje
+   Mensaje = F_Notas &amp; Chr(13) &amp; F_LeyendasNum&apos;,0+64+0, Extension)
+   If Mensaje &lt;&gt; Chr(13) then
+     Msgbox (Mensaje,0+64+0, Extension)
+   End If
+   ThisComponent.store()
 
  Dim oDlgXhtml as Object, Opciones() As Variant, Archivos()
  Dim aFile() As Variant, Nombre As String
@@ -251,15 +260,12 @@ Sub Convierte2(sUrlOut)
    oProps(2).Name  = &quot;FilterData&quot;
    oProps(2).Value = oFilterData
 
+   Call _Aux.ProgressBar
    ThisComponent.StoreToURL(sUrlOut, oProps())
+   If  Not isnull (oDlg_Barra) then oDlg_Barra.Dispose&apos; setVisible(False)
    If Msgbox(Txt(15),4+32+0,Extension) = 6 then
       _Aux.AbreArchivo(sUrlOut) 
    End If
 End Sub
 &apos;==================== FIN Formatos
-
-
-
-
-
 </script:module>

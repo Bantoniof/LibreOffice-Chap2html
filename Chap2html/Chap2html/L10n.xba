@@ -8,7 +8,7 @@
 Option Explicit
 
 Global Extension
-Global Txt(53)
+Global Txt(57)
 
  Rem ############
 Function F_getLang As String
@@ -26,7 +26,8 @@ Sub IdiomaDoc
    Select case F_getLang
      Case &quot;es&quot; :  pais= &quot;es&quot; : idioma = &quot;es&quot;
      Case &quot;pt&quot; : pais= &quot;br&quot; : idioma = &quot;pt&quot;
-     Case else : pais= &quot;us&quot; : idioma = &quot;en&quot;
+     Case &quot;en&quot; : pais= &quot;us&quot; : idioma = &quot;en&quot;
+     Case else : idioma = F_getLang
    End select
    Locales.Language = idioma
    Locales.Country = pais
@@ -56,7 +57,8 @@ case &quot;es&quot;
  Txt(10) = &quot;Este archivo no parece un documento de las guías.&quot; 
  Txt(11) = &quot;- Se ha cambiado el color de los títulos&quot; &amp; Chr(13) &amp;  Chr(9) &amp;_
     &quot;( Como medida de seguridad se desactiva la actualización de estilos a partir de la plantilla.)&quot;
- Txt(12) =  &quot;- Se han cambiado los saltos de párrafo por saltos de línea en los textos de las notas&quot;
+ Txt(12) =  &quot;- Se han cambiado los saltos de párrafo por saltos de línea&quot; &amp; Chr(13) &amp; _
+    &quot; en los estilos de párrafo &quot;&quot;Body Text, Note&quot;&quot; y &quot;&quot;Code&quot;&quot;&quot;
 Rem Formatos.Convierte
  Txt(13) = &quot;Exportación a HTML &quot;
  Txt(14) = &quot;No se ha encontrado la extensión Writer2xhtml, no se puede exportar con sus filtros.&quot;
@@ -89,23 +91,33 @@ Rem Formatos.Convierte
       &quot; (Ej. 1) y los cambia por&quot; &amp; Chr(13) &amp;  &quot;Categoría y número (Ej. Figura 1)&quot;
  Txt(37) = &quot;Busca campos con error de referencia no encontrada&quot;
  Txt(38) = &quot;en la página&quot; &apos; = Loc = na pagina = on page
- Txt(39) = &quot;Revisión concluida&quot; &amp; Chr(13) &amp; &quot;No hay referencias de número del tipo &quot;&quot;en la página #&quot;&quot; &quot;
- Txt(40) = &quot; Posible Campo de referencia a página en:&quot; &amp; Chr(13) &amp; &quot; Marco, Tabla o encabezado/pie de página&quot; &amp;  _ 
-        Chr(13) &amp; Chr(13) &amp; &quot;Es necesario Cambiar el campo manualmente&quot; 
- Txt(41) = &quot;Actual&quot;
- Txt(42) = &quot;¿Cambiar for &quot;
- Txt(43) = &quot;arriba&quot;
- Txt(44) = &quot;abajo&quot;
- Txt(45) = &quot;Omitir&quot;
- Txt(46)= &quot;Cambiar&quot;
+ Txt(39) = &quot;Revisión concluida o interrumpida&quot;
+ Txt(40) = &quot; Posibles errores:&quot; &amp;Chr(13) &amp;_
+    &quot;- Objeto seleccionado al lanzar la macro &quot; &amp; Chr(13) &amp;_
+    &quot;- la macro ha sobrescrito un campo de referencia&quot; &amp; Chr(13) &amp;_
+    &quot;- Campo de referencia en marco, tabla o encabezado/pie de página&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
+    &quot; Comprueba la selección en el documento, corrige el fallo&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
+    &quot;y ejecuta la macro de nuevo&quot;
+  Txt(41) = &quot;Ref. Encontrada:&quot;
+ Txt(42) = &quot;Eliminar &quot;
+ Txt(43) = &quot;Cambiar&quot;
+ Txt(44) = &quot;Omitir&quot;
+ Txt(45) = &quot;Procesando ...&quot;
+ Txt(46)= &quot;&quot; &apos;Libre
  Txt(47) = &quot;No hay errores en referencias&quot; &amp; Chr(13)
  Txt(48) =  &quot;Se encontraron errores en la(s) Paginas(s): &quot;
  Txt(49) = &quot; Errores en referencias&quot;
  Txt(50) = &quot;  campos cambiados&quot;
  Txt(51) = &quot; No se ha cambiado ningún campo&quot;
  Txt(52) = &quot;- Se ha actualizado la numeración en leyendas numeradas&quot;
- Txt(53) = &quot;Procesando ...&quot;
- 
+ Txt(53) = &quot;Elimina el campo y texto &quot;&quot;en la página&quot;&quot;.&quot;
+ Txt(54) = &quot;Cambia el campo por &quot;&quot;arriba/ abajo&quot;&quot; y Elimina el texto &quot;&quot;en la página&quot;&quot; &quot;
+ Txt(55) = &quot;Mantiene el campo y  texto (sin cambios).&quot;
+ Txt(56) = &quot;El documento tiene que tener un salto de sección al final.&quot; &amp; Chr(13) &amp; _
+       &quot;Pulsa Aceptar para continuar o Cancelar para insertar el salto&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
+ Txt(57) = &quot;Conflicto de idiomas.&quot; &amp; Chr(13) &amp; Chr(13) &amp;  &quot; El idioma de la interfaz es distinto del documento&quot; &amp; Chr(13) &amp; _
+       &quot; Para procesar las referencias es necesario que la interfaz está en el mismo idioma del documento&quot;
+
 case &quot;pt&quot;
  Rem Aux
  Txt(0) = &quot;Primeiro de tudo você deve salvar o documento.&quot; &apos;&amp; Chr(13) &amp; Chr(13) &amp; &quot;Salvar agora?&quot;
@@ -125,7 +137,8 @@ case &quot;pt&quot;
  Txt(10) = &quot;Este arquivo não parece um documento do guia.&quot;
  Txt(11) = &quot;- A cor dos títulos foi alterada.&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
     &quot;( Como medida de segurança, a atualização de estilos do modelo está desativada.&quot;
- Txt(12) =  &quot;- As quebras de parágrafo foram alteradas para quebras de linha nos textos das notas)&quot;
+ Txt(12) = &quot;- As quebras de parágrafo foram alteradas para quebras de linha&quot; &amp; Chr(13) &amp; _
+    &quot;nos estilos de parágrafo &quot;&quot;Body Text, Note&quot;&quot; e &quot;&quot;Code&quot;&quot;&quot;
  Rem Formatos.Convierte
  Txt(13) = &quot;Exportar para HTML &quot;
  Txt(14) = &quot;Extensão Writer2xhtml não encontrada, não é possível exportar com seus filtros.&quot;
@@ -158,22 +171,33 @@ Txt(28) = &quot;Referências&quot;
       &quot;(Ex. 1) e altere-os para&quot; &amp;  Chr(13) &amp; &quot;Categoria e número (Ex. Figura 1)&quot;
  Txt(37) = &quot;Pesquisa por campos com erro de referência não encontrada&quot;
  Txt(38) = &quot;na página&quot; &apos; = Loc = en la página = on page
- Txt(39) = &quot;Revisão concluída&quot; &amp; Chr(13) &amp; &quot;Não há referências de número do tipo &quot;&quot;na página #&quot;&quot; &quot;
- Txt(40) = &quot; Possível campo de referência de página em:&quot; &amp; Chr(13) &amp; &quot; Quadro, Tabela ou cabeçalho/rodapé&quot; &amp; _ 
-        Chr(13) &amp; Chr(13) &amp; &quot;Você precisa alterar o campo manualmente&quot; 
- Txt(41) = &quot;Atual&quot;
- Txt(42) = &quot;Alterar para&quot;
- Txt(43) = &quot;acima&quot;
- Txt(44) = &quot;abaixo&quot;
- Txt(45) = &quot;Pular&quot;
- Txt(46)= &quot;Alterar&quot;
+ Txt(39) = &quot;Revisão concluída ou interrompida&quot;
+ Txt(40) = &quot; Possíveis erros:&quot; &amp;Chr(13) &amp;_
+    &quot;- Objeto selecionado ao iniciar a macro &quot; &amp; Chr(13) &amp;_
+    &quot;- a macro substituiu um campo de referência&quot; &amp; Chr(13) &amp;_
+    &quot;- Campo de referência em quadro, tabela ou cabeçalho/rodapé&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
+    &quot;Verifique a seleção no documento, corrija o erro&quot;  &amp; Chr(13) &amp; chr(9) &amp;_
+    &quot;e execute a macro novamente&quot;
+ Txt(41) = &quot;Ref. encontrada&quot;
+ Txt(42) = &quot;Eliminar&quot;
+ Txt(43) = &quot;Alterar&quot;
+ Txt(44) = &quot;Pular&quot;
+ Txt(45) = &quot;Processando...&quot;
+ Txt(46)= &quot;&quot; &apos;Libre
  Txt(47) = &quot;Não há erros nas referências&quot; &amp; Chr(13)
  Txt(48) = &quot;Foram encontrados erros na(s) página(s):&quot;
  Txt(49) = &quot;Erros nas referências&quot;
  Txt(50) = &quot;  campos alterados&quot;
  Txt(51) = &quot; Nenhum campo foi alterado&quot;
  Txt(52) = &quot;- A numeração nas legendas numeradas foi atualizada&quot;
- Txt(53) = &quot;Em processamento ...&quot;
+ Txt(53) = &quot;Exclude o campo e o texto &quot;&quot;na página&quot;&quot;.&quot;
+ Txt(54) = &quot;Muda o campo para &quot;&quot;acima/baixo&quot;&quot; e exclude o texto &quot;&quot;na página&quot;&quot; &quot;
+ Txt(55) = &quot;O campo e o texto e mantenido inalterado.&quot;
+ Txt(56) = &quot;O documento deve ter uma quebra de seção no final.&quot; &amp; Chr(13) &amp; _
+     &quot;Pressione OK para continuar ou Cancelar para inserir a quebra&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
+ Txt(57) = &quot;Conflito de idioma.&quot; &amp; Chr(13) &amp; Chr(13)  &amp; &quot;O idioma da interface é diferente do documento&quot; &amp; Chr(13) &amp; _
+       &quot;Para processar as referências é necessário que a interface esteja no mesmo idioma do documento&quot;
+
 case else
   Rem Aux
  Txt(0) = &quot;You must to save the document first.&quot; &apos;&amp; Chr(13) &amp; Chr(13) &amp; &quot;Save now?&quot;
@@ -193,7 +217,8 @@ case else
  Txt(10) = &quot;This file does not look like a guide document.&quot;
  Txt(11) = &quot;- The color of the titles has been changed.&quot; &amp; Chr(13) &amp; Chr(9) &amp; _ 
     &quot;(As a security measure, updating styles from the template is disabled).&quot;
- Txt(12) =  &quot;-  Paragraph breaks have been changed to line breaks in notice texts&quot;
+Txt(12) = &quot;- Paragraph breaks have been changed to line breaks&quot; &amp; Chr(13) &amp; _
+    &quot; in &quot;&quot;Body Text, Note&quot;&quot; and &quot;&quot;Code&quot;&quot; paragraph styles&quot;
 Rem Formatos.Convierte
  Txt(13) = &quot;HTML Export &quot;
  Txt(14) = &quot;Writer2xhtml extension not found, cannot export with its filters.&quot;
@@ -226,24 +251,33 @@ Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Te
       &quot;(Ex. 1) and change them to&quot; &amp; Chr(13) &amp; &quot;Category and number (Ex. Figure 1)&quot;
  Txt(37) = &quot;Search for fields with &quot;&quot; Error: reference not found&quot;&quot; &quot;
  Txt(38) = &quot;on page&quot; &apos; = Loc = en la página = na página
- Txt(39) = &quot;Review completed&quot; &amp; Chr(13) &amp; &quot;There are no number references of the type &quot;&quot;on page #&quot;&quot; &quot;
-Txt(40) = &quot; Possible page reference field in:&quot; &amp; Chr(13) &amp; &quot; Frame, Table or header/footer&quot; &amp; _ 
-        Chr(13) &amp; Chr(13) &amp; &quot;You need to Change the field manually&quot; 
- Txt(41) = &quot;Current&quot;
- Txt(42) = &quot;Change for &quot;
- Txt(43) = &quot;above&quot;
- Txt(44) = &quot;below&quot;
- Txt(45) = &quot;Skip&quot;
- Txt(46)= &quot;Change&quot;
-Txt(47) = &quot;There are no errors in references&quot; &amp; Chr(13)
+ Txt(39) = &quot;Review completed or stopped&quot;
+ Txt(40) = &quot; Possible errors:&quot; &amp;Chr(13) &amp;_
+    &quot;- Object selected when launching the macro &quot; &amp; Chr(13) &amp;_
+    &quot;- the macro has overwritten a reference field&quot; &amp; Chr(13) &amp;_
+    &quot;- Reference field in frame, table or header/footer&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
+    &quot;Check the selection in the document, correct the error&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
+    &quot;and run the macro again&quot;
+ Txt(41) = &quot;Reference Found:&quot;
+ Txt(42) = &quot;Delete&quot;
+ Txt(43) = &quot;Change&quot;
+ Txt(44) = &quot;Skip&quot;
+ Txt(45) = &quot;Processing...&quot;
+ Txt(46)= &quot;&quot; &apos;Libre
+ Txt(47) = &quot;There are no errors in references&quot; &amp; Chr(13)
  Txt(48) = &quot;Errors were found on the Page(s): &quot;
  Txt(49) = &quot;Errors in references&quot;
  Txt(50) = &quot;  fields changed&quot;
  Txt(51) = &quot;No field has been changed&quot;
  Txt(52) = &quot;- Numbering in numbered legends has been updated&quot;
- Txt(53) = &quot;Working ...&quot;
+ Txt(53) = &quot;Delete the field and text &quot;&quot;on page&quot;&quot;.&quot;
+ Txt(54) = &quot;Change the field to &quot;&quot;above/below&quot;&quot; and Delete the text &quot;&quot;on page&quot;&quot; &quot;
+ Txt(55) = &quot;Keep the field and text (unchanged).&quot;
+ Txt(56) = &quot;The document must have a section break at the end.&quot; &amp; Chr(13) &amp; _
+       &quot;Press OK to continue or Cancel to insert the break&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
+ Txt(57) = &quot;Language conflict.&quot; &amp; Chr(13)  &amp; Chr(13) &amp; &quot;The interface language is different from the document&quot; &amp; Chr(13) &amp; _
+       &quot;To process the cross-referemces it is necessary that the interface is in the same language as the document&quot;
 End Select
-
 
 End sub
 &apos;==================== FIN L10n

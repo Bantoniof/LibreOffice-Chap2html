@@ -2,7 +2,7 @@
 <config>
   <option name="ignore_hard_line_breaks" value="false" />
   <option name="ignore_empty_paragraphs" value="true" />
-  <option name="ignore_double_spaces" value="true" />
+  <option name="ignore_double_spaces" value="false" />
   <option name="multilingual" value="false" />
   <option name="max_width" value="100%" /> 
   <option name="save_images_in_subdir" value="true" />

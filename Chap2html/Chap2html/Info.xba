@@ -14,6 +14,7 @@ Sub Dlg_Info
  Dim sv As Variant, icono as Variant, Inf_Txt(2) As String
    DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
    oDlgInfo = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgInfo&quot;))
+   If getGUIType &gt; 1 then oDlgCampos.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    sv = GetDefaultContext.getByName(&quot;/singletons/com.sun.star.deployment.PackageInformationProvider&quot;)
    icono = sv.getPackageLocation(&quot;vnd.bantoniof.Chap2html&quot;) &amp; &quot;/icons/Chap2html.svg&quot;
 

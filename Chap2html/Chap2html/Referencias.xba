@@ -11,12 +11,17 @@
  Dim oEnum As Object, oField As Object
  Dim vCursor As Object, oCursor As Object
 
-
+ Rem ############
 Sub Dlg_Refs
-
-Call L10n.Trad
+   Call L10n.Trad
+   If ThisComponent.CharLocale.Language &lt;&gt; _
+       GetStarOfficeLocale.language Then
+       Msgbox (Txt(57), 0+16+0, Extension) 
+       Exit Sub
+   End If
    DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
    oDlgRefs = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgRefs&quot;))
+   If getGUIType &gt; 1 then oDlgCampos.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    With oDlgRefs.Model
      .Title = &quot;Referencias&quot; &amp; Extension : .PositionX = 530: .PositionY = 60
      .Title = Txt(28) &amp; Extension : .PositionX = 530: .PositionY = 60
@@ -33,7 +38,6 @@ End Sub
 
   Rem ############
 Sub OnBtn_Ejec(oEv)
-
    oDlgRefs = oEv.Source.Context
    With oDlgRefs.getmodel
      If .getByName(&quot;Opt_Pag&quot;).state = 0 AND _ 
@@ -41,8 +45,10 @@ Sub OnBtn_Ejec(oEv)
        .getByName(&quot;Opt_Err&quot;).state = 0 then
        Msgbox Txt(34) , 0+0+0, Txt(28) &amp; Extension
      ElseIf .getByName(&quot;Opt_Pag&quot;).state = 1 then
+       oDlgRefs.Endexecute()
        Call Campo_Pag
      ElseIf .getByName(&quot;Opt_Obj&quot;).state = 1 then
+       oDlgRefs.Endexecute()
        Call Campo_Obj
      ElseIf .getByName(&quot;Opt_Err&quot;).state = 1 then
        Call Campo_Error
@@ -55,7 +61,7 @@ Sub OnBtn_Ejec(oEv)
 End Sub
 
   Rem ############
-Sub OnOpts(oEv)
+Sub OnOpts_Refs(oEv)
    oDlgRefs = oEv.Source.Context
    With oDlgRefs.getmodel
      If .getByName(&quot;Opt_Pag&quot;).state = 1 then
@@ -68,28 +74,86 @@ Sub OnOpts(oEv)
    End WIth
 End Sub
 
-
  Rem ############
 Sub Dlg_Above(oField)
    DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
    oDlgAbove = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgAbove&quot;))
+   If getGUIType &gt; 1 then oDlgCampos.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    With oDlgAbove.Model
      .Title = Txt(28) &amp; Extension : .PositionX = 530: .PositionY = 60
      .getByName(&quot;Lbl_Actual&quot;).Label = Txt(41)   
      .getByName(&quot;Lbl_OnPage&quot;).Label = ocursor.string
-     .getByName(&quot;Lbl_Pres&quot;).Label= oFIeld.CurrentPresentation 
-     .getByName(&quot;Lbl_Sust&quot;).Label = Txt(42)   
-     .getByName(&quot;Lbl_Encima&quot;).Label = Txt(43)
-     .getByName(&quot;Lbl_Debajo&quot;).Label = Txt(44)
+     .getByName(&quot;Lbl_Campo&quot;).Label= oFIeld.CurrentPresentation 
      .getByName(&quot;Btn_Salir&quot;).Label  = Txt(33) 
-      .getByName(&quot;Btn_Omitir&quot;).Label  = Txt(45)
-      .getByName(&quot;Btn_Cambiar&quot;).Label  = Txt(46) 
+     .getByName(&quot;Opt_Eliminar&quot;).Label  = Txt(42)   
+     .getByName(&quot;Opt_Cambiar&quot;).Label  = Txt(43)
+     .getByName(&quot;Opt_Omitir&quot;).Label  = Txt(44)
+     .getByName(&quot;Lbl_Info&quot;).Label  = Txt(34)
+
+ &apos;    .getByName(&quot;Opt_Eliminar&quot;).state = 0
+  &apos;   .getByName(&quot;Opt_Cambiar&quot;).state = 0
+&apos;     .getByName(&quot;Opt_Omitir&quot;).state = 0
+     .getByName(&quot;Btn_Aceptar&quot;).label = Txt(44)
+     .getByName(&quot;Lbl_Info&quot;).Label = Txt(34)
+
    End With
+   oDlgAbove.getControl(&quot;Btn_Aceptar&quot;).Enable = False 
    oDlgAbove.execute()
 End Sub
 
  Rem ############
-Sub OnBtn_Cambiar
+Sub OnBtn_Salir
+   CierraDlg = True
+   oDlgAbove.EndExecute
+
+End Sub
+
+  Rem ############
+Sub OnOpts_Above(oEv)
+   oDlgAbove = oEv.Source.Context
+   With oDlgAbove.getmodel
+     If .getByName(&quot;Opt_Eliminar&quot;).state = 1 then
+       .getByName(&quot;Lbl_Info&quot;).Label = Txt(53)
+       .getByName(&quot;Btn_Aceptar&quot;).label = Txt(42)
+     ElseIf .getByName(&quot;Opt_Cambiar&quot;).state = 1 then
+       .getByName(&quot;Lbl_Info&quot;).Label = Txt(54)
+       .getByName(&quot;Btn_Aceptar&quot;).label = Txt(43)
+     ElseIf .getByName(&quot;Opt_Omitir&quot;).state = 1 then
+       .getByName(&quot;Btn_Aceptar&quot;).label = Txt(44)
+       .getByName(&quot;Lbl_Info&quot;).Label = Txt(55)
+     End If
+   End WIth
+   oDlgAbove.getControl(&quot;Btn_Aceptar&quot;).Enable = True
+End Sub
+
+  Rem ############
+Sub OnBtn_Aceptar(oEv)
+   oDlgAbove = oEv.Source.Context
+   With oDlgAbove.getmodel
+     If .getByName(&quot;Opt_Eliminar&quot;).state = 1 then
+       oDlgRefs.Endexecute()
+       Call Opt_Eliminar
+     ElseIf .getByName(&quot;Opt_Cambiar&quot;).state = 1 then
+       Call Opt_Cambiar
+     ElseIf .getByName(&quot;Opt_Omitir&quot;).state = 1 then
+       Call Opt_Omitir
+     End If
+   End WIth
+End Sub
+
+ Rem ############
+Sub Opt_Eliminar
+   &apos;oField.ReferenceFieldPart = 3 
+&apos;   oField.update
+   oField.dispose
+   ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+    oCursor.goLeft(1,true)
+   ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+   oDlgAbove.EndExecute
+End Sub
+
+ Rem ############
+Sub Opt_Cambiar
    oField.ReferenceFieldPart = 3 
    oField.update
    ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
@@ -97,24 +161,22 @@ Sub OnBtn_Cambiar
 End Sub
 
  Rem ############
-Sub OnBtn_Salir
-   CierraDlg = True
+Sub Opt_Omitir
+   &apos;CierraDlg = True
    oDlgAbove.EndExecute
 End Sub
 
   Rem ############
  Sub Campo_Pag
- Call L10n.Trad
+   Call L10n.Trad
  Dim i As Integer, Texto as String
- 
-   Texto = Txt(38)
-   
-   vCursor = ThisComponent.CurrentController.getViewCursor
+    Texto = Txt(38)
+    vCursor = ThisComponent.CurrentController.getViewCursor
    oCursor= ThisComponent.Text.CreateTextCursor
    oEnum = ThisComponent.getTextFields().createEnumeration()
    Do While oEnum.hasMoreElements()
    on local error goto ERRORES
-  oField = oEnum.nextElement()
+   oField = oEnum.nextElement()
    If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
      If InStr(ofield.SourceName, &quot;RefHeading&quot;) OR _
          oField.SourceName = &quot;Figure&quot; OR  _
@@ -136,7 +198,6 @@ End Sub
         End If   
      End If
    End If
-      
    Loop
    Msgbox (Txt(39),0+64+0,&quot;Extension&quot;)
  
@@ -155,35 +216,56 @@ ERRORES:
 End Sub
 
  Rem ############
-  sub Campo_Obj
+Sub Campo_Obj
  
  Call L10n.Trad
  Dim oEnum As Object, oField As Object, i As Integer
  Dim vCursor As Object, oCursor As Object
+ Dim dispatcher As Object, oCursor2 As Object
    vCursor = ThisComponent.CurrentController.getViewCursor
    oCursor= ThisComponent.Text.CreateTextCursor
    oEnum = ThisComponent.getTextFields().createEnumeration()
+   On local error  goto ERRORES
+   i = 0
+ Dim Conj
+   Select case F_getLang
+      case &quot;es&quot; : Conj= &quot;y&quot; : case &quot;pt&quot; : Conj = &quot;e&quot; : case &quot;en&quot; : Conj = &quot;and&quot; 
+   End select
    Do While oEnum.hasMoreElements()
    oField = oEnum.nextElement() 
    If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
-     If oField.SourceName = &quot;Figure&quot; OR  _
-         oField.SourceName = &quot;Table&quot; OR _
-         oField.SourceName = &quot;Text&quot; OR _
-         oField.SourceName = &quot;Formula&quot; OR _
-         oField.SourceName = &quot;Listing&quot; OR _
-         oField.SourceName = &quot;Listado&quot; Then      &apos;Listado = Español y posible Portugués    
+     If oField.SourceName = &quot;Figure&quot;_
+          OR oField.SourceName = &quot;Table&quot; _
+          OR oField.SourceName = &quot;Text&quot; _
+          OR oField.SourceName = &quot;Formula&quot; _
+          OR oField.SourceName = &quot;Listing&quot;_
+          OR oField.SourceName = &quot;Listado&quot; Then      &apos;Listado = Español y posible Portugués    
          oCursor.GotoRange(oField.Anchor.start,false)
          oCursor.gotoPreviousWord(True)       
        If oField.ReferenceFieldPart = 7 Then
-         vCursor.GotoRange(oCursor,false)  
          oField.ReferenceFieldPart = 5 
          oField.update
-         ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
-         i = i + 1
+         vCursor.GotoRange(oCursor,false)  
+       dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+ &apos;Control campo en inicio de párrafo
+       dispatcher.executeDispatch( ThisComponent.CurrentController.Frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array())
+       oCursor2 =ThisComponent.Text.CreateTextCursorbyrange(vCursor,true)
+         if oCursor2.isEndOfParagraph then
+           ThisComponent.Text.insertControlCharacter(oCursor2,0,true)
+           ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+            i = i + 1
+         ElseIf Instr(ocursor.string,Conj) &lt;&gt; 0 then
+           ThisComponent.Text.InsertString(oCursor,oCursor.string,true)
+           i = i + 1  
+         Else 
+           ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+            i = i + 1
+         End If
        End If   
      End If
    End If
    Loop
+
    If i &lt;&gt; 0 Then
      Msgbox  (i &amp; Txt(50) ,0+64+0, Txt(28) &amp; Extension)
    Else  
@@ -193,9 +275,9 @@ ERRORES:
    If Err = 0 Then
      Exit Sub 
    ElseIf Err = 1 Then 
-     Msgbox ( Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+64+0, &quot;Error n. 1&quot; &amp; Extension)
-     vCursor.gotoRange(oField.Anchor.start,false)
-     vCursor.goRight(1,true)
+     Msgbox ( i &amp; &quot; &quot; &amp; Txt(50) &amp; Chr(13) &amp; Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+48+0, &quot;Error n. 1&quot; &amp; Extension)
+&apos; Deshacemos sobreescritura de campo
+  dispatcher.executeDispatch(ThisComponent.CurrentController.Frame,  &quot;.uno:Undo&quot;, &quot;&quot;, 0, Array())
      Exit sub
    Else
      Msgbox (&quot;Error =  &quot;&amp; Err &amp; &quot;  Linea = &quot; &amp;  Erl &amp;  &quot;  Msg = &quot; &amp;  Error )
@@ -211,7 +293,7 @@ Sub Campo_Error
    Do While oEnum.hasMoreElements()
      oField = oEnum.nextElement() 
      s = ofield.getPresentation(false)
-     If inStr(s,&quot;Erro&quot;) then
+     If inStr(s,&quot;Erro&quot;) then &apos;Loc_Valido para pt  ,en y es 
        VCursor.gotoRange(oField.Anchor.Start,False)
        VCursor.goRight(1, true)
        i = i+1

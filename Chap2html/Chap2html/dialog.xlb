@@ -4,4 +4,5 @@
  <library:element library:name="DlgInfo"/>
  <library:element library:name="DlgAbove"/>
  <library:element library:name="DlgRefs"/>
+ <library:element library:name="DlgBarra_P"/>
 </library:library>
