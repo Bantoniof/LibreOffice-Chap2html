@@ -21,7 +21,7 @@ Sub Dlg_Refs
    End If
    DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
    oDlgRefs = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgRefs&quot;))
-   If getGUIType &gt; 1 then oDlgCampos.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
+   If getGUIType &gt; 1 then oDlgRefs.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    With oDlgRefs.Model
      .Title = &quot;Referencias&quot; &amp; Extension : .PositionX = 530: .PositionY = 60
      .Title = Txt(28) &amp; Extension : .PositionX = 530: .PositionY = 60
@@ -51,6 +51,7 @@ Sub OnBtn_Ejec(oEv)
        oDlgRefs.Endexecute()
        Call Campo_Obj
      ElseIf .getByName(&quot;Opt_Err&quot;).state = 1 then
+       Call _Aux.GuardaRecarga
        Call Campo_Error
      End If
      .getByName(&quot;Opt_Pag&quot;).state = 0
@@ -78,7 +79,7 @@ End Sub
 Sub Dlg_Above(oField)
    DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
    oDlgAbove = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgAbove&quot;))
-   If getGUIType &gt; 1 then oDlgCampos.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
+   If getGUIType &gt; 1 then oDlgAbove.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    With oDlgAbove.Model
      .Title = Txt(28) &amp; Extension : .PositionX = 530: .PositionY = 60
      .getByName(&quot;Lbl_Actual&quot;).Label = Txt(41)   
@@ -89,13 +90,7 @@ Sub Dlg_Above(oField)
      .getByName(&quot;Opt_Cambiar&quot;).Label  = Txt(43)
      .getByName(&quot;Opt_Omitir&quot;).Label  = Txt(44)
      .getByName(&quot;Lbl_Info&quot;).Label  = Txt(34)
-
- &apos;    .getByName(&quot;Opt_Eliminar&quot;).state = 0
-  &apos;   .getByName(&quot;Opt_Cambiar&quot;).state = 0
-&apos;     .getByName(&quot;Opt_Omitir&quot;).state = 0
      .getByName(&quot;Btn_Aceptar&quot;).label = Txt(44)
-     .getByName(&quot;Lbl_Info&quot;).Label = Txt(34)
-
    End With
    oDlgAbove.getControl(&quot;Btn_Aceptar&quot;).Enable = False 
    oDlgAbove.execute()
@@ -105,7 +100,6 @@ End Sub
 Sub OnBtn_Salir
    CierraDlg = True
    oDlgAbove.EndExecute
-
 End Sub
 
   Rem ############
@@ -143,8 +137,6 @@ End Sub
 
  Rem ############
 Sub Opt_Eliminar
-   &apos;oField.ReferenceFieldPart = 3 
-&apos;   oField.update
    oField.dispose
    ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
     oCursor.goLeft(1,true)
@@ -162,7 +154,6 @@ End Sub
 
  Rem ############
 Sub Opt_Omitir
-   &apos;CierraDlg = True
    oDlgAbove.EndExecute
 End Sub
 
@@ -322,8 +313,7 @@ Sub RestablecerCampoObj &apos; En Castellano
        If  oField.SourceName = &quot;Table&quot; Then sObjeto = &quot;tabla&quot;
        If oField.SourceName = &quot;Text&quot; Then sObjeto = &quot;texto&quot;
        If oField.SourceName = &quot;Formula&quot; Then sObjeto = &quot;formula&quot;
-       If oField.SourceName = &quot;Listado&quot; Then sObjeto = &quot;listado&quot;
-       If oField.SourceName = &quot;Listing&quot; Then sObjeto = &quot;Listing&quot;
+       If oField.SourceName = &quot;Listado&quot; Then sObjeto = &quot;listado&quot;&apos; Loc = Listing,Listagem
        oCursor.GotoRange(oField.Anchor.start,false)
        If oField.ReferenceFieldPart = 5 Then
          vCursor.GotoRange(oCursor,false)  

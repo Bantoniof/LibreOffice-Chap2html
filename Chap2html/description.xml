@@ -1,19 +1,33 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <description
- xmlns="http://openoffice.org/extensions/description/2006"
- xmlns:dep="http://openoffice.org/extensions/description/2006"
+ xmlns   = "http://openoffice.org/extensions/description/2006"             
+ xmlns:d = "http://openoffice.org/extensions/description/2006"             
+ xmlns:l = "http://libreoffice.org/extensions/description/2011" 
  xmlns:xlink="http://www.w3.org/1999/xlink">
+
 	<identifier value="vnd.bantoniof.Chap2html"/>
-	<version value="1.0.3"/> 
+
+	<version value="1.0.4"/> 
+
 	<update-information>
 		<src xlink:href="https://githubraw.com/Bantoniof/LibreOffice-Chap2html/master/Chap2html.update.xml"/> 
 	</update-information>
+
 	<dependencies>
-	<l:LibreOffice-minimal-version xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:l="http://libreoffice.org/extensions/description/2011" value="7.5" d:name="LibreOffice 7.5" /> 
+		<l:LibreOffice-minimal-version value="7.5" d:name="LibreOffice 7.5  or higher" />
 	</dependencies>
+
 	<publisher>
 		<name lang="en" xlink:href="https://github.com/Bantoniof/LibreOffice-Chap2html">B. Antonio Fernández</name> 
 	</publisher>
+
+    <extension-description>
+		<src xlink:href="pkg-desc/pkg-description_en.txt"/>
+		<src xlink:href="pkg-desc/pkg-description_en.txt" lang = "en"/>
+		<src xlink:href="pkg-desc/pkg-description_es.txt" lang = "es"/>
+		<src xlink:href="pkg-desc/pkg-description_pt.txt" lang = "pt"/>
+	</extension-description>
+
 	<registration>
 		<simple-license  accept-by="admin" default-license-id="ID0" suppress-on-update="true" >
 			<license-text xlink:href="registration/Licencia_en.txt" lang="en" license-id="ID0" />
@@ -21,7 +35,9 @@
 			<license-text xlink:href="registration/Licencia_es.txt" lang="es" />
 		</simple-license>
 	</registration>
+
 	<icon>
 		<default xlink:href="icons/Chap2html.svg" /> 
 	</icon>
+	
 </description>

@@ -185,13 +185,11 @@ Sub Convierte()
    ElseIf  ThisComponent.isModified Then
      If Not ThisComponent.isReadOnly Then
        Call _Aux.Actualizar
-&apos;      Msgbox (Txt(11) &amp; Chr(13) &amp; F_Notas &amp; Chr(13) &amp; F_LeyendasNum ,0+64+0, Extension)
-&apos;      ThisComponent.store()
      End If
    End If 
 
-Dim Mensaje
-   Mensaje = F_Notas &amp; Chr(13) &amp; F_LeyendasNum&apos;,0+64+0, Extension)
+ Dim Mensaje &apos; Ajusta formatos y formatea el mensaje
+   Mensaje = F_Notas &amp; Chr(13) &amp; F_LeyendasNum
    If Mensaje &lt;&gt; Chr(13) then
      Msgbox (Mensaje,0+64+0, Extension)
    End If
