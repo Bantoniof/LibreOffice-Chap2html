@@ -91,8 +91,8 @@ Sub Colores
 end sub
 
  Rem ############
-Function F_Notas() As String
- Rem cambia salto de párrafo por salto de línea en el texto de las notas
+Function F_Notas(Estilo as String) As String
+ Rem cambia salto de párrafo por salto de línea en el texto en el &quot;Estilo&quot;
  Rem para evitar líneas al final de cada párrafo
  
  Dim oEstilos As Object: oEstilos = ThisComponent.StyleFamilies.getByName(&quot;ParagraphStyles&quot;)
@@ -105,14 +105,14 @@ Function F_Notas() As String
      If oPar.supportsService(&quot;com.sun.star.text.Paragraph&quot;) Then
        P_Nota = oPar.ParaStyleName
        bFound = False&apos; Reset variable
-       If P_Nota = &quot;Body Text, Note&quot; Or P_Nota = &quot;Code&quot; Then
+       If P_Nota = Estilo Then&apos;&quot;Body Text, Note&quot; Or P_Nota = &quot;Code&quot; Then
          bFound = True
        End If
        If (bFound) = True Then
          oCursor = opar.getText.createTextCursorByRange(opar)
          oCursor.gotoPreviousParagraph(false)
-         If oCursor.ParaStyleName = &quot;Body Text, Note&quot; _
-         OR oCursor.ParaStyleName = &quot;Code&quot; then
+         If oCursor.ParaStyleName = Estilo Then
+&apos;         OR oCursor.ParaStyleName = &quot;Code&quot; then
            oCursor.gotoEndOfParagraph(false)
            oCursor.gotoNextParagraph(true)
            ThisComponent.Text.InsertControlCharacter(oCursor,1,true)
@@ -122,7 +122,7 @@ Function F_Notas() As String
      End If
    loop
    If contador &lt;&gt;0 then
-     F_Notas = Txt(12)
+     F_Notas = Txt(12) &amp; Estilo
    End If   
 End Function
 
@@ -189,7 +189,7 @@ Sub Convierte()
    End If 
 
  Dim Mensaje &apos; Ajusta formatos y formatea el mensaje
-   Mensaje = F_Notas &amp; Chr(13) &amp; F_LeyendasNum
+   Mensaje = F_Notas(&quot;Body Text, Note&quot;) &amp; F_Notas(&quot;Code&quot;) &amp; Chr(13) &amp; F_LeyendasNum
    If Mensaje &lt;&gt; Chr(13) then
      Msgbox (Mensaje,0+64+0, Extension)
    End If

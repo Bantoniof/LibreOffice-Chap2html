@@ -58,7 +58,7 @@ case &quot;es&quot;
  Txt(11) = &quot;- Se ha cambiado el color de los títulos&quot; &amp; Chr(13) &amp;  Chr(9) &amp;_
     &quot;( Como medida de seguridad se desactiva la actualización de estilos a partir de la plantilla.)&quot;
  Txt(12) =  &quot;- Se han cambiado los saltos de párrafo por saltos de línea&quot; &amp; Chr(13) &amp; _
-    &quot; en los estilos de párrafo &quot;&quot;Body Text, Note&quot;&quot; y &quot;&quot;Code&quot;&quot;&quot;
+    &quot; en los párrafos con estilo de párrafo - &quot;&apos; &quot;&quot;Body Text, Note&quot;&quot; y &quot;&quot;Code&quot;&quot;&quot;
 Rem Formatos.Convierte
  Txt(13) = &quot;Exportación a HTML &quot;
  Txt(14) = &quot;No se ha encontrado la extensión Writer2xhtml, no se puede exportar con sus filtros.&quot;
@@ -138,7 +138,7 @@ case &quot;pt&quot;
  Txt(11) = &quot;- A cor dos títulos foi alterada.&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
     &quot;( Como medida de segurança, a atualização de estilos do modelo está desativada.&quot;
  Txt(12) = &quot;- As quebras de parágrafo foram alteradas para quebras de linha&quot; &amp; Chr(13) &amp; _
-    &quot;nos estilos de parágrafo &quot;&quot;Body Text, Note&quot;&quot; e &quot;&quot;Code&quot;&quot;&quot;
+    &quot;nos parágrafos com estilo de parágrafo - &quot; &apos;&quot;&quot;Body Text, Note&quot;&quot; e &quot;&quot;Code&quot;&quot;&quot;
  Rem Formatos.Convierte
  Txt(13) = &quot;Exportar para HTML &quot;
  Txt(14) = &quot;Extensão Writer2xhtml não encontrada, não é possível exportar com seus filtros.&quot;
@@ -218,7 +218,7 @@ case else
  Txt(11) = &quot;- The color of the titles has been changed.&quot; &amp; Chr(13) &amp; Chr(9) &amp; _ 
     &quot;(As a security measure, updating styles from the template is disabled).&quot;
 Txt(12) = &quot;- Paragraph breaks have been changed to line breaks&quot; &amp; Chr(13) &amp; _
-    &quot; in &quot;&quot;Body Text, Note&quot;&quot; and &quot;&quot;Code&quot;&quot; paragraph styles&quot;
+    &quot; in paragraphs whit paragraph style - &quot; &apos;&quot;&quot;Body Text, Note&quot;&quot; and &quot;&quot;Code&quot;&quot; paragraph styles&quot;
 Rem Formatos.Convierte
  Txt(13) = &quot;HTML Export &quot;
  Txt(14) = &quot;Writer2xhtml extension not found, cannot export with its filters.&quot;
