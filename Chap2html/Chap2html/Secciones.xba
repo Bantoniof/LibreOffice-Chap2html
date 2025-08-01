@@ -16,16 +16,15 @@ Dim oCursor As Object, vCursor As Object
  oCursor.gotoEnd(False)
  vCursor= ThisComponent.CurrentController.getViewCursor
  vCursor.gotorange(oCursor,False)
-
+   
    If _Aux.F_Prueba_Secs &lt;&gt; 4 Then Exit Function 
-   If MsgBox (Txt(56),1+48+256, Extension) = 2 then 
-   Exit Function
-   End if
+
+   If not isEmpty(oCursor.TextSection) Then
+     MsgBox (Txt(56),0+48+256, Extension) 
+     Exit Function
+   End If
+
  Dim s As String
-&apos;  If ThisComponent.TextSections.HasByName(&quot;SEC_BOOK_TOC&quot;) Then
-&apos;   Msgbox (&quot;Ya se han creado las secciones&quot;,0+64+0, Extension)
-&apos;   Exit Function
-&apos;   End If
  
    If thisComponent.TextSections.HasbyName(&quot;SEC_COPYRIGHT&quot;) then 
      s = s &amp; F_IntegraCopyR

@@ -98,7 +98,7 @@ Rem Formatos.Convierte
     &quot;- Campo de referencia en marco, tabla o encabezado/pie de página&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
     &quot; Comprueba la selección en el documento, corrige el fallo&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
     &quot;y ejecuta la macro de nuevo&quot;
-  Txt(41) = &quot;Ref. Encontrada:&quot;
+ Txt(41) = &quot;Ref. Encontrada:&quot;
  Txt(42) = &quot;Eliminar &quot;
  Txt(43) = &quot;Cambiar&quot;
  Txt(44) = &quot;Omitir&quot;
@@ -114,9 +114,9 @@ Rem Formatos.Convierte
  Txt(54) = &quot;Cambia el campo por &quot;&quot;arriba/ abajo&quot;&quot; y Elimina el texto &quot;&quot;en la página&quot;&quot; &quot;
  Txt(55) = &quot;Mantiene el campo y  texto (sin cambios).&quot;
  Txt(56) = &quot;El documento tiene que tener un salto de sección al final.&quot; &amp; Chr(13) &amp; _
-       &quot;Pulsa Aceptar para continuar o Cancelar para insertar el salto&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
+    &quot;Inserta el salto (Alt + Enter) y vuelve a ejecutar la macro&quot;
  Txt(57) = &quot;Conflicto de idiomas.&quot; &amp; Chr(13) &amp; Chr(13) &amp;  &quot; El idioma de la interfaz es distinto del documento&quot; &amp; Chr(13) &amp; _
-       &quot; Para procesar las referencias es necesario que la interfaz está en el mismo idioma del documento&quot;
+    &quot; Para procesar las referencias es necesario que la interfaz está en el mismo idioma del documento&quot;
 
 case &quot;pt&quot;
  Rem Aux
@@ -194,7 +194,7 @@ Txt(28) = &quot;Referências&quot;
  Txt(54) = &quot;Muda o campo para &quot;&quot;acima/baixo&quot;&quot; e exclude o texto &quot;&quot;na página&quot;&quot; &quot;
  Txt(55) = &quot;O campo e o texto e mantenido inalterado.&quot;
  Txt(56) = &quot;O documento deve ter uma quebra de seção no final.&quot; &amp; Chr(13) &amp; _
-     &quot;Pressione OK para continuar ou Cancelar para inserir a quebra&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
+    &quot;Insira a quebra (Alt + Enter) e execute a macro novamente&quot;
  Txt(57) = &quot;Conflito de idioma.&quot; &amp; Chr(13) &amp; Chr(13)  &amp; &quot;O idioma da interface é diferente do documento&quot; &amp; Chr(13) &amp; _
        &quot;Para processar as referências é necessário que a interface esteja no mesmo idioma do documento&quot;
 
@@ -274,7 +274,7 @@ Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Te
  Txt(54) = &quot;Change the field to &quot;&quot;above/below&quot;&quot; and Delete the text &quot;&quot;on page&quot;&quot; &quot;
  Txt(55) = &quot;Keep the field and text (unchanged).&quot;
  Txt(56) = &quot;The document must have a section break at the end.&quot; &amp; Chr(13) &amp; _
-       &quot;Press OK to continue or Cancel to insert the break&quot; &amp; Chr(13) &amp; Chr(9) &amp; &quot;(Alt + Enter)&quot;
+    &quot;Insert the break (Alt + Enter) and run the macro again&quot;
  Txt(57) = &quot;Language conflict.&quot; &amp; Chr(13)  &amp; Chr(13) &amp; &quot;The interface language is different from the document&quot; &amp; Chr(13) &amp; _
        &quot;To process the cross-references it is necessary that the interface is in the same language as the document&quot;
 End Select
