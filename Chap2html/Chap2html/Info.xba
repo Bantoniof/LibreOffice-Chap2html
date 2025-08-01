@@ -57,15 +57,15 @@ End Sub
  Rem ############
 Sub OnBtn_Ayuda(oEv)
    oDlgInfo = oEv.Source.Context
-   AbreURL(&quot;https://bantoniof.github.io/LO-Chap2html-Pages/docs/Chap2html_&quot; &amp;_
+   OpenURL(&quot;https://bantoniof.github.io/LO-Chap2html-Pages/docs/Chap2html_&quot; &amp;_
    Ucase(_Aux.F_getLang) &amp; &quot;.html&quot;)
 End Sub
 
  Rem ############
-sub  AbreURL(Enlace)
+sub  OpenURL(Link)&apos;AbreURL(Enlace)
 dim op As Variant, sv As Object
-     op = com.sun.star.system.SystemShellExecuteFlags.NO_SYSTEM_ERROR_MESSAGE
+     op = com.sun.star.system.SystemShellExecuteFlags.DEFAULTS&apos;NO_SYSTEM_ERROR_MESSAGE
      sv = CreateUNOService(&quot;com.sun.star.system.SystemShellExecute&quot;)
-     sv.execute(Enlace,&quot;1&quot;,op)
+     sv.execute(Link,1,op)
 end sub
 </script:module>

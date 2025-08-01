@@ -220,17 +220,18 @@ Sub Campo_Obj
    i = 0
  Dim Conj
    Select case F_getLang
-      case &quot;es&quot; : Conj= &quot;y&quot; : case &quot;pt&quot; : Conj = &quot;e&quot; : case &quot;en&quot; : Conj = &quot;and&quot; 
+      case &quot;es&quot; : Conj= &quot;y &quot; : case &quot;pt&quot; : Conj = &quot;e &quot; : case &quot;en&quot; : Conj = &quot;and &quot;  
    End select
    Do While oEnum.hasMoreElements()
    oField = oEnum.nextElement() 
    If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
      If oField.SourceName = &quot;Figure&quot;_
-          OR oField.SourceName = &quot;Table&quot; _
-          OR oField.SourceName = &quot;Text&quot; _
-          OR oField.SourceName = &quot;Formula&quot; _
+          OR oField.SourceName = &quot;Table&quot;_
+          OR oField.SourceName = &quot;Text&quot;_
+          OR oField.SourceName = &quot;Formula&quot;_
           OR oField.SourceName = &quot;Listing&quot;_
-          OR oField.SourceName = &quot;Listado&quot; Then      &apos;Listado = Español y posible Portugués    
+          OR oField.SourceName = &quot;Listado&quot;_
+          OR oField.SourceName = &quot;Listagem&quot; Then      &apos;Listado = Español y posible Portugués    
          oCursor.GotoRange(oField.Anchor.start,false)
          oCursor.gotoPreviousWord(True)       
        If oField.ReferenceFieldPart = 7 Then
@@ -239,11 +240,11 @@ Sub Campo_Obj
          vCursor.GotoRange(oCursor,false)  
        dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
  &apos;Control campo en inicio de párrafo
-       dispatcher.executeDispatch( ThisComponent.CurrentController.Frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array())
-       oCursor2 =ThisComponent.Text.CreateTextCursorbyrange(vCursor,true)
+       dispatcher.executeDispatch(ThisComponent.CurrentController.Frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array())
+       oCursor2 =ThisComponent.Text.CreateTextCursorbyrange(vCursor,true)&apos; para salto 
          if oCursor2.isEndOfParagraph then
-           ThisComponent.Text.insertControlCharacter(oCursor2,0,true)
-           ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+           ThisComponent.Text.insertControlCharacter(oCursor2,0,true) &apos;inserta salto parrafo
+           ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)&apos; Borra la palabra fajo el cursor
             i = i + 1
          ElseIf Instr(ocursor.string,Conj) &lt;&gt; 0 then
            ThisComponent.Text.InsertString(oCursor,oCursor.string,true)
@@ -284,7 +285,7 @@ Sub Campo_Error
    Do While oEnum.hasMoreElements()
      oField = oEnum.nextElement() 
      s = ofield.getPresentation(false)
-     If inStr(s,&quot;Erro&quot;) then &apos;Loc_Valido para pt  ,en y es 
+     If inStr(s,&quot;Erro&quot;) then &apos;Loc_Valido para pt, en y es 
        VCursor.gotoRange(oField.Anchor.Start,False)
        VCursor.goRight(1, true)
        i = i+1
