@@ -14,6 +14,24 @@
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
 					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Add sections</value>
+						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
+						<value xml:lang="es-ES">Agregar secciones</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+				
+				
+				<node oor:name="m002" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
 						<value>vnd.sun.star.script:Chap2html.Formatos.F_AlternarLeyenda?language=Basic&amp;location=application</value>
 					</prop>
 					<prop oor:name="Title" oor:type="xs:string">
@@ -26,7 +44,7 @@
 					</prop>
 				</node>
 
-				<node oor:name="m002" oor:op="replace">
+				<node oor:name="m003" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -43,7 +61,7 @@
 					</prop>
 				</node>
 
-				<node oor:name="m003" oor:op="replace">
+				<node oor:name="m004" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -54,23 +72,6 @@
 						<value>Cross-references</value>
 						<value xml:lang="pt-BR">Referências</value>
 						<value xml:lang="es-ES">Referencias</value>
-					</prop>
-					<prop oor:name="Target" oor:type="xs:string">
-						<value>_self</value>
-					</prop>
-				</node>
-
-				<node oor:name="m004" oor:op="replace">
-					<prop oor:name="Context" oor:type="xs:string">
-						<value>com.sun.star.text.TextDocument</value>
-					</prop>
-					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
-					</prop>
-					<prop oor:name="Title" oor:type="xs:string">
-						<value>Add sections</value>
-						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
-						<value xml:lang="es-ES">Agregar secciones</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -127,7 +128,25 @@
 
 				<node oor:name="Submenu"> <!-- 3 -->
 
+
 				<node oor:name="m001" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Add sections</value>
+						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
+						<value xml:lang="es-ES">Agregar secciones</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="m002" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -144,7 +163,7 @@
 					</prop>
 				</node>
 
-				<node oor:name="m002" oor:op="replace">
+				<node oor:name="m003" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -161,7 +180,7 @@
 					</prop>
 				</node>
 
-				<node oor:name="m003" oor:op="replace">
+				<node oor:name="m004" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -172,23 +191,6 @@
 						<value>Cross-references</value>
 						<value xml:lang="pt-BR">Referências</value>
 						<value xml:lang="es-ES">Referencias</value>
-					</prop>
-					<prop oor:name="Target" oor:type="xs:string">
-						<value>_self</value>
-					</prop>
-				</node>
-
-				<node oor:name="m004" oor:op="replace">
-					<prop oor:name="Context" oor:type="xs:string">
-						<value>com.sun.star.text.TextDocument</value>
-					</prop>
-					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
-					</prop>
-					<prop oor:name="Title" oor:type="xs:string">
-						<value>Add sections</value>
-						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
-						<value xml:lang="es-ES">Agregar secciones</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -238,7 +240,6 @@
 					</prop>
 				</node>
 
-
 				</node>
 			</node>
 		</node>
@@ -257,7 +258,24 @@
 					</prop>
 				</node>
 
-				<node oor:name="omb02" oor:op="replace">
+				<node oor:name="omb2" oor:op="replace">
+					<prop oor:name="Context" oor:type="xs:string">
+						<value>com.sun.star.text.TextDocument</value>
+					</prop>
+					<prop oor:name="URL" oor:type="xs:string">
+						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+					</prop>
+					<prop oor:name="Title" oor:type="xs:string">
+						<value>Add sections</value>
+						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
+						<value xml:lang="es-ES">Agregar secciones</value>
+					</prop>
+					<prop oor:name="Target" oor:type="xs:string">
+						<value>_self</value>
+					</prop>
+				</node>
+
+				<node oor:name="omb03" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -274,7 +292,7 @@
 					</prop>
 				</node>
 
-				<node oor:name="omb03" oor:op="replace">
+				<node oor:name="omb04" oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -291,7 +309,7 @@
 					</prop>
 				</node>
 
-				<node oor:name="omb04" oor:op="replace">
+				<node oor:name="omb05 oor:op="replace">
 					<prop oor:name="Context" oor:type="xs:string">
 						<value>com.sun.star.text.TextDocument</value>
 					</prop>
@@ -302,23 +320,6 @@
 						<value>Heading Colors</value>
 						<value xml:lang="pt-BR">Cors dos titulos</value>
 						<value xml:lang="es-ES">Colores de t&#237;tulos</value>
-					</prop>
-					<prop oor:name="Target" oor:type="xs:string">
-						<value>_self</value>
-					</prop>
-				</node>
-
-				<node oor:name="omb05" oor:op="replace">
-					<prop oor:name="Context" oor:type="xs:string">
-						<value>com.sun.star.text.TextDocument</value>
-					</prop>
-					<prop oor:name="URL" oor:type="xs:string">
-						<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
-					</prop>
-					<prop oor:name="Title" oor:type="xs:string">
-						<value>Add sections</value>
-						<value xml:lang="pt-BR">Adicionar se&#231;&#245;es</value>
-						<value xml:lang="es-ES">Agregar secciones</value>
 					</prop>
 					<prop oor:name="Target" oor:type="xs:string">
 						<value>_self</value>
@@ -375,6 +376,19 @@
 
 		<node oor:name="Images"><!-- Imágenes --> 
 
+			<node oor:name="vnd.bantoniof.Chap2html.Secciones.F_AjusteSecciones" oor:op="replace">
+				<prop oor:name="URL" oor:type="xs:string">
+					<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
+				</prop>
+				<node oor:name="UserDefinedImages">
+					<prop oor:name="ImageSmallURL">
+						<value>%origin%/icons/Secciones.svg</value>
+					</prop>
+					<prop oor:name="ImageBigURL">
+						<value>%origin%/icons/Secciones.svg</value>
+					</prop>
+				</node>
+			</node>
 
 			<node oor:name="vnd.bantoniof.Chap2html.Formatos.F_AlternarLeyenda" oor:op="replace">
 				<prop oor:name="URL" oor:type="xs:string">
@@ -418,20 +432,6 @@
 				</node>
 			</node>
 
-			<node oor:name="vnd.bantoniof.Chap2html.Secciones.F_AjusteSecciones" oor:op="replace">
-				<prop oor:name="URL" oor:type="xs:string">
-					<value>vnd.sun.star.script:Chap2html.Secciones.F_AjusteSecciones?language=Basic&amp;location=application</value>
-				</prop>
-				<node oor:name="UserDefinedImages">
-					<prop oor:name="ImageSmallURL">
-						<value>%origin%/icons/Secciones.svg</value>
-					</prop>
-					<prop oor:name="ImageBigURL">
-						<value>%origin%/icons/Secciones.svg</value>
-					</prop>
-				</node>
-			</node>
-
 			<node oor:name="vnd.bantoniof.Chap2html.Formatos.Convierte" oor:op="replace">
 				<prop oor:name="URL" oor:type="xs:string">
 					<value>vnd.sun.star.script:Chap2html.Formatos.Convierte?language=Basic&amp;location=application</value>
@@ -444,7 +444,7 @@
 						<value>%origin%/icons/Html5.svg</value>
 					</prop>
 				</node>
-			</node> -->
+			</node>
   
 			<node oor:name="vnd.bantoniof.Chap2html.Info.Dlg_Info" oor:op="replace">
 				<prop oor:name="URL" oor:type="xs:string">
@@ -458,7 +458,9 @@
 						<value>%origin%/icons/Info.svg</value>
 					</prop>
 				</node>
-			</node> -->
+			</node>
 		</node>
+- <!--  Fin Imágenes   -->
+
 	</node>
 </oor:component-data>
