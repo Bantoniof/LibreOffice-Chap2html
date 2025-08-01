@@ -34,7 +34,7 @@ else
     echo "### Compiling " $Ext
     ${ZIP_CMD} ../$Ext.oxt .
     cd ..
-#	SubstVersion $1 $Ext.update.xml
+    SubstVersion $1 $Ext.update.xml
        #The next line is if the .OXT is in releases, if is in root dir will break the updates.
     sed -i s'/raw.*/raw\/'$1'\/'$Ext'.oxt"\/>/' $Ext.update.xml
     echo "### Done, Version " $1 " of " $Ext 
