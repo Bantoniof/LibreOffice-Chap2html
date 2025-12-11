@@ -43,8 +43,7 @@ case &quot;es&quot;
  Txt(0) = &quot;Primero tienes que guardar el documento.&quot; &apos;&amp; Chr(13) &amp; Chr(13) &amp; &quot;¿Guardar ahora?&quot;
  Txt(1) = &quot;El documento no tiene las secciones necesarias: &quot; &amp; Chr(13) &amp; Chr(13) 
  Txt(2) = &quot;Comprueba situación y nombres de secciones.&quot;
- Txt(3) = &quot;Es posible que esté seleccionado un objeto: imagen, marco, etc.&quot; &amp; Chr(13) &amp; _
-    &quot; Coloca el cursor en un fragmento de texto y prueba de nuevo.&quot;
+ Txt(3) = &quot;Es posible que esté seleccionado un objeto: imagen, marco, etc.&quot;
  Txt(4) = &quot;Es posible que el cursor esté en un comentario.&quot; &amp; Chr(13) &amp; Chr(13) &amp; _
     &quot; Coloca el cursor en un fragmento de texto y prueba de nuevo.&quot;&amp; Chr(13) &amp; Chr(13) 
  Txt(5) =  &quot;Para evitar este mensaje coloca siempre el cursor en un fragmento de texto&quot;
@@ -103,9 +102,9 @@ Rem Formatos.Convierte
  Txt(43) = &quot;Cambiar&quot;
  Txt(44) = &quot;Omitir&quot;
  Txt(45) = &quot;Procesando ...&quot;
- Txt(46)= &quot;&quot; &apos;Libre
- Txt(47) = &quot;No hay errores en referencias&quot; &amp; Chr(13)
- Txt(48) =  &quot;Se encontraron errores en la(s) Paginas(s): &quot;
+ Txt(46) = &quot;Error: &quot; &apos; Localización
+ Txt(47) = &quot;No hay errores en referencias&quot;
+ Txt(48) =  &quot;Se encontraron errores:&quot;  &amp; Chr(13) &amp; Chr(13)
  Txt(49) = &quot; Errores en referencias&quot;
  Txt(50) = &quot;  referencias cambiadas&quot;
  Txt(51) = &quot; No se ha cambiado ninguna referencia&quot;
@@ -123,8 +122,7 @@ case &quot;pt&quot;
  Txt(0) = &quot;Primeiro de tudo você deve salvar o documento.&quot; &apos;&amp; Chr(13) &amp; Chr(13) &amp; &quot;Salvar agora?&quot;
  Txt(1) = &quot;O documento não possui as seções necessárias: &quot; &amp; Chr(13) &amp; Chr(13) 
  Txt(2) = &quot;Verifique o local e os nomes das seções.&quot;
- Txt(3) = &quot;Um objeto pode ser selecionado: imagem, quadro, etc.&quot; &amp; Chr(13) &amp; _
-     &quot;Coloque o cursor em um trecho de texto e tente novamente.&quot;
+ Txt(3) = &quot;Um objeto pode ser selecionado: imagem, quadro, etc.&quot;
  Txt(4) = &quot;O Cursor pode estar em um comentário.&quot; &amp; Chr(13) &amp; _
      &quot;Coloque o cursor em um trecho de texto e tente novamente.&quot;
  Txt(5) = &quot;Para evitar esta mensagem sempre coloque o cursor em um trecho de texto.&quot;
@@ -150,7 +148,7 @@ case &quot;pt&quot;
  Txt(19) = &quot; já existe.&quot;
  Txt(20) = &quot;As seções parecem ter sido excluídas manualmente.&quot; &amp; Chr(13) &amp; Chr(13) &amp; _ 
        &quot;Execute novamente a macro e verifique a ordem das seções.&quot;
-  Txt(21) = &quot;- Seção adicionada: &quot; 
+ Txt(21) = &quot;- Seção adicionada: &quot; 
  Txt(22) = &quot;Sumário &quot;&apos;Objeto índice 
  Txt(23) = &quot; excluído.&quot;
  Txt(24) = &quot;- A seção &quot;&quot;SEC_TOC&quot;&quot; não existe.&quot;
@@ -158,7 +156,7 @@ case &quot;pt&quot;
  Txt(26) = &quot;Sumário inserido na seção &quot;&quot;SEC_TOC&quot;&quot;.&quot;
  Txt(27) = &quot;- Sumário atualizado.&quot;
 Rem Referencias
-Txt(28) = &quot;Referências&quot; 
+ Txt(28) = &quot;Referências&quot; 
  Txt(29) = &quot;Na página #&quot;
  Txt(30) = &quot;Objeto #&quot;
  Txt(31) = &quot;Erros&quot;
@@ -183,9 +181,9 @@ Txt(28) = &quot;Referências&quot;
  Txt(43) = &quot;Alterar&quot;
  Txt(44) = &quot;Pular&quot;
  Txt(45) = &quot;Processando...&quot;
- Txt(46)= &quot;&quot; &apos;Libre
- Txt(47) = &quot;Não há erros nas referências&quot; &amp; Chr(13)
- Txt(48) = &quot;Foram encontrados erros na(s) página(s):&quot;
+ Txt(46)= &quot;Erro: &quot; &apos; Localización
+ Txt(47) = &quot;Não há erros nas referências.&quot;
+ Txt(48) = &quot;Foram encontrados erros:&quot; &amp; Chr(13) &amp; Chr(13)
  Txt(49) = &quot;Erros nas referências&quot;
  Txt(50) = &quot;   referências alteradas&quot;
  Txt(51) = &quot; Nenhuma referência foi alterada&quot;
@@ -203,8 +201,7 @@ case else
  Txt(0) = &quot;You must to save the document first.&quot; &apos;&amp; Chr(13) &amp; Chr(13) &amp; &quot;Save now?&quot;
  Txt(1) = &quot;The document does not have the necessary sections: &quot; &amp; Chr(13) &amp; Chr(13) 
  Txt(2) = &quot;Check location and section names.&quot;
- Txt(3) = &quot;An object may be selected: image, frame, etc.&quot; &amp; Chr(13) &amp; Chr(13) &amp; _
-     &quot;Place the cursor on a piece of text and try again.&quot;
+ Txt(3) = &quot;An object may be selected: image, frame, etc.&quot;
  Txt(4) = &quot;The cursor may be in a comment.&quot; &amp; Chr(13) &amp; Chr(13) &amp; _
      &quot;Place the cursor on a piece of text and try again.&quot;&amp; Chr(13) &amp; Chr(13) 
  Txt(5) = &quot; - To avoid this message always place the cursor on a text fragment.&quot;
@@ -217,7 +214,7 @@ case else
  Txt(10) = &quot;This file does not look like a guide document.&quot;
  Txt(11) = &quot;- The color of the titles has been changed.&quot; &amp; Chr(13) &amp; Chr(9) &amp; _ 
     &quot;(As a security measure, updating styles from the template is disabled).&quot;
-Txt(12) = &quot;- Paragraph breaks have been changed to line breaks&quot; &amp; Chr(13) &amp; _
+ Txt(12) = &quot;- Paragraph breaks have been changed to line breaks&quot; &amp; Chr(13) &amp; _
     &quot; in paragraphs whit paragraph style - &quot; &apos;&quot;&quot;Body Text, Note&quot;&quot; and &quot;&quot;Code&quot;&quot; paragraph styles&quot;
 Rem Formatos.Convierte
  Txt(13) = &quot;HTML Export &quot;
@@ -247,7 +244,7 @@ Rem Formatos.Convierte
  Txt(34) = &quot;Select an option&quot;
  Txt(35) = &quot;Searches for fields with reference to page numbers of Titles and objects&quot; &amp; _ 
       &quot;and opens a dialog that allows changing them for &quot;&quot;above&quot;&quot; or &quot;&quot;below&quot;&quot; &quot;
-Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Text number &quot; &amp; Chr(13) &amp; _
+ Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Text number &quot; &amp; Chr(13) &amp; _
       &quot;(Ex. 1) and change them to&quot; &amp; Chr(13) &amp; &quot;Category and number (Ex. Figure 1)&quot;
  Txt(37) = &quot;Search for fields with &quot;&quot; Error: reference not found&quot;&quot; &quot;
  Txt(38) = &quot;on page&quot; &apos; = Loc = en la página = na página
@@ -263,9 +260,9 @@ Txt(36) = &quot;Search for fields with reference to Figure, Table, Formula or Te
  Txt(43) = &quot;Change&quot;
  Txt(44) = &quot;Skip&quot;
  Txt(45) = &quot;Processing...&quot;
- Txt(46)= &quot;&quot; &apos;Libre
- Txt(47) = &quot;There are no errors in references&quot; &amp; Chr(13)
- Txt(48) = &quot;Errors were found on the Page(s): &quot;
+ Txt(46) = &quot;Error: &quot; &apos; Localización
+ Txt(47) = &quot;There are no errors in references.&quot;
+ Txt(48) = &quot;Errors were found:&quot;  &amp; Chr(13) &amp; Chr(13)
  Txt(49) = &quot;Errors in references&quot;
  Txt(50) = &quot;  cross-references changed&quot;
  Txt(51) = &quot;No cross-references has been changed&quot;

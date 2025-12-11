@@ -161,7 +161,7 @@ End Sub
  Sub Campo_Pag
    Call L10n.Trad
  Dim i As Integer, Texto as String
-    Texto = Txt(38)
+    Texto = Txt(38)&apos;&quot;en la página&quot;
     vCursor = ThisComponent.CurrentController.getViewCursor
    oCursor= ThisComponent.Text.CreateTextCursor
    oEnum = ThisComponent.getTextFields().createEnumeration()
@@ -175,7 +175,7 @@ End Sub
          oField.SourceName = &quot;Listing&quot; OR _
          oField.SourceName = &quot;Formula&quot; Then 
       If oField.ReferenceFieldPart = 0 OR _
-         oField.ReferenceFieldPart = 4 then
+         oField.ReferenceFieldPart = 4 then&apos; 0-page, 4-page_desc
          oCursor.GotoRange(oField.Anchor.Start,false) &apos;.START?Error en tablas y pie de pagina
          For i= 0 to uBound(split(Texto,&quot; &quot;))
            oCursor.gotoPreviousWord(True)
@@ -285,22 +285,24 @@ Sub Campo_Error
    Do While oEnum.hasMoreElements()
      oField = oEnum.nextElement() 
      s = ofield.getPresentation(false)
-     If inStr(s,&quot;Erro&quot;) then &apos;Loc_Valido para pt, en y es 
+     If inStr(s,Txt(46)) then &apos;Loc_Valido para pt, en y es 
        VCursor.gotoRange(oField.Anchor.Start,False)
        VCursor.goRight(1, true)
        i = i+1
-       Loc = VCursor.getPage &amp; &quot;,  &quot; &amp; Loc
+       Loc = Txt(38)  &amp; &quot; &quot; &amp; VCursor.getPage &amp; &quot;, &quot; &amp; VCursor.string &amp; Chr(13) &amp; Loc
      End If
    Loop
    If i = 0 Then
-     Msgbox (Txt(47) &amp; Loc ,0+64+0, Txt(49) &amp; Extension)
-   else
-     Msgbox (Txt(48) &amp; Chr(13)  &amp; Chr(13) &amp; Chr(9) &amp; Loc ,0+64+0, Txt(49) &amp; Extension)
-     End If
+     s = Chr(13) &amp; Txt(47)
+   Else
+     s = Txt(48) &amp; Loc
+   End If
+     Msgbox (s,0+64+0, Txt(49) &amp; Extension)
+
 End Sub
  Rem ===================== Fin Referencias ========
 
-Sub RestablecerCampoObj &apos; En Castellano
+Sub RestablecerCampoObj &apos; En Castellano (minúscula inicial)
  Call L10n.Trad
  Dim oEnum As Object, oField As Object, i As Integer
  Dim vCursor As Object, oCursor As Object, sObjeto as String

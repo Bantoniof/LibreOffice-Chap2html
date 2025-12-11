@@ -81,8 +81,10 @@ Function F_Prueba_Sel()As Boolean &apos;pasar prueba selección
  Dim oSel : oSel= ThisComponent.getCurrentSelection
    On Error GoTo ERRORES
    If Not oSel.supportsService(&quot;com.sun.star.text.TextRanges&quot;) Then 
+     dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+     dispatcher.executeDispatch(ThisComponent.CurrentController.frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array())
      MsgBox (Txt(3) &amp; Chr(13) &amp; Chr(13) &amp; Txt(5), 0+0+64, Extension)&apos;Cursor en un objeto
-     F_Prueba_Sel = 0
+     F_Prueba_Sel = 0 
      Exit Function
    End If
 ERRORES:
@@ -232,7 +234,17 @@ Sub ProgressBar()
 &apos;    oCell.SetString(&quot;Done&quot;)
 End Sub
 
-
+Function F_ParrafosEnDoc
+ Dim Datos As Variant, i As Integer, cuenta As Variant
+   Datos = ThisComponent.DocumentProperties.DocumentStatistics
+   For i = LBound(Datos) to  Ubound(Datos)
+     If Datos(i).Name = &quot;ParagraphCount&quot;  Then
+       cuenta= Datos(i).Value
+       Exit For
+     End if
+   next
+   F_ParrafosEnDoc = cuenta
+End Function
 
 Rem  ================ Fin Aux ==================
 </script:module>
