@@ -207,7 +207,7 @@ Sub ProgressBar()
 &apos;https://ask.libreoffice.org/t/basic-calc-progress-bar/46444/2
 	Dim oProgressBar as Object, oProgressBarModel As Object&apos;, oDlg_Barra as Object
 	Dim ProgressValue As Long, ProgressValueMin as Integer, ProgressValueMax as Integer
-	DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
+	If not DialogLibraries.isLibraryLoaded(&quot;Chap2html&quot;) Then DialogLibraries.LoadLibrary(&quot;Chap2html&quot;)
 	oDlg_Barra = CreateUnoDialog(DialogLibraries.Chap2html.DlgBarra_P)
     oDlg_Barra.getModel.getbyname(&quot;Fr_Procesando&quot;).Label= Txt(13) &amp; &quot;, &quot; &amp; Txt(45)
     oDlg_Barra.getModel.Title = Extension

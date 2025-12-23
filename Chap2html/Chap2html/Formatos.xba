@@ -121,7 +121,7 @@ Function F_Notas(Estilo as String) As String
        End If
      End If
    loop
-   If contador &lt;&gt;0 then
+   If contador &lt;&gt; 0 then
      F_Notas = Txt(12) &amp; Estilo
    End If   
 End Function
@@ -171,8 +171,22 @@ Function F_LeyendasNum() As String
      Next 
    Next  
    oProgressBar.End
-   if j &lt;&gt;0 then F_LeyendasNum = Txt(52)
+   if j &lt;&gt; 0 then F_LeyendasNum = Txt(52)
 End Function
+
+ Rem ############
+Function F_EliminaLogo as String
+ Dim Logo
+ If  ThisComponent.GraphicObjects.getcount &lt;&gt; 0 then
+ Logo = ThisComponent.GraphicObjects.getByIndex(0)
+ If Logo.Name = &quot; LibreOffice Logo&quot; then
+  Logo.dispose
+  F_EliminaLogo = &quot;Logo Eliminado&quot; &amp; Chr(13)
+  End If
+End If
+End Function
+
+
 
  Rem ############
 Sub Convierte()
@@ -189,7 +203,7 @@ Sub Convierte()
    End If 
 
  Dim Mensaje &apos; Ajusta formatos y formatea el mensaje
-   Mensaje = F_Notas(&quot;Body Text, Note&quot;) &amp; F_Notas(&quot;Code&quot;) &amp; Chr(13) &amp; F_LeyendasNum
+   Mensaje = F_Notas(&quot;Body Text, Note&quot;) &amp; F_Notas(&quot;Code&quot;) &amp; Chr(13) &amp; F_LeyendasNum &amp; F_EliminaLogo
    If Mensaje &lt;&gt; Chr(13) then
      Msgbox (Mensaje,0+64+0, Extension)
    End If

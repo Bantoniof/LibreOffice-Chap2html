@@ -19,7 +19,7 @@ Sub Dlg_Refs
        Msgbox (Txt(57), 0+16+0, Extension) 
        Exit Sub
    End If
-   DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
+   If not DialogLibraries.isLibraryLoaded(&quot;Chap2html&quot;) Then DialogLibraries.LoadLibrary(&quot;Chap2html&quot;)
    oDlgRefs = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgRefs&quot;))
    If getGUIType &gt; 1 then oDlgRefs.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    With oDlgRefs.Model
@@ -77,7 +77,7 @@ End Sub
 
  Rem ############
 Sub Dlg_Above(oField)
-   DialogLibraries.loadLibrary(&quot;Chap2html&quot;)
+   If not DialogLibraries.isLibraryLoaded(&quot;Chap2html&quot;) Then DialogLibraries.LoadLibrary(&quot;Chap2html&quot;)
    oDlgAbove = CreateUNODialog(DialogLibraries.getByName(&quot;Chap2html&quot;).getByName(&quot;DlgAbove&quot;))
    If getGUIType &gt; 1 then oDlgAbove.getPeer().setProperty( &quot;NativeWidgetLook&quot;, False ) 
    With oDlgAbove.Model
