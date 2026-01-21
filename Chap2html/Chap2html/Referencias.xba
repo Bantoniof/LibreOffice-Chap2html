@@ -206,58 +206,75 @@ ERRORES:
    End If
 End Sub
 
+
+Function Tabla_Marco(oField as object)
+ If Not isEmpty(oFIeld.anchor.Textframe) Then 
+   Tabla_Marco = &quot;Marco&quot;
+ ElseIf Not isEmpty(oFIeld.anchor.cell)Then &apos;
+   Tabla_Marco = &quot;Tabla&quot;
+ Else 
+   Tabla_Marco = &quot;Sigue&quot;
+ EndIf
+end Function
+
+
+
  Rem ############
 Sub Campo_Obj
  
  Call L10n.Trad
- Dim oEnum As Object, oField As Object, i As Integer
+ Dim oEnum As Object, oField As Object, i As Integer, cuenta2 As Integer
  Dim vCursor As Object, oCursor As Object
  Dim dispatcher As Object, oCursor2 As Object
    vCursor = ThisComponent.CurrentController.getViewCursor
    oCursor= ThisComponent.Text.CreateTextCursor
    oEnum = ThisComponent.getTextFields().createEnumeration()
-   On local error  goto ERRORES
-   i = 0
+   i = 0 : cuenta2 = 0
  Dim Conj
    Select case F_getLang
       case &quot;es&quot; : Conj= &quot;y &quot; : case &quot;pt&quot; : Conj = &quot;e &quot; : case &quot;en&quot; : Conj = &quot;and &quot;  
    End select
+
+  On local error  goto ERRORES
+
    Do While oEnum.hasMoreElements()
    oField = oEnum.nextElement() 
    If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
-     If oField.SourceName = &quot;Figure&quot;_
-          OR oField.SourceName = &quot;Table&quot;_
-          OR oField.SourceName = &quot;Text&quot;_
-          OR oField.SourceName = &quot;Formula&quot;_
-          OR oField.SourceName = &quot;Listing&quot;_
-          OR oField.SourceName = &quot;Listado&quot;_
-          OR oField.SourceName = &quot;Listagem&quot; Then      &apos;Listado = Español y posible Portugués    
-         oCursor.GotoRange(oField.Anchor.start,false)
-         oCursor.gotoPreviousWord(True)       
-       If oField.ReferenceFieldPart = 7 Then
-         oField.ReferenceFieldPart = 5 
-         oField.update
-         vCursor.GotoRange(oCursor,false)  
-       dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
- &apos;Control campo en inicio de párrafo
-       dispatcher.executeDispatch(ThisComponent.CurrentController.Frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array())
-       oCursor2 =ThisComponent.Text.CreateTextCursorbyrange(vCursor,true)&apos; para salto 
-         if oCursor2.isEndOfParagraph then
-           ThisComponent.Text.insertControlCharacter(oCursor2,0,true) &apos;inserta salto parrafo
-           ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)&apos; Borra la palabra fajo el cursor
-            i = i + 1
-         ElseIf Instr(ocursor.string,Conj) &lt;&gt; 0 then
-           ThisComponent.Text.InsertString(oCursor,oCursor.string,true)
-           i = i + 1  
-         Else 
-           ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
-            i = i + 1
-         End If
-       End If   
+     If oField.ReferenceFieldPart = 7 Then &apos; el campo es solo número.
+       If oField.SourceName = &quot;Figure&quot;_ 
+         OR oField.SourceName = &quot;Table&quot;_
+         OR oField.SourceName = &quot;Text&quot;_
+         OR oField.SourceName = &quot;Formula&quot;_
+         OR oField.SourceName = &quot;Listing&quot;_
+         OR oField.SourceName = &quot;Listado&quot;_
+         OR oField.SourceName = &quot;Listagem&quot; Then 
+           If Tabla_Marco (oFIeld) = &quot;Sigue&quot; Then&apos; OR Tabla_Marco (oFIeld) &lt;&gt; &quot;Marco&quot;   then
+             oCursor.GotoRange(oField.Anchor.start,false)
+             oCursor.gotoPreviousWord(True)       
+             oField.ReferenceFieldPart = 5 &apos;cambio a categoría y número
+             oField.update
+             vCursor.GotoRange(oCursor,false)  
+             dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;) 
+         &apos;Control campo en inicio de párrafo
+             dispatcher.executeDispatch(ThisComponent.CurrentController.Frame, &quot;.uno:Escape&quot;, &quot;&quot;, 0, Array()) &apos;quita selección
+             oCursor2 =ThisComponent.Text.CreateTextCursorbyrange(vCursor,true)&apos; para salto 
+             If oCursor2.isEndOfParagraph then
+               ThisComponent.Text.insertControlCharacter(oCursor2,0,true) &apos;inserta salto parrafo
+               ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)&apos; Borra la palabra bajo el cursor
+             ElseIf Instr(ocursor.string,Conj) &lt;&gt; 0 then &apos; hay conjunciones inserto conjunción
+               ThisComponent.Text.InsertString(oCursor,oCursor.string,true)
+             Else 
+               ThisComponent.Text.InsertString(oCursor,&quot;&quot;,true)
+             End If
+             i = i + 1
+           Else&apos;  el campo está en tabla o Marco
+             cuenta2 = cuenta2+1
+           Endif &apos;  
+         End If   
+       End If
      End If
-   End If
    Loop
-
+   If cuenta2 &lt;&gt; 0 Then Msgbox Cuenta2 &amp; Txt(58) 
    If i &lt;&gt; 0 Then
      Msgbox  (i &amp; Txt(50) ,0+64+0, Txt(28) &amp; Extension)
    Else  
@@ -268,9 +285,10 @@ ERRORES:
      Exit Sub 
    ElseIf Err = 1 Then 
      Msgbox ( i &amp; &quot; &quot; &amp; Txt(50) &amp; Chr(13) &amp; Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+48+0, &quot;Error n. 1&quot; &amp; Extension)
-&apos; Deshacemos sobreescritura de campo
+&apos; Marcamos donde está el posible error&apos; &apos;&apos; Deshacemos sobreescritura de campo
+  dispatcher = createUnoService(&quot;com.sun.star.frame.DispatchHelper&quot;)
   dispatcher.executeDispatch(ThisComponent.CurrentController.Frame,  &quot;.uno:Undo&quot;, &quot;&quot;, 0, Array())
-     Exit sub
+      Exit sub
    Else
      Msgbox (&quot;Error =  &quot;&amp; Err &amp; &quot;  Linea = &quot; &amp;  Erl &amp;  &quot;  Msg = &quot; &amp;  Error )
    End If
@@ -302,13 +320,14 @@ Sub Campo_Error
 End Sub
  Rem ===================== Fin Referencias ========
 
-Sub RestablecerCampoObj &apos; En Castellano (minúscula inicial)
+Sub RestablecerCampoObj &apos; En Castellano (minúscula inicial)&apos; problemas con tablas y marcos
  Call L10n.Trad
  Dim oEnum As Object, oField As Object, i As Integer
  Dim vCursor As Object, oCursor As Object, sObjeto as String
    vCursor = ThisComponent.CurrentController.getViewCursor
    oCursor= ThisComponent.Text.CreateTextCursor
    oEnum = ThisComponent.getTextFields().createEnumeration()
+   On local error goto ERRORES
    Do While oEnum.hasMoreElements()
      oField = oEnum.nextElement() 
      If ofield.supportsService   (&quot;com.sun.star.text.TextField.GetReference&quot;) Then 
@@ -317,12 +336,12 @@ Sub RestablecerCampoObj &apos; En Castellano (minúscula inicial)
        If oField.SourceName = &quot;Text&quot; Then sObjeto = &quot;texto&quot;
        If oField.SourceName = &quot;Formula&quot; Then sObjeto = &quot;formula&quot;
        If oField.SourceName = &quot;Listado&quot; Then sObjeto = &quot;listado&quot;&apos; Loc = Listing,Listagem
-       oCursor.GotoRange(oField.Anchor.start,false)
+       vCursor.GotoRange(oField.Anchor.start,false)&apos;ocursor?
        If oField.ReferenceFieldPart = 5 Then
-         vCursor.GotoRange(oCursor,false)  
+         &apos;vCursor.GotoRange(oCursor,false)  
          oField.ReferenceFieldPart = 7 
          oField.update
-         ThisComponent.Text.InsertString(oCursor,sObjeto &amp; Chr(160),true)
+         ThisComponent.Text.InsertString(vCursor,sObjeto &amp; Chr(160),true)
          i = i + 1
        End If   
      End If
@@ -336,7 +355,7 @@ ERRORES:
    If Err = 0 Then
      Exit Sub 
    ElseIf Err = 1 Then 
-     Msgbox ( Txt(40) &amp;  Chr(13) &amp; Chr(13) &amp; Error, 0+64+0, &quot;Error n. 1&quot; &amp; Extension)
+     Msgbox ( Txt(50) &amp; Chr(13) &amp; Txt(40) &amp; Chr(13) &amp; &quot; o en Marco o Tabla&quot;  &amp; Chr(13) &amp; Error, 0+64+0, &quot;Error n. 1&quot; &amp; Extension)
      vCursor.gotoRange(oField.Anchor.start,false)
      vCursor.goRight(1,true)
      Exit sub

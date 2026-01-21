@@ -115,7 +115,7 @@ Function F_Notas(Estilo as String) As String
 &apos;         OR oCursor.ParaStyleName = &quot;Code&quot; then
            oCursor.gotoEndOfParagraph(false)
            oCursor.gotoNextParagraph(true)
-           ThisComponent.Text.InsertControlCharacter(oCursor,1,true)
+           ThisComponent.Text.InsertControlCharacter(oCursor,1,true)&apos;0 PB, 1 LB
            contador = contador + 1
          End If
        End If
@@ -177,16 +177,15 @@ End Function
  Rem ############
 Function F_EliminaLogo as String
  Dim Logo
- If  ThisComponent.GraphicObjects.getcount &lt;&gt; 0 then
- Logo = ThisComponent.GraphicObjects.getByIndex(0)
- If Logo.Name = &quot; LibreOffice Logo&quot; then
-  Logo.dispose
-  F_EliminaLogo = &quot;Logo Eliminado&quot; &amp; Chr(13)
-  End If
-End If
+   If  ThisComponent.GraphicObjects.getcount &lt;&gt; 0 then
+     Logo = ThisComponent.GraphicObjects.getByIndex(0)
+&apos;print Logo.name
+     If Logo.Name = &quot; LibreOffice Logo&quot; OR  Logo.Name = &quot; LibreOfficeLogo&quot; then
+       Logo.dispose
+       F_EliminaLogo = Txt(59)
+     End If
+   End If
 End Function
-
-
 
  Rem ############
 Sub Convierte()
@@ -203,8 +202,8 @@ Sub Convierte()
    End If 
 
  Dim Mensaje &apos; Ajusta formatos y formatea el mensaje
-   Mensaje = F_Notas(&quot;Body Text, Note&quot;) &amp; F_Notas(&quot;Code&quot;) &amp; Chr(13) &amp; F_LeyendasNum &amp; F_EliminaLogo
-   If Mensaje &lt;&gt; Chr(13) then
+   Mensaje = F_Notas(&quot;Body Text, Note&quot;) &amp; F_Notas(&quot;Code&quot;) &amp; Chr(13) &amp; F_LeyendasNum &amp; Chr(13) &amp; F_EliminaLogo
+   If Mensaje &lt;&gt; Chr(13) &amp; Chr(13) then
      Msgbox (Mensaje,0+64+0, Extension)
    End If
    ThisComponent.store()

@@ -8,7 +8,7 @@
 Option Explicit
 
 Global Extension
-Global Txt(57)
+Global Txt(59)
 
  Rem ############
 Function F_getLang As String
@@ -93,8 +93,7 @@ Rem Formatos.Convierte
  Txt(39) = &quot;Revisión concluida o interrumpida&quot;
  Txt(40) = &quot; Posibles errores:&quot; &amp;Chr(13) &amp;_
     &quot;- Objeto seleccionado al lanzar la macro &quot; &amp; Chr(13) &amp;_
-    &quot;- la macro ha sobrescrito un campo de referencia&quot; &amp; Chr(13) &amp;_
-    &quot;- Campo de referencia en marco, tabla o encabezado/pie de página&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
+    &quot;- la macro ha sobrescrito un campo de referencia&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
     &quot; Comprueba la selección en el documento, corrige el fallo&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
     &quot;y ejecuta la macro de nuevo&quot;
  Txt(41) = &quot;Ref. Encontrada:&quot;
@@ -116,6 +115,8 @@ Rem Formatos.Convierte
     &quot;Inserta el salto (Alt + Enter) y vuelve a ejecutar la macro&quot;
  Txt(57) = &quot;Conflicto de idiomas.&quot; &amp; Chr(13) &amp; Chr(13) &amp;  &quot; El idioma de la interfaz es distinto del documento&quot; &amp; Chr(13) &amp; _
     &quot; Para procesar las referencias es necesario que la interfaz está en el mismo idioma del documento&quot;
+ Txt(58) = &quot; Referencias a objetos en tabla/s o Marco/s&quot; &amp; Chr(13) &amp; &quot;Corrígelas manualmente&quot;
+ Txt(59) = &quot;- Logo eliminado&quot;
 
 case &quot;pt&quot;
  Rem Aux
@@ -172,8 +173,7 @@ Rem Referencias
  Txt(39) = &quot;Revisão concluída ou interrompida&quot;
  Txt(40) = &quot; Possíveis erros:&quot; &amp;Chr(13) &amp;_
     &quot;- Objeto selecionado ao iniciar a macro &quot; &amp; Chr(13) &amp;_
-    &quot;- a macro substituiu um campo de referência&quot; &amp; Chr(13) &amp;_
-    &quot;- Campo de referência em quadro, tabela ou cabeçalho/rodapé&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
+    &quot;- a macro substituiu um campo de referência&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
     &quot;Verifique a seleção no documento, corrija o erro&quot;  &amp; Chr(13) &amp; chr(9) &amp;_
     &quot;e execute a macro novamente&quot;
  Txt(41) = &quot;Ref. encontrada&quot;
@@ -195,6 +195,8 @@ Rem Referencias
     &quot;Insira a quebra (Alt + Enter) e execute a macro novamente&quot;
  Txt(57) = &quot;Conflito de idioma.&quot; &amp; Chr(13) &amp; Chr(13)  &amp; &quot;O idioma da interface é diferente do documento&quot; &amp; Chr(13) &amp; _
        &quot;Para processar as referências é necessário que a interface esteja no mesmo idioma do documento&quot;
+ Txt(58) = &quot; Referências a objetos em tabelas ou quadros&quot; &amp; Chr(13) &amp; &quot;Corrija-os manualmente&quot;
+ Txt(59) = &quot;- Logo removido&quot;
 
 case else
   Rem Aux
@@ -251,8 +253,7 @@ Rem Formatos.Convierte
  Txt(39) = &quot;Review completed or stopped&quot;
  Txt(40) = &quot; Possible errors:&quot; &amp;Chr(13) &amp;_
     &quot;- Object selected when launching the macro &quot; &amp; Chr(13) &amp;_
-    &quot;- the macro has overwritten a reference field&quot; &amp; Chr(13) &amp;_
-    &quot;- Reference field in frame, table or header/footer&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
+    &quot;- the macro has overwritten a reference field&quot; &amp; Chr(13) &amp; Chr(13) &amp;_
     &quot;Check the selection in the document, correct the error&quot; &amp; Chr(13) &amp; Chr(9) &amp;_
     &quot;and run the macro again&quot;
  Txt(41) = &quot;Reference Found:&quot;
@@ -274,6 +275,8 @@ Rem Formatos.Convierte
     &quot;Insert the break (Alt + Enter) and run the macro again&quot;
  Txt(57) = &quot;Language conflict.&quot; &amp; Chr(13)  &amp; Chr(13) &amp; &quot;The interface language is different from the document&quot; &amp; Chr(13) &amp; _
        &quot;To process the cross-references it is necessary that the interface is in the same language as the document&quot;
+ Txt(58) = &quot; References to objects in table/s or Frame/s&quot; &amp; Chr(13) &amp; &quot;Correct them manually&quot;
+ Txt(59) = &quot;- Logo deleted&quot;
 End Select
 
 End sub
